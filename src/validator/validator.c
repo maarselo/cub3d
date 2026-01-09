@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   validator.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/09 03:14:10 by mvillavi         ###   ########.fr       */
+/*   Created: 2025/12/29 19:14:28 by mvillavi          #+#    #+#             */
+/*   Updated: 2026/01/08 20:41:22 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "validator.h"
 
-int	main(int argc, char **argv)
+void	ft_validator(int argc, char **argv)
 {
-	ft_validator(argc, argv);
-
-
+	(void)argv;
+	if (argc != 2)
+		return (ft_putstr_fd("Invalid.", 2));
 }
