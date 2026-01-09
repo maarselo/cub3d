@@ -1,7 +1,7 @@
-/home/mvillavi/Desktop/cub3d/libs/mlx/build/CMakeFiles/mlx42.dir
-/home/mvillavi/Desktop/cub3d/libs/mlx/build/CMakeFiles/edit_cache.dir
-/home/mvillavi/Desktop/cub3d/libs/mlx/build/CMakeFiles/rebuild_cache.dir
-/home/mvillavi/Desktop/cub3d/libs/mlx/build/CMakeFiles/list_install_components.dir
-/home/mvillavi/Desktop/cub3d/libs/mlx/build/CMakeFiles/install.dir
-/home/mvillavi/Desktop/cub3d/libs/mlx/build/CMakeFiles/install/local.dir
-/home/mvillavi/Desktop/cub3d/libs/mlx/build/CMakeFiles/install/strip.dir
+/home/mvillavi/42Barcelona/cub3d/libs/mlx/build/CMakeFiles/mlx42.dir
+/home/mvillavi/42Barcelona/cub3d/libs/mlx/build/CMakeFiles/edit_cache.dir
+/home/mvillavi/42Barcelona/cub3d/libs/mlx/build/CMakeFiles/rebuild_cache.dir
+/home/mvillavi/42Barcelona/cub3d/libs/mlx/build/CMakeFiles/list_install_components.dir
+/home/mvillavi/42Barcelona/cub3d/libs/mlx/build/CMakeFiles/install.dir
+/home/mvillavi/42Barcelona/cub3d/libs/mlx/build/CMakeFiles/install/local.dir
+/home/mvillavi/42Barcelona/cub3d/libs/mlx/build/CMakeFiles/install/strip.dir
