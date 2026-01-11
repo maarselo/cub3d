@@ -6,7 +6,7 @@
 #    By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/29 19:14:28 by mvillavi          #+#    #+#              #
-#    Updated: 2026/01/09 03:41:51 by mvillavi         ###   ########.fr        #
+#    Updated: 2026/01/10 23:39:56 by mvillavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,20 @@ DIR_LIBFT = libs/libft
 
 #sources paths
 DIR_VALIDATOR = validator
+DIR_ERROR = error
+
+
+SRC_VALIDATOR = validator.c
+SRC_ERROR = handler_error.c set_error.c init_error.c
 
 
 #diferent folder with files
-FILES_VALIDATOR = $(DIR_VALIDATOR)/validator.c
+FILES_VALIDATOR = $(addprefix $(DIR_VALIDATOR)/, $(SRC_VALIDATOR))
+FILES_ERROR = $(addprefix $(DIR_ERROR)/, $(SRC_ERROR))
 
 
 #all files
-FILES = main.c $(FILES_VALIDATOR)
+FILES = main.c $(FILES_VALIDATOR) $(FILES_ERROR)
 
 SRCS = $(addprefix $(DIR_SRC)/,$(FILES))
 

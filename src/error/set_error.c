@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   set_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/10 20:47:47 by mvillavi         ###   ########.fr       */
+/*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
+/*   Updated: 2026/01/10 23:33:47 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-
-#include "validator.h"
 #include "error.h"
 
-typedef struct	s_data
+void	ft_set_custom_error(int errnum, t_error *error, int process)
 {
-	t_error	*error;
-}	t_data;
-
-
-#endif
+	error->error_number = errnum;
+	
+}

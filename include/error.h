@@ -1,24 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/10 21:14:32 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/01/10 23:33:37 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef ERROR_H
+# define ERROR_H
 
-int	main(int argc, char **argv)
+# include <stdbool.h>
+
+typedef enum	e_process
 {
-	t_error	*error;
+	VALIDATOR,
 
+}	t_process;
+
+typedef struct	s_error
+{
+	int		error_number;
+	char	*message;
+	bool	is_freeable;
+}	t_error;
+
+//validator errors
+typedef enum	e_validator_error
+{
+	ERROR_NONE,
 	
-	ft_validator(argc, argv, error);
-
-
-}
+	ARGUMENTS_NUMBER,
+	MAP_EXTENSION,
 	
+	ERROR_COUNT
+}	t_validator_error;
+//validator message errros
+char	*error_message_validator[ERROR_COUNT] = {
+	[ARGUMENTS_NUMBER] = "Cub3D: invalid number of arguments",
+	[MAP_EXTENSION] = "Cub3D: invalid map extension",
+};
+
+#endif
