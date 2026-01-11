@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_error	*error;
 
-	
+	error = ft_init_error();
 	ft_validator(argc, argv, error);
 
 

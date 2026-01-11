@@ -12,12 +12,17 @@
 
 #include "error.h"
 #include <stdlib.h>
+#include <stdio.h>
 
-void	ft_init_error(t_error *error)
+t_error	*ft_init_error(void)
 {
-	t_error	error;
+	t_error	*error;
 
-	error = (t_errror *)malloc(sizeof())
-
-	
+	error = (t_error *)malloc(sizeof(t_error));
+	if  (!error)
+		return (perror("cub3d"), exit(1), NULL);
+	error->error_number = ERROR_NONE;
+	error->message = NULL;
+	error->is_freeable = false;
+	return (error);
 }
