@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "validator.h"
+#include "errorctx.h" //rprotype
+#include "validator_internal.h" //auxiliar_functions
 
-/*
 void	ft_validator(int argc, char **argv, t_error *error)
 {
-	(void)argc;(void)argv;
-	if (argc != 2)
-}*/
+	ft_check_argument(argc, argv, error);
+	//ft_check_map(argv, error);
+}

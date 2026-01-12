@@ -19,6 +19,6 @@ int	main(int argc, char **argv)
 	error = ft_init_error();
 	ft_validator(argc, argv, error);
 
-
+	ft_error_handler(error);
 }
 	

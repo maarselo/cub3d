@@ -23,7 +23,7 @@ DIR_VALIDATOR = validator
 DIR_ERROR = error
 
 
-SRC_VALIDATOR = validator.c
+SRC_VALIDATOR = validator.c arguments.c
 SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
 
 
