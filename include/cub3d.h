@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 #include "validator.h" //function main validator
-#include "error.h" //struct in data
+#include "errorctx.h" //struct in data
 
 typedef struct	s_data
 {

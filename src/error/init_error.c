@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
-#include <stdlib.h>
-#include <stdio.h>
-
+#include "errorctx.h" //enums vars and struct
+#include <stdio.h> //perror
+#include <stdlib.h> //exit
+ 
 t_error	*ft_init_error(void)
 {
 	t_error	*error;

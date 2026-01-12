@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
-#include <errno.h>
-#include <string.h>
+#include "errorctx.h" //enum vars
+#include <errno.h> //use of errno
+#include <string.h> //use of strerror
 
-/*validator message errors
+//validator message errors
 static char	*g_error_message_validator[ERROR_COUNT] = {
-		[ARGUMENTS_NUMBER] = "Cub3D: invalid number of arguments",
-		[MAP_EXTENSION] = "Cub3D: invalid map extension",
-};*/
+		[ARGUMENTS_NUMBER] = "Cub3D: invalid number of arguments.",
+		[EMPTY_ARGUMENT] = "Cub3D: empty argument.",
+		[MAP_EXTENSION] = "Cub3D: invalid map extension"
+};
 
-/*
 char	*ft_strerror(int errnum, int process)
 {
 	if (process == SYSTEM)
@@ -28,7 +28,7 @@ char	*ft_strerror(int errnum, int process)
 	else
 	{
 		if (process == VALIDATOR)
-			return (error_message_validator[errnum]);
+			return (g_error_message_validator[errnum]);
 	}
+	return ("Cub3D: Unknown error.");
 }
-*/
