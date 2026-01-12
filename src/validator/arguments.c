@@ -42,10 +42,9 @@ static void	ft_check_extension_file(char *argv, t_error *error)
 	if (ft_strncmp(EXTENSION_CUB, argv + (point_found - argv), ft_strlen(argv)))
 		return (ft_set_error_join(MAP_EXTENSION, argv, error, VALIDATOR));
 }
-
-void	ft_check_argument(int argc, char **argv, t_error *error)
+void	ft_check_argument(int argc, char *file, t_error *error)
 {
 	ft_check_arguments_number(argc, error);
-	ft_check_file_len(argv[1], error);
-	ft_check_extension_file(argv[1], error);
+	ft_check_file_len(file, error);
+	ft_check_extension_file(file, error);
 }

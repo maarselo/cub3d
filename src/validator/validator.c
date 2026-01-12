@@ -15,6 +15,6 @@
 
 void	ft_validator(int argc, char **argv, t_error *error)
 {
-	ft_check_argument(argc, argv, error);
-	ft_check_map(argv, error);
+	ft_check_argument(argc, argv[1], error);
+	ft_check_map(argv[1], error);
 }

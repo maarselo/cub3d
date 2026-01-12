@@ -17,6 +17,6 @@
 
 # include "errorctx.h" //use in prototype function
 
-void	ft_check_argument(int argc, char **argv, t_error *error);
+void	ft_check_argument(int argc, char *file, t_error *error);
 
 #endif
