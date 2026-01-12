@@ -13,10 +13,11 @@
 #ifndef ERROR_H
 # define ERROR_H
 
-# include <stdbool.h>
+# include <stdbool.h> //struct variable
 
 typedef enum	e_process
 {
+	SYSTEM,
 	VALIDATOR,
 
 }	t_process;
@@ -28,6 +29,7 @@ typedef struct	s_error
 	bool	is_freeable;
 }	t_error;
 
+
 //validator errors
 typedef enum	e_validator_error
 {
@@ -38,10 +40,10 @@ typedef enum	e_validator_error
 	
 	ERROR_COUNT
 }	t_validator_error;
-//validator message errros
-char	*error_message_validator[ERROR_COUNT] = {
-	[ARGUMENTS_NUMBER] = "Cub3D: invalid number of arguments",
-	[MAP_EXTENSION] = "Cub3D: invalid map extension",
-};
+
+
+
+//init_error.c
+t_error	*ft_init_error(void);
 
 #endif

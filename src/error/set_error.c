@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include "error.h"
-
+/*
 void	ft_set_custom_error(int errnum, t_error *error, int process)
 {
 	error->error_number = errnum;
+
 	
-}
+}*/

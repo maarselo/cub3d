@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   strerror.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/10 20:47:47 by mvillavi         ###   ########.fr       */
+/*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
+/*   Updated: 2026/01/10 23:33:47 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef STRERROR_H
+# define STRERROR_H
 
-#include "validator.h" //function main validator
-#include "error.h" //struct in data
-
-typedef struct	s_data
-{
-	t_error	*error;
-}	t_data;
 
 
 #endif

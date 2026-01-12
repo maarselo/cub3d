@@ -12,8 +12,9 @@
 
 #include "validator.h"
 
-void	ft_validator(int argc, char **argv)
+/*
+void	ft_validator(int argc, char **argv, t_error *error)
 {
+	(void)argc;(void)argv;
 	if (argc != 2)
-		return (ft_putstr_fd("Invalid.", 2));
-}
+}*/
