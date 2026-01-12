@@ -13,13 +13,12 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "validator.h" //function main validator
-#include "errorctx.h" //struct in data
+# include "validator.h" //function main validator
+# include "errorctx.h" //struct in data
 
-typedef struct	s_data
+typedef struct s_data
 {
 	t_error	*error;
 }	t_data;
-
 
 #endif

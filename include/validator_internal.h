@@ -15,9 +15,8 @@
 
 # define EXTENSION_CUB ".cub"
 
-#include "errorctx.h" //use in prototype function
+# include "errorctx.h" //use in prototype function
 
 void	ft_check_argument(int argc, char **argv, t_error *error);
-
 
 #endif

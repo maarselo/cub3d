@@ -29,6 +29,3 @@ void	ft_error_handler(t_error *error)
 	error = NULL;
 	exit(FAILED);
 }
-
-
-

@@ -18,33 +18,31 @@
 # define SUCCES 0
 # define FAILED 1 
 
-typedef enum	e_process
+typedef enum e_process
 {
 	SYSTEM,
 	VALIDATOR,
 
 }	t_process;
 
-typedef struct	s_error
+typedef struct s_error
 {
 	int		error_number;
 	char	*message;
 	bool	is_freeable;
 }	t_error;
 
-
 //validator errors
-typedef enum	e_validator_error
+typedef enum e_validator_error
 {
 	ERROR_NONE,
-	
+
 	ARGUMENTS_NUMBER,
 	EMPTY_ARGUMENT,
 	MAP_EXTENSION,
-	
+
 	ERROR_COUNT
 }	t_validator_error;
-
 
 
 //init_error.c

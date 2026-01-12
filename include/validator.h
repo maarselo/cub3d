@@ -13,7 +13,7 @@
 #ifndef VALIDATOR_H
 # define VALIDATOR_H
 
-#include "errorctx.h" //use in prototype function
+# include "errorctx.h" //use in prototype function
 
 void	ft_validator(int argc, char **argv, t_error *error);
 

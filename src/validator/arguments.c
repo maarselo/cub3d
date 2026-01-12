@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "errorctx.h" //enum_valor && ft_set_error* && struct
-# include "validator_internal.h" //EXTENSION_FILE
-# include "libft.h" //ft_str*
+#include "errorctx.h" //enum_valor && ft_set_error* && struct
+#include "validator_internal.h" //EXTENSION_FILE
+#include "libft.h" //ft_str*
 
 static void	ft_check_arguments_number(int argc, t_error *error)
 {
@@ -32,11 +32,14 @@ static void	ft_check_file_len(char *argv, t_error *error)
 
 static void	ft_check_extension_file(char *argv, t_error *error)
 {
+	char	*point_found;
+
 	if (ft_has_error(error))
 		return ;
-	if (!ft_strrchr(argv, '.'))
+	point_found = ft_strrchr(argv, '.');
+	if (!point_found)
 		return (ft_set_error_join(MAP_EXTENSION, argv, error, VALIDATOR));
-	if (ft_strncmp(EXTENSION_CUB, argv + (ft_strrchr(argv, '.') - argv), ft_strlen(argv)))
+	if (ft_strncmp(EXTENSION_CUB, argv + (point_found - argv), ft_strlen(argv)))
 		return (ft_set_error_join(MAP_EXTENSION, argv, error, VALIDATOR));
 }
 

@@ -16,9 +16,9 @@
 
 //validator message errors
 static char	*g_error_message_validator[ERROR_COUNT] = {
-		[ARGUMENTS_NUMBER] = "Cub3D: invalid number of arguments.",
-		[EMPTY_ARGUMENT] = "Cub3D: empty argument.",
-		[MAP_EXTENSION] = "Cub3D: invalid map extension"
+[ARGUMENTS_NUMBER] = "Cub3D: invalid number of arguments.",
+[EMPTY_ARGUMENT] = "Cub3D: empty argument.",
+[MAP_EXTENSION] = "Cub3D: invalid map extension"
 };
 
 char	*ft_strerror(int errnum, int process)
