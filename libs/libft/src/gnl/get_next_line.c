@@ -63,21 +63,17 @@ static void	ft_read(int fd, char **buffer)
 	if (!tmp_buffer)
 		return ;
 	bytes_read = 1;
-	while (bytes_read > 0 && !ft_strchr(tmp_buffer, '\n'))
+	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, tmp_buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
-		{
-			free(tmp_buffer);
-			return ;
-		}
+			return (free(tmp_buffer));
 		tmp_buffer[bytes_read] = '\0';
 		ft_buffjoin(buffer, tmp_buffer);
 		if (!*buffer)
-		{
-			free(tmp_buffer);
-			return ;
-		}
+			return (free(tmp_buffer));
+		if (ft_strchr(tmp_buffer, '\n'))
+			break ;
 	}
 	free(tmp_buffer);
 }
