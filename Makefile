@@ -21,19 +21,22 @@ DIR_LIBFT = libs/libft
 #sources paths
 DIR_VALIDATOR = validator
 DIR_ERROR = error
+DIR_UTILS = utils
 
 
 SRC_VALIDATOR = validator.c arguments.c map.c
 SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
+SRC_UTILS = file.c file_utils.c
 
 
 #diferent folder with files
 FILES_VALIDATOR = $(addprefix $(DIR_VALIDATOR)/, $(SRC_VALIDATOR))
 FILES_ERROR = $(addprefix $(DIR_ERROR)/, $(SRC_ERROR))
+FILES_UTILS = $(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 
 
 #all files
-FILES = main.c $(FILES_VALIDATOR) $(FILES_ERROR)
+FILES = main.c $(FILES_VALIDATOR) $(FILES_ERROR) $(FILES_UTILS)
 
 SRCS = $(addprefix $(DIR_SRC)/,$(FILES))
 
