@@ -18,6 +18,9 @@
 # define SUCCES 0
 # define FAILED 1 
 
+# define FT_FAILED_INT -1
+# define FT_FAILED_PTR NULL
+
 typedef enum e_process
 {
 	SYSTEM,
@@ -40,6 +43,15 @@ typedef enum e_validator_error
 	ARGUMENTS_NUMBER,
 	EMPTY_ARGUMENT,
 	MAP_EXTENSION,
+	EMPTY_FILE,
+	DUPLICATE_NO,
+	DUPLICATE_SO,
+	DUPLICATE_WE,
+	DUPLICATE_EA,
+	DUPLICATE_F,
+	DUPLICATE_C,
+	MULTI_STATEMENT,
+	CONFIG_NOT_DEFINED,
 
 	ERROR_COUNT
 }	t_validator_error;
