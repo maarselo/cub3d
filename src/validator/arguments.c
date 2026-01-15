@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "errorctx.h" //enum_valor && ft_set_error* && struct
-#include "validator_internal.h" //EXTENSION_FILE
 #include "libft.h" //ft_str*
+#include "validator/validator_internal.h" //EXTENSION_FILE
 
 static void	ft_check_arguments_number(int argc, t_error *error)
 {

@@ -13,7 +13,7 @@
 #include "errorctx.h" //struct
 #include "utils.h" //ft_count_lines
 #include "libft.h" //ft_isspace_str
-#include "validator_internal.h" //struct falgs and macros
+#include "validator/validator_internal.h" //struct falgs and macros
 #include <errno.h>
 
 static void	ft_check_empty_file(char *file, t_error *error)

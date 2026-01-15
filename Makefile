@@ -56,7 +56,11 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra
 CFLAGS_MLX = -ldl -lglfw -pthread -lm
 CFLAGS_DEPENDECIES = -MMD -MP
-CFLAGS_INCLUDE = -Iinclude -I$(HEADER_LIBTF) -I$(HEADER_MLX)
+CFLAGS_INCLUDE = -I$(HEADER_LIBTF) \
+				-I$(HEADER_MLX) \
+				-Iinclude	\
+				-Isrc
+
 CFLAGS_DEBUG = -fsanitize=address,leak
 
 RM = rm -rf

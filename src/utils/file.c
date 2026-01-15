@@ -14,7 +14,7 @@
 #include <errno.h> //errno in open file
 #include <fcntl.h> //open()
 #include "libft.h" //gnl, and ft_substr
-#include "utils_internal.h"
+#include "utils/utils_internal.h"
 
 int	ft_open_file(char *file, t_error *error)
 {

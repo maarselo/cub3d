@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "errorctx.h" //rprotype
-#include "validator_internal.h" //auxiliar_functions
+#include "validator/validator_internal.h" //auxiliar_functions
 
 void	ft_validator(int argc, char **argv, t_error *error)
 {
