@@ -13,6 +13,7 @@
 #include "errorctx.h" //enum_valor && ft_set_error* && struct
 #include "libft.h" //ft_str*
 #include "validator/validator_internal.h" //EXTENSION_FILE
+#define EXTENSION_CUB ".cub"
 
 static void	ft_check_arguments_number(int argc, t_error *error)
 {
@@ -42,6 +43,7 @@ static void	ft_check_extension_file(char *argv, t_error *error)
 	if (ft_strncmp(EXTENSION_CUB, argv + (point_found - argv), ft_strlen(argv)))
 		return (ft_set_error_join(MAP_EXTENSION, argv, error, VALIDATOR));
 }
+
 void	ft_check_argument(int argc, char *file, t_error *error)
 {
 	ft_check_arguments_number(argc, error);
