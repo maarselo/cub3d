@@ -12,6 +12,7 @@
 
 #include "errorctx.h" //struct
 #include "libft.h" //ft_multijoin
+#include <errno.h>
 
 void	ft_set_error_static(int errnum, t_error *error, int process)
 {
@@ -26,4 +27,11 @@ void	ft_set_error_join(int errnum, char *join, t_error *error, int process)
 	error->message = ft_multijoin(4, ft_strerror(errnum, process),
 			" \"", join, "\".");
 	error->is_freeable = true;
+}
+
+void	ft_set_error_system(t_error *error)
+{
+	error->error_number = errno;
+	error->message = ft_strerror(errno, SYSTEM);
+	error->is_freeable = false;
 }

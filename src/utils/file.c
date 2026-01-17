@@ -59,7 +59,7 @@ char	**ft_read_file(char *file, t_error *error)
 		return (FT_FAILED_PTR);
 	file_content = (char **)ft_calloc(total_lines + 1, sizeof(char *));
 	if (!file_content)
-		return (ft_set_error_static(errno, error, SYSTEM), FT_FAILED_PTR);
+		return (ft_set_error_system(error), FT_FAILED_PTR);
 	fd = ft_open_file(file, error);
 	if (ft_has_error(error))
 		return (FT_FAILED_PTR);

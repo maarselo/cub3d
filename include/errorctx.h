@@ -58,6 +58,7 @@ t_error	*ft_init_error(void);
 //set_error.c
 void	ft_set_error_static(int errnum, t_error *error, int process);
 void	ft_set_error_join(int errnum, char *join, t_error *error, int process);
+void	ft_set_error_system(t_error *error);
 
 //strerror.c
 char	*ft_strerror(int errnum, int process);
