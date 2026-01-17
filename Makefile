@@ -17,26 +17,30 @@ DIR_SRC = src
 DIR_OBJS = objs
 DIR_DEPS = deps
 DIR_LIBFT = libs/libft
+DIR_MLX = libs/mlx/build
 
 #sources paths
 DIR_VALIDATOR = validator
 DIR_ERROR = error
 DIR_UTILS = utils
+DIR_FREE = free
 
 
-SRC_VALIDATOR = validator.c arguments.c map.c
+SRC_VALIDATOR = validator.c arguments.c config.c config_helpers.c
 SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
 SRC_UTILS = file.c file_utils.c
+SRC_FREE = free_file_content.c
 
 
 #diferent folder with files
 FILES_VALIDATOR = $(addprefix $(DIR_VALIDATOR)/, $(SRC_VALIDATOR))
 FILES_ERROR = $(addprefix $(DIR_ERROR)/, $(SRC_ERROR))
 FILES_UTILS = $(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
+FILES_FREE = $(addprefix $(DIR_FREE)/, $(SRC_FREE))
 
 
 #all files
-FILES = main.c $(FILES_VALIDATOR) $(FILES_ERROR) $(FILES_UTILS)
+FILES = main.c $(FILES_VALIDATOR) $(FILES_ERROR) $(FILES_UTILS) $(FILES_FREE)
 
 SRCS = $(addprefix $(DIR_SRC)/,$(FILES))
 
@@ -46,7 +50,7 @@ DEPS = $(addprefix $(DIR_DEPS)/, $(FILES:.c=.d))
 
 #libs to use
 LIBFT = $(DIR_LIBFT)/libft.a
-MLX = libs/mlx/build/libmlx42.a
+MLX = $(DIR_MLX)/libmlx42.a
 #headers of the libs
 HEADER_LIBTF = $(DIR_LIBFT)/include
 HEADER_MLX = ./libs/mlx/include/MLX42
@@ -84,7 +88,7 @@ clean:
 	$(RM) $(DIR_OBJS) $(DIR_DEPS)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(LIBFT) $(DIR_MLX)
 
 re: fclean all
 
