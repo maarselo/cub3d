@@ -26,7 +26,7 @@ DIR_UTILS = utils
 DIR_FREE = free
 
 
-SRC_VALIDATOR = validator.c arguments.c config.c config_helpers.c
+SRC_VALIDATOR = validator.c arguments.c config.c config_helpers.c  config_validator.c config_content.c
 SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
 SRC_UTILS = file.c file_utils.c
 SRC_FREE = free_file_content.c

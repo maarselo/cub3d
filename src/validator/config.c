@@ -59,6 +59,16 @@ static void	ft_validate_config(char **content, t_error *error)
 /*
 void	ft_validate_has_paths(char **content)
 {
+	int	idx;
+
+	idx = 0;
+	while (content[idx])
+	{
+		if (ft_isspace_str(content[idx]))
+			continue ;
+		if (ft_
+
+	}
 }*/
 
 void	ft_check_config(char *file, t_error *error)

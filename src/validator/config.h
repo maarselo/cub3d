@@ -34,6 +34,8 @@ typedef enum e_cfg_result
 	CFG_ERROR,
 }	t_cfg_result;
 
+extern const char *g_config_string[CONFIG_COUNT];
+
 int		ft_find_config(char *line);
 bool	ft_check_all_defined(bool flags[]);
 int		ft_validate_cfg_line(int type, char *line, bool *flags, t_error *error);

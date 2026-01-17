@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config_helpers.c                                   :+:      :+:    :+:   */
+/*   config_content.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/10 23:33:47 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/01/10 23:33:37 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "validator/config.h"//enum
-#include "libft.h" //ft_strnstr
+#include <stdlib.h>
+#include <unistd.h>
 
-int	ft_find_config(char *line)
+void	ft_remove_map(int last_cfg_line, char **file_content)
 {
-	int	idx;
-	int	len;
+	int	current_line;
 
-	idx = -1;
-	len = ft_strlen(line);
-	while (++idx < CONFIG_COUNT)
+	current_line = last_cfg_line;
+	if (!file_content[current_line])
+		return ;
+	while (file_content[current_line])
 	{
-		if (ft_strnstr(line, g_config_string[idx], len))
-			return (idx);
+		free(file_content[current_line]);
+		file_content[current_line++] = NULL;
 	}
-	return (FT_FAILED_INT);
 }
