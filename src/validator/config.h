@@ -13,23 +13,30 @@
 #ifndef CONFIG_H
 # define CONFIG_H
 
-# define NORTH_TEX "NO "
-# define SOUTH_TEX "SO "
-# define WEST_TEX "WE "
-# define EAST_TEX "EA "
-# define FLOOR_COLOR "F "
-# define CEILING_COLOR "C "
+#include <stdbool.h> //bool return ft
+#include "errorctx.h" //struct
 
-#include <stdbool.h>
-
-typedef struct s_config_flags
+typedef enum e_config_type
 {
-	bool	no_found;
-	bool	so_found;
-	bool	we_found;
-	bool	ea_found;
-	bool	f_found;
-	bool	c_found;
-} t_config_flags;
+	NO,
+	SO,
+	WE,
+	EA,
+	F,
+	C,
+	CONFIG_COUNT,
+}	t_config_type;
+
+typedef enum e_cfg_result
+{
+    CFG_DONE,
+    CFG_OK,
+    CFG_ERROR,
+}	t_cfg_result;
+
+int		ft_find_config(char *line);
+bool	ft_check_all_defined(bool flags[]);
+int		ft_handler_founded_errors(int type_found, char *line, bool *flags, t_error *error);
+void	ft_remove_map(int last_cfg_line, char **file_content);
 
 #endif
