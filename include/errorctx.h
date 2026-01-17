@@ -15,8 +15,8 @@
 
 # include <stdbool.h> //struct variable
 
-# define SUCCES 0
-# define FAILED 1 
+# define SUCCES 0 //exit_code in main
+# define FAILED 1 //exit_code in main
 
 # define FT_FAILED_INT -1
 # define FT_FAILED_PTR NULL
@@ -44,14 +44,10 @@ typedef enum e_validator_error
 	EMPTY_ARGUMENT,
 	MAP_EXTENSION,
 	EMPTY_FILE,
-	DUPLICATE_NO,
-	DUPLICATE_SO,
-	DUPLICATE_WE,
-	DUPLICATE_EA,
-	DUPLICATE_F,
-	DUPLICATE_C,
+	DUP_CFG,
 	MULTI_STATEMENT,
 	CONFIG_NOT_DEFINED,
+	//MAP_NOT_DEFINED,
 
 	ERROR_COUNT
 }	t_validator_error;
@@ -69,6 +65,6 @@ char	*ft_strerror(int errnum, int process);
 
 //handler_error.c
 bool	ft_has_error(t_error *error);
-void	ft_error_handler(t_error *error);
+int		ft_error_handler(t_error *error);
 
 #endif

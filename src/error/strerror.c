@@ -20,12 +20,7 @@ static char	*g_error_message_validator[ERROR_COUNT] = {
 [EMPTY_ARGUMENT] = "Cub3D: empty argument.",
 [MAP_EXTENSION] = "Cub3D: invalid file extension",
 [EMPTY_FILE] = "Cub3D: the file is empty.",
-[DUPLICATE_NO] = "Cub3D: the Nort Texture is declared twice in the file.",
-[DUPLICATE_SO] = "Cub3D: the South Texture is declared twice in the file.",
-[DUPLICATE_WE] = "Cub3D: the West Texture is declared twice in the file.",
-[DUPLICATE_EA] = "Cub3D: the East Texture is declared twice in the file.",
-[DUPLICATE_F] = "Cub3D: the Floor Color is declared twice in the file.",
-[DUPLICATE_C] = "Cub3D: the Ceiling Color is declared twice in the file.",
+[DUP_CFG] = "Cub3D: a configuration value is declared twice in the file.",
 [MULTI_STATEMENT] = "Cub3D: the file have two statements in the same line.",
 [CONFIG_NOT_DEFINED] = "Cub3D: the file needs to define:\n  \
 \tNO path/to/nort/texture\n \
@@ -33,7 +28,8 @@ static char	*g_error_message_validator[ERROR_COUNT] = {
 \tWE path/to/west/texture\n \
 \tEA path/to/east/texture\n \
 \tF (RGB colors[0-255, 0-255, 0-255])\n \
-\tC (RGB colors[0-255, 0-255, 0-255])"
+\tC (RGB colors[0-255, 0-255, 0-255])",
+[MAP_NOT_DEFINED] = "Cub3D: there is any map defined."
 };
 
 char	*ft_strerror(int errnum, int process)

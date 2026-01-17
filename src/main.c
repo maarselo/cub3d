@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "validator.h" //function main validator
 
 int	main(int argc, char **argv)
 {
@@ -18,5 +19,7 @@ int	main(int argc, char **argv)
 
 	error = ft_init_error();
 	ft_validator(argc, argv, error);
-	ft_error_handler(error);
+	if (ft_error_handler(error))
+		return (FAILED);
+	return (SUCCES);
 }
