@@ -47,7 +47,7 @@ typedef enum e_validator_error
 	DUP_CFG,
 	MULTI_STATEMENT,
 	CONFIG_NOT_DEFINED,
-	//MAP_NOT_DEFINED,
+	MAP_NOT_DEFINED,
 
 	ERROR_COUNT
 }	t_validator_error;

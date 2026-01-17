@@ -54,14 +54,14 @@ static void	ft_validate_config(char **content, t_error *error)
 	if (!ft_check_all_defined(flags))
 		return (ft_free_file_content(content),
 			ft_set_error_static(CONFIG_NOT_DEFINED, error, VALIDATOR));
-	return (ft_set_error_static(MAP_NOT_DEFINED, error, VALIDATOR));
+	return (ft_set_error_static(MAP_NOT_DEFINED, error, VALIDATOR)); 
 }
-/*
+
 void	ft_validate_has_paths(char **content)
 {
 
 
-}*/
+}
 
 
 void	ft_check_config(char *file, t_error *error)
