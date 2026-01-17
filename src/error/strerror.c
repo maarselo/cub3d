@@ -29,7 +29,7 @@ static char	*g_error_message_validator[ERROR_COUNT] = {
 \tEA path/to/east/texture\n \
 \tF (RGB colors[0-255, 0-255, 0-255])\n \
 \tC (RGB colors[0-255, 0-255, 0-255])",
-[MAP_NOT_DEFINED] = "Cub3D: there is any map defined."
+[MAP_NOT_DEFINED] = "Cub3D: there is any map defined. "
 };
 
 char	*ft_strerror(int errnum, int process)
