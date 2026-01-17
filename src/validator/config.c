@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.c                                         :+:      :+:    :+:   */
+/*   config.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -43,7 +43,7 @@ static void	ft_validate_config(char **content, t_error *error)
 	{
 		if (ft_isspace_str(content[idx]))
 			continue ;
-		type_found = ft_find_config(content[idx]);
+		type_found = ft_find_config(content[idx], error);
 		result = ft_validate_cfg_line(type_found, content[idx], flags, error);
 		if (result == CFG_DONE)
 			return (ft_remove_map(idx, content));
@@ -56,20 +56,34 @@ static void	ft_validate_config(char **content, t_error *error)
 			ft_set_error_static(CONFIG_NOT_DEFINED, error, VALIDATOR));
 	return (ft_set_error_static(MAP_NOT_DEFINED, error, VALIDATOR));
 }
-/*
-void	ft_validate_has_paths(char **content)
+
+static void	ft_validate_cfg_values(char **content, t_error *error)
 {
 	int	idx;
+	int	current_cfg;
+	int	cfg_type;
 
-	idx = 0;
-	while (content[idx])
+	if (ft_has_error(error))
+		return ;
+	idx = -1;
+	while (content[++idx])
 	{
 		if (ft_isspace_str(content[idx]))
 			continue ;
-		if (ft_
-
+		current_cfg = ft_find_config(content[idx], error);
+		cfg_type = ft_detect_cfg_type(current_cfg);
+		if (cfg_type == CFG_TEXTURE)
+		{
+			if (!ft_has_path(content[idx], error))
+				return(ft_free_file_content(content));
+		}
+		else if (cfg_type == CFG_COLOR)
+		{
+			if (!ft_has_correct_colors(content[idx], error))
+				return (ft_free_file_content(content));
+		}
 	}
-}*/
+}
 
 void	ft_check_config(char *file, t_error *error)
 {
@@ -80,5 +94,5 @@ void	ft_check_config(char *file, t_error *error)
 	ft_check_empty_file(file, error);
 	content = ft_read_file(file, error);
 	ft_validate_config(content, error);
-	//ft_validate_has_paths(content);
+	ft_validate_cfg_values(content, error);
 }

@@ -34,11 +34,25 @@ typedef enum e_cfg_result
 	CFG_ERROR,
 }	t_cfg_result;
 
+typedef enum e_cfg_type
+{
+	CFG_TEXTURE,
+	CFG_COLOR,
+}	t_cfg_type;
+
 extern const char *g_config_string[CONFIG_COUNT];
 
-int		ft_find_config(char *line);
+//config_hlpers.h
+int		ft_find_config(char *line, t_error *error);
+int		ft_detect_cfg_type(int cfg);
+
+//config_validator.h
 bool	ft_check_all_defined(bool flags[]);
 int		ft_validate_cfg_line(int type, char *line, bool *flags, t_error *error);
+int		ft_has_path(char *cfg_line, t_error *error);
+int		ft_has_correct_colors(char *cfg_line, t_error *error);
+
+//config_content.c
 void	ft_remove_map(int last_cfg_line, char **file_content);
 
 #endif

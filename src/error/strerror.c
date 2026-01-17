@@ -20,6 +20,7 @@ static char	*g_error_message_validator[ERROR_COUNT] = {
 [EMPTY_ARGUMENT] = "Cub3D: empty argument.",
 [MAP_EXTENSION] = "Cub3D: invalid file extension",
 [EMPTY_FILE] = "Cub3D: the file is empty.",
+[INVALID_ORDER] = "Cub3D: configuration line malformed — token must appear first.",
 [DUP_CFG] = "Cub3D: a configuration value is declared twice in the file.",
 [MULTI_STATEMENT] = "Cub3D: the file has two statements in the same line.",
 [CONFIG_NOT_DEFINED] = "Cub3D: the file needs to define:\n  \
@@ -29,7 +30,10 @@ static char	*g_error_message_validator[ERROR_COUNT] = {
 \tEA path/to/east/texture\n \
 \tF (RGB colors[0-255, 0-255, 0-255])\n \
 \tC (RGB colors[0-255, 0-255, 0-255])",
-[MAP_NOT_DEFINED] = "Cub3D: there is any map defined. "
+[MAP_NOT_DEFINED] = "Cub3D: there is any map defined.",
+[CFG_WITHOUT_PATH] = "Cub3D: texture path missing for a cardinal direction (NO, SO, WE, EA).",
+[CFG_MULTI_PATHS] = "Cub3D: multiple paths defined for the same cardinal direction.",
+[CFG_COLOR_UNDEF] = "Cub3D: floor or ceiling color not defined."
 };
 
 char	*ft_strerror(int errnum, int process)
