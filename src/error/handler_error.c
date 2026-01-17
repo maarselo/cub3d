@@ -18,13 +18,14 @@ bool	ft_has_error(t_error *error)
 	return (error->error_number != ERROR_NONE);
 }
 
-int	ft_error_handler(t_error *error)
+bool	ft_error_handler(t_error *error)
 {
 	if (!ft_has_error(error))
-		return ;
+		return (false);
 	ft_putendl_fd(error->message, 2);
 	if (error->is_freeable)
 		free(error->message);
 	free(error);
 	error = NULL;
+	return (true);
 }

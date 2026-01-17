@@ -13,8 +13,8 @@
 #ifndef CONFIG_H
 # define CONFIG_H
 
-#include <stdbool.h> //bool return ft
-#include "errorctx.h" //struct
+# include <stdbool.h> //bool return ft
+# include "errorctx.h" //struct
 
 typedef enum e_config_type
 {
@@ -29,14 +29,14 @@ typedef enum e_config_type
 
 typedef enum e_cfg_result
 {
-    CFG_DONE,
-    CFG_OK,
-    CFG_ERROR,
+	CFG_DONE,
+	CFG_OK,
+	CFG_ERROR,
 }	t_cfg_result;
 
 int		ft_find_config(char *line);
 bool	ft_check_all_defined(bool flags[]);
-int		ft_handler_founded_errors(int type_found, char *line, bool *flags, t_error *error);
+int		ft_validate_cfg_line(int type, char *line, bool *flags, t_error *error);
 void	ft_remove_map(int last_cfg_line, char **file_content);
 
 #endif

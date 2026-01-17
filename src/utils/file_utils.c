@@ -23,7 +23,7 @@ void	ft_free_content_assigned(int i, char **file_content)
 char	*ft_get_clean_line(int *fd)
 {
 	int		len;
-	char 	*line;
+	char	*line;
 	char	*old_line;
 
 	line = get_next_line(*fd);
@@ -36,5 +36,5 @@ char	*ft_get_clean_line(int *fd)
 		return (line);
 	}
 	else
-		return(line);
+		return (line);
 }

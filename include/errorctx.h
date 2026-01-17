@@ -19,7 +19,7 @@
 # define FAILED 1 //exit_code in main
 
 # define FT_FAILED_INT -1
-# define FT_FAILED_PTR NULL
+# define FT_FAILED_PTR (void *)0
 
 typedef enum e_process
 {
@@ -52,7 +52,6 @@ typedef enum e_validator_error
 	ERROR_COUNT
 }	t_validator_error;
 
-
 //init_error.c
 t_error	*ft_init_error(void);
 
@@ -65,6 +64,6 @@ char	*ft_strerror(int errnum, int process);
 
 //handler_error.c
 bool	ft_has_error(t_error *error);
-int		ft_error_handler(t_error *error);
+bool	ft_error_handler(t_error *error);
 
 #endif

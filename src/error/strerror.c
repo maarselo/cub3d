@@ -21,7 +21,7 @@ static char	*g_error_message_validator[ERROR_COUNT] = {
 [MAP_EXTENSION] = "Cub3D: invalid file extension",
 [EMPTY_FILE] = "Cub3D: the file is empty.",
 [DUP_CFG] = "Cub3D: a configuration value is declared twice in the file.",
-[MULTI_STATEMENT] = "Cub3D: the file have two statements in the same line.",
+[MULTI_STATEMENT] = "Cub3D: the file has two statements in the same line.",
 [CONFIG_NOT_DEFINED] = "Cub3D: the file needs to define:\n  \
 \tNO path/to/nort/texture\n \
 \tSO path/to/south/texture\n \

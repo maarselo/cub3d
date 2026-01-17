@@ -13,7 +13,7 @@
 #ifndef UTILS_INTERNAL_H
 # define UTILS_INTERNAL_H
 
-#include "errorctx.h"
+# include "errorctx.h"
 
 //file_utils.c
 void	ft_free_content_assigned(int i, char **file_content);
