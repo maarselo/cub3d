@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config_validator.h                                 :+:      :+:    :+:   */
+/*   config_validator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,6 +14,8 @@
 #include "validator/config.h" //enum values
 #include "libft.h" //ft_strlen and ft_strnstr
 #include "errorctx.h" //fucntons
+#include "validator/config_validator.h" //auxiliar functions
+#include "free.h"
 
 const char	*g_config_string[CONFIG_COUNT] = {
 [NO] = "NO ",
@@ -35,30 +37,6 @@ bool	ft_check_all_defined(bool flags[])
 			return (false);
 	}
 	return (true);
-}
-
-static bool	ft_has_multi_statement(int type, char *line)
-{
-	int		idx;
-	int		len;
-	int		token_len;
-	char	*match;
-
-	idx = -1;
-	len = ft_strlen(line);
-	while (++idx < CONFIG_COUNT)
-	{
-		if (idx == type)
-		{
-			match = ft_strnstr(line, g_config_string[type], len);
-			token_len = ft_strlen(g_config_string[type]);
-			if (ft_strnstr(match + token_len, g_config_string[type], len))
-				return (true);
-		}
-		else if (ft_strnstr(line, g_config_string[idx], len))
-			return (true);
-	}
-	return (false);
 }
 
 int	ft_validate_cfg_line(int type, char *line, bool *flags, t_error *error)
@@ -91,38 +69,49 @@ int	ft_has_path(char *cfg_line, t_error *error)
 	while (split_line[i])
 		i++;
 	if (i < 2)
-		return (ft_set_error_static(CFG_WITHOUT_PATH, error, VALIDATOR), 0);
+		return (ft_set_error_static(CFG_TEX_WITHOUT_PATH, error, VALIDATOR), 0);
 	else if (i > 2)
-		return (ft_set_error_static(CFG_MULTI_PATHS, error, VALIDATOR), 0);
+		return (ft_set_error_static(CFG_TEX_MULTI_PATHS, error, VALIDATOR), 0);
 	return (1);
 }
-#include <stdio.h>
+
+static void	ft_strtrim_spaces(char **split)
+{
+	int		idx;
+	char	*tmp;
+
+	idx = -1;
+	while (split[++idx])
+	{
+		tmp = split[idx];
+		split[idx] = ft_strtrim(split[idx], " ");
+		free(tmp);
+	}
+}
+
 int	ft_has_correct_colors(char *cfg_line, t_error *error)
 {
 	int		i;
-	char	*real_line;
+	char	*value;
 	char	**split_line;
 
 	i = 0;
 	while (ft_isspace(cfg_line[i]))
 		i++;
-	real_line = cfg_line + i + 1;
-	/*real_line = ft_strdup_ignore(' ', real_line);
-	if (!real_line)
-		return (ft_set_error_system(error), 0);
-	if (!ft_strlen(real_line))
-		return (ft_set_error_static(CFG_COLOR_UNDEF, error, VALIDATOR) , 0);
-	*/split_line = ft_split(real_line, ',');
+	value = cfg_line + i + 1;
+	if (ft_isspace_str(value))
+		return (ft_set_error_static(CFG_COLOR_UNDEF, error, VALIDATOR), 0);
+	if (ft_has_consecutive_commas(value))
+		return (ft_set_error_static(CFG_COLOR_CONSECUTIVE_COMMAS, error, VALIDATOR), 0);
+	split_line = ft_split(value, ',');
 	if (!split_line)
-		return (printf("diarrea"),ft_set_error_system(error), 0);
-	if (!split_line[0])
-		return (printf("caca"));
-	if (split_line[0])
-		return (printf("%s.", split_line[0]));
-	//int j =-1;
-	/*while (split_line[++j])
-	{
-		split_line
-	}*/
+		return (ft_set_error_system(error), 0);
+	if (!ft_has_valid_value_count(split_line))
+		return (ft_free_split(split_line), ft_set_error_static(CFG_COLOR_INVALID_VALUE_COUNT, error, VALIDATOR), 0);
+	ft_strtrim_spaces(split_line);
+	if (ft_has_invalid_characters(split_line))
+		return (ft_free_split(split_line), ft_set_error_static(CFG_COLOR_INVALID_CHARS, error, VALIDATOR), 0);
+	if (!ft_has_correct_color_range(split_line))
+		return (ft_free_split(split_line), ft_set_error_static(CFG_COLOR_INVALID_RANGE, error, VALIDATOR), 0);
 	return (1);
 }
