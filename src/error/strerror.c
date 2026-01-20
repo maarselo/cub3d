@@ -35,6 +35,7 @@ Expected:\n \
 [CFG_TEX_WITHOUT_PATH] = "Cub3D: texture identifier declared without a path (NO, SO, WE, EA).",
 [CFG_TEX_MULTI_PATHS] = "Cub3D: multiple paths defined for the same texture identifier.",
 [CFG_COLOR_UNDEF] = "Cub3D: floor or ceiling color not defined.",
+[CFG_COLOR_LASTC_COMMA] = "Cub3D: invalid color format. The declaration must not end with a comma.",
 [CFG_COLOR_CONSECUTIVE_COMMAS] = "Cub3D: invalid color format. Consecutive commas are not allowed.",
 [CFG_COLOR_INVALID_VALUE_COUNT] = "Cub3D: invalid color format. Exactly three RGB values are required.",
 [CFG_COLOR_INVALID_CHARS] = "Cub3D: invalid color format. RGB values must contain only digits and commas.",

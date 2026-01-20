@@ -101,6 +101,8 @@ int	ft_has_correct_colors(char *cfg_line, t_error *error)
 	value = cfg_line + i + 1;
 	if (ft_isspace_str(value))
 		return (ft_set_error_static(CFG_COLOR_UNDEF, error, VALIDATOR), 0);
+	if (ft_get_lastc(value) == ',')
+		return (ft_set_error_static(CFG_COLOR_LASTC_COMMA, error, VALIDATOR), 0);
 	if (ft_has_consecutive_commas(value))
 		return (ft_set_error_static(CFG_COLOR_CONSECUTIVE_COMMAS, error, VALIDATOR), 0);
 	split_line = ft_split(value, ',');
