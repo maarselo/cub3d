@@ -48,12 +48,11 @@ static void	ft_validate_config(char **content, t_error *error)
 		if (result == CFG_DONE)
 			return (ft_remove_map(idx, content));
 		else if (result == CFG_ERROR)
-			return (ft_free_file_content(content));
+			return ;
 		flags[type_found] = true;
 	}
 	if (!ft_check_all_defined(flags))
-		return (ft_free_file_content(content),
-			ft_set_error_static(CONFIG_NOT_DEFINED, error, VALIDATOR));
+		return (ft_set_error_static(CONFIG_NOT_DEFINED, error, VALIDATOR));
 	return (ft_set_error_static(MAP_NOT_DEFINED, error, VALIDATOR));
 }
 
@@ -75,12 +74,12 @@ static void	ft_validate_cfg_values(char **content, t_error *error)
 		if (cfg_type == CFG_TEXTURE)
 		{
 			if (!ft_has_path(content[idx], error))
-				return(ft_free_file_content(content));
+				return ;
 		}
 		else if (cfg_type == CFG_COLOR)
 		{
 			if (!ft_has_correct_colors(content[idx], error))
-				return (ft_free_file_content(content));
+				return ;
 		}
 	}
 }
@@ -95,4 +94,5 @@ void	ft_check_config(char *file, t_error *error)
 	content = ft_read_file(file, error);
 	ft_validate_config(content, error);
 	ft_validate_cfg_values(content, error);
+	ft_free_file_content(content);
 }
