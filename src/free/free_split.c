@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.h                                             :+:      :+:    :+:   */
+/*   free_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/29 19:14:28 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/10 13:59:21 by mvillavi         ###   ########.fr       */
+/*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
+/*   Updated: 2026/01/10 23:33:37 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FREE_H
-# define FREE_H
+#include <stdlib.h>
 
-//free_cile_content
-void	ft_free_file_content(char **content);
+void	ft_free_split(char **split)
+{
+	int	idx;
 
-//free_split.c
-void	ft_free_split(char **split);
-
-#endif
+	idx = -1;
+	while (split[++idx])
+		free(split[idx]);
+	free(split);
+}
