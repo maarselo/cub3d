@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_utils.c                                       :+:      :+:    :+:   */
+/*   free_content_asigned.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,24 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" //gnl and ft_substr
-#include <stdlib.h> //free
+#include <stdlib.h>
 
-char	*ft_get_clean_line(int *fd)
+void	ft_free_content_assigned(int i, char **file_content)
 {
-	int		len;
-	char	*line;
-	char	*old_line;
-
-	line = get_next_line(*fd);
-	len = ft_strlen(line);
-	if (line[len - 1] == '\n')
-	{
-		old_line = line;
-		line = ft_substr(line, 0, len - 1);
-		free(old_line);
-		return (line);
-	}
-	else
-		return (line);
+	while (--i >= 0)
+		free(file_content[i]);
+	free(file_content);
 }

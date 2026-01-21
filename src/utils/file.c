@@ -15,6 +15,7 @@
 #include <fcntl.h> //open()
 #include "libft.h" //gnl, and ft_substr
 #include "utils/utils_internal.h"
+#include "free.h" //ft_free_content_asigned
 
 int	ft_open_file(char *file, t_error *error)
 {

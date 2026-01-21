@@ -16,6 +16,9 @@
 //free_cile_content
 void	ft_free_file_content(char **content);
 
+//free_content_assigned.c
+void	ft_free_content_assigned(int i, char **file_content);
+
 //free_split.c
 void	ft_free_split(char **split);
 
