@@ -57,19 +57,20 @@ char	**ft_read_file(char *file, t_error *error)
 	total_lines = ft_count_lines(file, error);
 	if (ft_has_error(error))
 		return (FT_FAILED_PTR);
-	file_content = (char **)ft_calloc(total_lines + 1, sizeof(char *));
-	if (!file_content)
-		return (ft_set_error_system(error), FT_FAILED_PTR);
 	fd = ft_open_file(file, error);
 	if (ft_has_error(error))
 		return (FT_FAILED_PTR);
+	file_content = (char **)ft_calloc(total_lines + 1, sizeof(char *));
+	if (!file_content)
+		return (ft_set_error_system(error), FT_FAILED_PTR);
 	i = -1;
 	while (++i < total_lines)
 	{
 		file_content[i] = ft_get_clean_line(&fd);
-		if (!file_content)
+		if (!file_content[i])
 			ft_free_content_assigned(i, file_content);
 	}
+	file_content[total_lines] = NULL;
 	close(fd);
 	return (file_content);
 }
