@@ -72,7 +72,7 @@ int	ft_has_path(char *cfg_line, t_error *error)
 		return (ft_set_error_static(CFG_TEX_WITHOUT_PATH, error, VALIDATOR), 0);
 	else if (i > 2)
 		return (ft_set_error_static(CFG_TEX_MULTI_PATHS, error, VALIDATOR), 0);
-	return (1);
+	return (ft_free_split(split_line), 1);
 }
 
 static void	ft_strtrim_spaces(char **split)
@@ -115,5 +115,5 @@ int	ft_has_correct_colors(char *cfg_line, t_error *error)
 		return (ft_free_split(split_line), ft_set_error_static(CFG_COLOR_INVALID_CHARS, error, VALIDATOR), 0);
 	if (!ft_has_correct_color_range(split_line))
 		return (ft_free_split(split_line), ft_set_error_static(CFG_COLOR_INVALID_RANGE, error, VALIDATOR), 0);
-	return (1);
+	return (ft_free_split(split_line), 1);
 }
