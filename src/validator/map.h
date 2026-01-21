@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,18 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "errorctx.h" //struct
-#include "map.h" //auxliar functions
+#ifndef MAP_H
+# define MAP_H
 
-#include <stdio.h>
-void	ft_check_map(char *file, t_error *error)
-{
-	char	**map;
+# include "errorctx.h"
 
-	if (ft_has_error(error))
-		return ;
-	map = ft_get_map(file, error);
-	int i = -1;	
-	while (map[++i])
-		printf("%s.\n", map[i]);
-}
+char	**ft_get_map(char *file, t_error *error);
+
+#endif
