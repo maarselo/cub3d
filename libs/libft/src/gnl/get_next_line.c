@@ -50,6 +50,12 @@ static void	ft_nextline(char **buffer)
 	if ((*buffer)[i] == '\n')
 		i++;
 	len = ft_strlen(*buffer);
+	if (i >= len)
+	{
+		free(tmp);
+		*buffer = NULL;
+		return ;
+	}
 	*buffer = ft_substr(*buffer, i, len - i);
 	free(tmp);
 }
