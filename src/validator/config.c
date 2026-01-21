@@ -35,7 +35,7 @@ static void	ft_validate_config(char **content, t_error *error)
 	int		result;
 	bool	flags[CONFIG_COUNT];
 
-	if (ft_has_error(error) || content == FT_FAILED_PTR)
+	if (ft_has_error(error) || content == NULL)
 		return ;
 	idx = -1;
 	ft_memset(flags, 0, sizeof(flags));

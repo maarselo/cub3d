@@ -23,7 +23,7 @@ int	ft_open_file(char *file, t_error *error)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (ft_set_error_join(errno, file, error, SYSTEM), FT_FAILED_INT);
+		return (ft_set_error_join(errno, file, error, SYSTEM), -1);
 	return (fd);
 }
 
@@ -36,7 +36,7 @@ int	ft_count_lines(char *file, t_error *error)
 	total_lines = 0;
 	fd = ft_open_file(file, error);
 	if (ft_has_error(error))
-		return (FT_FAILED_INT);
+		return (-1);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -57,13 +57,13 @@ char	**ft_read_file(char *file, t_error *error)
 
 	total_lines = ft_count_lines(file, error);
 	if (ft_has_error(error))
-		return (FT_FAILED_PTR);
+		return (NULL);
 	fd = ft_open_file(file, error);
 	if (ft_has_error(error))
-		return (FT_FAILED_PTR);
+		return (NULL);
 	file_content = (char **)ft_calloc(total_lines + 1, sizeof(char *));
 	if (!file_content)
-		return (ft_set_error_system(error), FT_FAILED_PTR);
+		return (ft_set_error_system(error), NULL);
 	i = -1;
 	while (++i < total_lines)
 	{

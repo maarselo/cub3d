@@ -30,11 +30,11 @@ int	ft_find_config(char *line, t_error *error)
 				j++;
 			if (ft_strncmp(line + j, g_config_string[i], ft_strlen(g_config_string[i])))
 				return (ft_set_error_static(INVALID_ORDER, error, VALIDATOR),
-					FT_FAILED_INT);
+					-1);
 			return (i);
 		}
 	}
-	return (FT_FAILED_INT);
+	return (-1);
 }
 
 int	ft_detect_cfg_type(int cfg)

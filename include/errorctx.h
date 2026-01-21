@@ -18,9 +18,6 @@
 # define SUCCES 0 //exit_code in main
 # define FAILED 1 //exit_code in main
 
-# define FT_FAILED_INT -1
-# define FT_FAILED_PTR (void *)0
-
 typedef enum e_process
 {
 	SYSTEM,

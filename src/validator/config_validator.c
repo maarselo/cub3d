@@ -41,7 +41,7 @@ bool	ft_check_all_defined(bool flags[])
 
 int	ft_validate_cfg_line(int type, char *line, bool *flags, t_error *error)
 {
-	if (type == FT_FAILED_INT)
+	if (type == -1)
 	{
 		if (error->error_number == INVALID_ORDER)
 			return (CFG_ERROR);
