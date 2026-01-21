@@ -77,7 +77,7 @@ char	**ft_get_map(char *file, t_error *error)
 		return (NULL);
 	start_idx = ft_get_map_start_idx(content);
 	last_idx = ft_get_map_last_idx(start_idx, content);
-	map = (char **)ft_calloc(last_idx - start_idx + 2, sizeof(char *));
+	map = (char **)ft_calloc(1, sizeof(char *) * (last_idx - start_idx + 1 + 1));
 	if (!map)
 		return (ft_free_file_content(content), ft_set_error_system(error), NULL);
 	idx = -1;
