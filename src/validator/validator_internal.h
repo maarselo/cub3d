@@ -17,5 +17,6 @@
 
 void	ft_check_argument(int argc, char *file, t_error *error);
 void	ft_check_config(char *file, t_error *error);
+void	ft_check_map(char *file, t_error *error);
 
 #endif
