@@ -1,0 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
+/*   Updated: 2026/01/10 23:33:47 by mvillavi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parser.h" //struct in parser
+#include "cub3d.h" //t_data struct
+#include "errorctx.h" //error struct
+#include "libft.h" //ft_calloc
+#include "free.h" //ft_free_data
+#include "utils.h" //ft_read_file
+
+t_data	*ft_init_data(t_error *error)
+{
+	t_data	*data;
+
+	data = (t_data *)ft_calloc(1, (sizeof(t_data)));
+	if (!data)
+		return (ft_set_error_system(error), NULL);
+	return (data);
+}
+
+void	ft_init_colors(char *file, t_data *data)
+{
+	char		**content;
+	t_colors	*colors;
+
+	colors = (t_colors *)malloc(sizeof(t_colors));
+	if (!colors)
+		return (ft_free_data(data), ft_set_error_system(data->error));
+	content = ft_read_file(file, data->error);
+		return (free(colors), ft_free_data(data), ft_set_error_system(data->error));
+	//..take the colors to hexadecimal and handler
+}
+
+void	ft_parser(char *file, t_data *data, t_error *error)
+{
+	if (ft_has_error(error))
+		return ;
+	data = ft_init_data(error);
+	if (!data)
+		return ;
+	data->error = error;
+	ft_init_colors(file, data);
+}
