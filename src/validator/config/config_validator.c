@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "stdbool.h" //returns and array
-#include "validator/config.h" //enum values
+#include "validator/config/config.h" //enum values
 #include "libft.h" //ft_strlen and ft_strnstr
 #include "errorctx.h" //fucntons
-#include "validator/config_validator.h" //auxiliar functions
+#include "validator/config/config_validator.h" //auxiliar functions
 #include "free.h"
 
 const char	*g_config_string[CONFIG_COUNT] = {

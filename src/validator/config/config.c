@@ -13,7 +13,7 @@
 #include "errorctx.h" //struct
 #include "utils.h" //ft_count_lines and read content
 #include "libft.h" //ft_isspace_str
-#include "validator/config.h" //struct flags and macros
+#include "validator/config/config.h" //struct flags and macros
 #include <stdbool.h> //bool array 
 #include "free.h" //ft_free_file
 

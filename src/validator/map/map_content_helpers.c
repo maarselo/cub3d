@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "validator/config.h" //enum var
-#include "../../libs/libft/include/libft.h" //len and strnstr
+#include "validator/config/config.h" //enum var
+#include "libft.h" //len and strnstr
 
 int	ft_get_map_start_idx(char **content)
 {

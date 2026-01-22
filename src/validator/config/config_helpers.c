@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "validator/config.h"//enum
+#include "validator/config/config.h"//enum
 #include "libft.h" //ft_strnstr
 
 int	ft_find_config(char *line, t_error *error)

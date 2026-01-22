@@ -12,8 +12,8 @@
 
 #include "errorctx.h" //struct 
 #include "utils.h" //read_file
-#include "validator/config.h" //enum var
-#include "../../libs/libft/include/libft.h" //len and strnstr
+#include "validator/config/config.h" //enum var
+#include "libft.h" //len and strnstr
 #include "free.h" //fre_content_asiigned.c
 #include "map.h" //auxliar functions
 

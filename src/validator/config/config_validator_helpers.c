@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "validator/config.h" //enum_values
+#include "validator/config/config.h" //enum_values
 #include <stdbool.h> //return
 #include "libft.h" //strtrim
 
