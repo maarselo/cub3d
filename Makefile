@@ -91,10 +91,8 @@ clean:
 	$(RM) $(DIR_OBJS) $(DIR_DEPS)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(LIBFT) $(DIR_MLX) $(NAME)
 
-re:
-	$(RM) $(LIBFT) $(DIR_MLX) 
 re: fclean all
 
 debug: CFLAGS += $(CFLAGS_DEBUG)
