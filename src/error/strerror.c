@@ -39,8 +39,10 @@ Expected:\n \
 [CFG_COLOR_CONSECUTIVE_COMMAS] = "Cub3D: invalid color format. Consecutive commas are not allowed.",
 [CFG_COLOR_INVALID_VALUE_COUNT] = "Cub3D: invalid color format. Exactly three RGB values are required.",
 [CFG_COLOR_INVALID_CHARS] = "Cub3D: invalid color format. RGB values must contain only digits and commas.",
-[CFG_COLOR_INVALID_RANGE] = "Cub3D: invalid color value. RGB components must be in the range 0–255."
-
+[CFG_COLOR_INVALID_RANGE] = "Cub3D: invalid color value. RGB components must be in the range 0–255.",
+[MAP_INVALID_CHARS] = "Cub3D: invalid map. Only characters '0', '1' and a single start position (N, S, E, W) are allowed.",
+[MAP_MULTI_STARTS] = "Cub3D: invalid map. Exactly one start position (N, S, E, W) is required.",
+[MAP_NOT_CLOSED] = "Cub3D: invalid map. The map is not properly closed by walls.",
 };
 
 char	*ft_strerror(int errnum, int process)
