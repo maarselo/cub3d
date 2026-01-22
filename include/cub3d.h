@@ -14,10 +14,16 @@
 # define CUB3D_H
 
 # include "errorctx.h" //struct in data
+# include "parser.h"
 
 typedef struct s_data
 {
-	t_error	*error;
+	t_colors	*colors;
+	t_textures	*textures;
+	t_map		*map;
+	t_player	*player;
+
+	t_error		*error;
 }	t_data;
 
 #endif

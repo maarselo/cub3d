@@ -21,6 +21,7 @@ DIR_MLX = libs/mlx/build
 
 #sources paths
 DIR_VALIDATOR = validator
+DIR_PARSER = parser
 DIR_ERROR = error
 DIR_UTILS = utils
 DIR_FREE = free
@@ -30,20 +31,23 @@ SRC_VALIDATOR = validator.c \
 			arguments.c \
 			config.c config_helpers.c  config_validator.c config_validator_helpers.c config_content.c \
 			map.c map_content.c map_content_helpers.c
+SRC_PARSER = parser.c
 SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
 SRC_UTILS = file.c file_utils.c
-SRC_FREE = free_file_content.c free_content_assigned.c free_split.c
+SRC_FREE = free_file_content.c free_content_assigned.c free_split.c free_data.c
 
 
 #diferent folder with files
 FILES_VALIDATOR = $(addprefix $(DIR_VALIDATOR)/, $(SRC_VALIDATOR))
+FILES_PARSER = $(addprefix $(DIR_PARSER)/, $(SRC_PARSER))
 FILES_ERROR = $(addprefix $(DIR_ERROR)/, $(SRC_ERROR))
 FILES_UTILS = $(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 FILES_FREE = $(addprefix $(DIR_FREE)/, $(SRC_FREE))
 
 
 #all files
-FILES = main.c $(FILES_VALIDATOR) $(FILES_ERROR) $(FILES_UTILS) $(FILES_FREE)
+FILES = main.c $(FILES_VALIDATOR) $(FILES_PARSER) \
+	 $(FILES_ERROR) $(FILES_UTILS) $(FILES_FREE)
 
 SRCS = $(addprefix $(DIR_SRC)/,$(FILES))
 

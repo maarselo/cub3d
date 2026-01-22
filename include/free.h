@@ -22,4 +22,7 @@ void	ft_free_content_assigned(int i, char **file_content);
 //free_split.c
 void	ft_free_split(char **split);
 
+
+//free_data.c
+void	ft_free_data(t_data *data);
 #endif
