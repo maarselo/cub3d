@@ -13,6 +13,7 @@
 #include "cub3d.h" //t_data
 #include "MLX42.h" //delete to free_some_mlx_structs
 #include "free.h" //stdlib.h and fre_file_contetn
+#include <stdlib.h> //free()
 
 void	ft_free_data(t_data *data)
 {
@@ -28,7 +29,7 @@ void	ft_free_data(t_data *data)
 	}
 	if (data->map)
 	{
-		ft_free_file_content(data->map);
+		ft_free_file_content(data->map->map);
 		free(data->map);
 	}
 	if (data->player)
