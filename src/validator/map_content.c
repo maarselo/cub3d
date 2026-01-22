@@ -3,66 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   map_content.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/10 23:33:47 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/01/22 21:29:29 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
- 
+
 #include "errorctx.h" //struct 
 #include "utils.h" //read_file
 #include "validator/config.h" //enum var
 #include "../../libs/libft/include/libft.h" //len and strnstr
 #include "free.h" //fre_content_asiigned.c
-
-int	ft_get_map_start_idx(char **content)
-{
-	int		i;
-	int		j;
-	int		cfg_found;
-
-	i = -1;
-	cfg_found = 0;
-	while (content[++i] && cfg_found < CONFIG_COUNT)
-	{
-		if (ft_isspace_str(content[i]))
-			continue; ;
-		j = -1;
-		while (g_config_string[++j])
-		{
-			if (ft_strnstr(content[i], g_config_string[j],
-					ft_strlen(content[i])))
-			{
-				cfg_found++;
-				break ;
-			}
-		}
-	}
-	while (content[i] && ft_isspace_str(content[i]))
-		i++ ;
-	return (i);
-}
-
-int	ft_get_map_last_idx(int start_idx, char **content)
-{
-	int	idx;
-	int	last_idx;
-
-	idx = start_idx;
-	while (content[idx])
-	{
-		if (ft_isspace_str(content[idx]))
-		{
-			idx++;
-			continue ;
-		}
-		else
-			last_idx = idx;
-		idx++;
-	}
-	return (last_idx);
-}
+#include "map.h" //auxliar functions
 
 char	**ft_get_map(char *file, t_error *error)
 {
@@ -92,4 +45,25 @@ char	**ft_get_map(char *file, t_error *error)
 	}
 	map[idx + 1] = NULL;
 	return (ft_free_file_content(content), map);
+}
+
+void	ft_fill_spaces(char **map, t_error *error)
+{
+	int		i;
+	size_t	len;
+	int		chars_to_put;
+
+	if (ft_has_error(error))
+		return ;
+	i = -1;
+	len = 0;
+	while (map[++i])
+		if (ft_strlen(map[i]) > len)
+			len = ft_strlen(map[i]);
+	i = -1;
+	while (map[++i])
+	{
+		chars_to_put = len - ft_strlen(map[i]);
+		map[i] = ft_replace_spaces(chars_to_put, map[i], error);
+	}
 }

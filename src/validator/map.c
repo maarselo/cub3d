@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/10 23:33:47 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/01/22 22:21:57 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,62 +40,58 @@ void	ft_detect_invalid_chars(char **map, t_error *error)
 		return (ft_set_error_static(MAP_MULTI_STARTS, error, VALIDATOR));
 }
 
-void	ft_get_start_position(int *i, int *j, char **map)
+static void	ft_check_cell(int i, int j, char **map, t_error *error)
 {
-	*i = -1;
-	while (map[++(*i)])
-	{
-		*j = -1;
-		while (map[*i][++(*j)])
-		{
-			if (map[*i][*j] == 'N' || map[*i][*j] == 'S'
-				|| map[*i][*j] == 'W' || map[*i][*j] == 'E')
-				return ;
-		}
-	}
-}
-
-int	ft_get_map_height(char **map)
-{
-	int	height;
-
-	height = 0;
-	while (map[height])
-		height++;
-	return (height);
-}
-
-#include <stdio.h>
-void	ft_check_walls(int i, int j, char **map, t_error *error)
-{
-	int	max_height;
-	int	max_len;
-
 	if (ft_has_error(error))
 		return ;
-	max_height = ft_get_map_height(map);
-	max_len = ft_strlen(map[i]);
-	if (map[i] && (map[i][j] == '1' || map[i][j] == 'X'))
-		return ;
-	if (i <= 0 || i >= max_height || j <= 0 || j >= max_len)
-	// {
-		// printf("valor max_height: %d\n valor lmmax_len: %d\ncalor i= %d\nvalor de j=%d\n",max_height, max_len, i, j);
+	if (i < 0 || i >= ft_get_map_height(map))
 		return (ft_set_error_static(MAP_NOT_CLOSED, error, VALIDATOR));
-	// }
-	map[i][j] = 'X';
+	if (j < 0 || j >= (int)ft_strlen(map[i]))
+		return (ft_set_error_static(MAP_NOT_CLOSED, error, VALIDATOR));
+	if (map[i][j] == '-')
+		return (ft_set_error_static(MAP_NOT_CLOSED, error, VALIDATOR));
+}
+
+void	ft_check_every_cell(char **map, t_error *error)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_isalpha(map[i][j]) || map[i][j] == '0')
+			{
+				ft_check_cell(i + 1, j, map, error);
+				ft_check_cell(i, j + 1, map, error);
+				ft_check_cell(i - 1, j, map, error);
+				ft_check_cell(i, j - 1, map, error);
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
 #include <stdio.h>
 void	ft_check_map(char *file, t_error *error)
 {
-	int		i;
-	int		j;
 	char	**map;
 
 	if (ft_has_error(error))
 		return ;
 	map = ft_get_map(file, error);
 	ft_detect_invalid_chars(map, error);
-	ft_get_start_position(&i, &j, map);
-	ft_check_walls(i, j, map, error);
+	ft_fill_spaces(map, error);
+	int x;
+	x = 0;
+	while (map[x])
+	{
+		printf("%s\n", map[x]);
+		x++;
+	}
+	ft_check_every_cell(map, error);
 }

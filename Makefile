@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+         #
+#    By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/29 19:14:28 by mvillavi          #+#    #+#              #
-#    Updated: 2026/01/10 23:39:56 by mvillavi         ###   ########.fr        #
+#    Updated: 2026/01/22 21:21:27 by fbanzo-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ DIR_FREE = free
 SRC_VALIDATOR = validator.c \
 			arguments.c \
 			config.c config_helpers.c  config_validator.c config_validator_helpers.c config_content.c \
-			map.c map_content.c
+			map.c map_content.c map_content_helpers.c
 SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
 SRC_UTILS = file.c file_utils.c
 SRC_FREE = free_file_content.c free_content_assigned.c free_split.c
