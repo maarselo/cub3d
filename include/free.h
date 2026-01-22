@@ -13,6 +13,8 @@
 #ifndef FREE_H
 # define FREE_H
 
+#include "cub3d.h"
+
 //free_cile_content
 void	ft_free_file_content(char **content);
 
