@@ -26,8 +26,11 @@ void	ft_init_colors(char *file, t_data *data)
 	if (!colors)
 		return (ft_free_data(data), ft_set_error_system(data->error));
 	content = ft_read_file(file, data->error);
-		return (free(colors), ft_free_data(data), ft_set_error_system(data->error));
+	if (!content)
+		return (free(colors), ft_free_data(data),
+			ft_set_error_system(data->error));
 	//..take the colors to hexadecimal and handler
+	return ; //to test
 }
 
 void	ft_parser(char *file, t_data *data, t_error *error)
@@ -36,5 +39,4 @@ void	ft_parser(char *file, t_data *data, t_error *error)
 		return ;
 	data->error = error;
 	ft_init_colors(file, data);
-	data->map->map = ft_read_file(file, error);
 }

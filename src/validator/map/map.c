@@ -33,7 +33,8 @@ static void	ft_detect_invalid_chars(char **map, t_error *error)
 				|| map[i][j] == 'W' || map[i][j] == 'E')
 				total_start_positions++;
 			else if (map[i][j] != '0' && map[i][j] != '1')
-				return (ft_set_error_static(MAP_INVALID_CHARS, error, VALIDATOR));
+				return (ft_set_error_static(MAP_INVALID_CHARS, error,
+						VALIDATOR));
 		}
 	}
 	if (total_start_positions != 1)

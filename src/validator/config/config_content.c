@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "libft.h" //ft_strtrim
 
 void	ft_remove_map(int last_cfg_line, char **file_content)
 {
@@ -24,5 +25,19 @@ void	ft_remove_map(int last_cfg_line, char **file_content)
 	{
 		free(file_content[current_line]);
 		file_content[current_line++] = NULL;
+	}
+}
+
+void	ft_strtrim_spaces(char **split)
+{
+	int		idx;
+	char	*tmp;
+
+	idx = -1;
+	while (split[++idx])
+	{
+		tmp = split[idx];
+		split[idx] = ft_strtrim(split[idx], " ");
+		free(tmp);
 	}
 }

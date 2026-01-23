@@ -17,10 +17,14 @@
 #include "parser.h"//t_map
 #include "errorctx.h" //free_terror
 
+#include "unistd.h"
 void	ft_free_data(t_data *data)
 {
-	if (!data->colors)
+	write(1, "uno\n", 5);
+	if (data->colors)
 		free(data->colors);
+	write(1, "dos\n", 5);
+	
 	if (data->textures)
 	{
 		// mlx_delete_image(data->textures->north);
@@ -29,18 +33,26 @@ void	ft_free_data(t_data *data)
 		// mlx_delete_image(data->textures->east);
 		free((data->textures));
 	}
+	write(1, "tres\n", 5);
+
 	if (data->map)
 	{
 		ft_free_file_content(data->map->map);
 		free(data->map);
 	}
+	write(1, "cuatro\n", 5);
+
 	if (data->player)
 		free(data->player);
+	write(1, "cinco\n", 5);
+	
 	if (data->error)
 	{
 		if (data->error->is_freeable)
 			free(data->error->message);
 		free(data->error);
 	}
+	write(1, "seis\n", 5);
+
 	free(data);
 }

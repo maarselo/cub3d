@@ -92,7 +92,6 @@ bool	ft_has_correct_color_range(char **split)
 	int	nb;
 
 	idx = -1;
-
 	while (split[++idx])
 	{
 		nb = ft_atoi(split[idx]);

@@ -40,7 +40,7 @@ typedef enum e_cfg_type
 	CFG_COLOR,
 }	t_cfg_type;
 
-extern const char *g_config_string[CONFIG_COUNT];
+extern const char	*g_config_string[CONFIG_COUNT];
 
 //config_hlpers.h
 int		ft_find_config(char *line, t_error *error);

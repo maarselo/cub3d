@@ -19,6 +19,6 @@ bool	ft_has_consecutive_commas(char *line);
 bool	ft_has_valid_value_count(char **split);
 bool	ft_has_invalid_characters(char **split);
 bool	ft_has_correct_color_range(char **split);
-
-
+//config_content.h
+void	ft_strtrim_spaces(char **split);
 #endif

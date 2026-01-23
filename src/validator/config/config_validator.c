@@ -75,23 +75,25 @@ int	ft_has_path(char *cfg_line, t_error *error)
 	return (ft_free_split(split_line), 1);
 }
 
-static void	ft_strtrim_spaces(char **split)
+static int	ft_validate_color_values(char **split_line, t_error *error)
 {
-	int		idx;
-	char	*tmp;
-
-	idx = -1;
-	while (split[++idx])
-	{
-		tmp = split[idx];
-		split[idx] = ft_strtrim(split[idx], " ");
-		free(tmp);
-	}
+	if (!ft_has_valid_value_count(split_line))
+		return (ft_set_error_static(CFG_COLOR_INVALID_VALUE_COUNT,
+				error, VALIDATOR), 0);
+	ft_strtrim_spaces(split_line);
+	if (ft_has_invalid_characters(split_line))
+		return (ft_set_error_static(CFG_COLOR_INVALID_CHARS,
+				error, VALIDATOR), 0);
+	if (!ft_has_correct_color_range(split_line))
+		return (ft_set_error_static(CFG_COLOR_INVALID_RANGE,
+				error, VALIDATOR), 0);
+	return (1);
 }
 
 int	ft_has_correct_colors(char *cfg_line, t_error *error)
 {
 	int		i;
+	int		result;
 	char	*value;
 	char	**split_line;
 
@@ -100,20 +102,17 @@ int	ft_has_correct_colors(char *cfg_line, t_error *error)
 		i++;
 	value = cfg_line + i + 1;
 	if (ft_isspace_str(value))
-		return (ft_set_error_static(CFG_COLOR_UNDEF, error, VALIDATOR), 0);
+		return (ft_set_error_static(CFG_COLOR_UNDEF,
+				error, VALIDATOR), 0);
 	if (ft_get_lastc(value) == ',')
-		return (ft_set_error_static(CFG_COLOR_LASTC_COMMA, error, VALIDATOR), 0);
+		return (ft_set_error_static(CFG_COLOR_LASTC_COMMA,
+				error, VALIDATOR), 0);
 	if (ft_has_consecutive_commas(value))
-		return (ft_set_error_static(CFG_COLOR_CONSECUTIVE_COMMAS, error, VALIDATOR), 0);
+		return (ft_set_error_static(CFG_COLOR_CONSECUTIVE_COMMAS,
+				error, VALIDATOR), 0);
 	split_line = ft_split(value, ',');
 	if (!split_line)
 		return (ft_set_error_system(error), 0);
-	if (!ft_has_valid_value_count(split_line))
-		return (ft_free_split(split_line), ft_set_error_static(CFG_COLOR_INVALID_VALUE_COUNT, error, VALIDATOR), 0);
-	ft_strtrim_spaces(split_line);
-	if (ft_has_invalid_characters(split_line))
-		return (ft_free_split(split_line), ft_set_error_static(CFG_COLOR_INVALID_CHARS, error, VALIDATOR), 0);
-	if (!ft_has_correct_color_range(split_line))
-		return (ft_free_split(split_line), ft_set_error_static(CFG_COLOR_INVALID_RANGE, error, VALIDATOR), 0);
-	return (ft_free_split(split_line), 1);
+	result = ft_validate_color_values(split_line, error);
+	return (ft_free_split(split_line), result);
 }

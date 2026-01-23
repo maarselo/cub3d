@@ -28,7 +28,8 @@ int	ft_find_config(char *line, t_error *error)
 		{
 			while (ft_isspace(line[j]))
 				j++;
-			if (ft_strncmp(line + j, g_config_string[i], ft_strlen(g_config_string[i])))
+			if (ft_strncmp(line + j, g_config_string[i],
+					ft_strlen(g_config_string[i])))
 				return (ft_set_error_static(INVALID_ORDER, error, VALIDATOR),
 					-1);
 			return (i);
@@ -44,4 +45,3 @@ int	ft_detect_cfg_type(int cfg)
 	else
 		return (CFG_COLOR);
 }
-
