@@ -33,7 +33,7 @@ DIR_FREE = free
 SRC_VALIDATOR = validator.c \
 			$(DIR_VALIDATOR_ARGUMENTS)/arguments.c \
 			$(DIR_VALIDATOR_CONFIG)/config.c $(DIR_VALIDATOR_CONFIG)/config_helpers.c $(DIR_VALIDATOR_CONFIG)/config_validator.c $(DIR_VALIDATOR_CONFIG)/config_validator_helpers.c $(DIR_VALIDATOR_CONFIG)/config_content.c \
-			$(DIR_VALIDATOR_MAP)/map.c $(DIR_VALIDATOR_MAP)/map_content.c $(DIR_VALIDATOR_MAP)/map_content_helpers.c
+			$(DIR_VALIDATOR_MAP)/map.c $(DIR_VALIDATOR_MAP)/map_content.c 
 SRC_PARSER = parser.c init_data.c
 SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
 SRC_UTILS = file.c file_utils.c

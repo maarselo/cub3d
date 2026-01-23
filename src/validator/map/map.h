@@ -15,10 +15,7 @@
 
 # include "errorctx.h"
 
+//map_content.c
 char	**ft_get_map(char *file, t_error *error);
 void	ft_fill_spaces(char **map, t_error *error);
-int		ft_get_map_height(char **map);
-char	*ft_replace_spaces(int chars, char *str, t_error *error);
-int		ft_get_map_last_idx(int start_idx, char **content);
-int		ft_get_map_start_idx(char **content);
 #endif

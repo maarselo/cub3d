@@ -14,7 +14,7 @@
 #include "map.h" //auxliar functions
 #include "libft.h" //ft_isspace
 
-void	ft_detect_invalid_chars(char **map, t_error *error)
+static void	ft_detect_invalid_chars(char **map, t_error *error)
 {
 	int		i;
 	int		j;
@@ -40,7 +40,17 @@ void	ft_detect_invalid_chars(char **map, t_error *error)
 		return (ft_set_error_static(MAP_MULTI_STARTS, error, VALIDATOR));
 }
 
-static void	ft_check_cell(int i, int j, char **map, t_error *error)
+static int	ft_get_map_height(char **map)//////////
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	return (i);
+}
+
+static void	ft_check_cell(int i, int j, char **map, t_error *error)/////////
 {
 	if (ft_has_error(error))
 		return ;
@@ -52,7 +62,7 @@ static void	ft_check_cell(int i, int j, char **map, t_error *error)
 		return (ft_set_error_static(MAP_NOT_CLOSED, error, VALIDATOR));
 }
 
-void	ft_check_every_cell(char **map, t_error *error)
+static void	ft_check_every_cell(char **map, t_error *error)
 {
 	int	i;
 	int	j;
@@ -76,7 +86,6 @@ void	ft_check_every_cell(char **map, t_error *error)
 	}
 }
 
-#include <stdio.h>
 void	ft_check_map(char *file, t_error *error)
 {
 	char	**map;
@@ -86,12 +95,5 @@ void	ft_check_map(char *file, t_error *error)
 	map = ft_get_map(file, error);
 	ft_detect_invalid_chars(map, error);
 	ft_fill_spaces(map, error);
-	int x;
-	x = 0;
-	while (map[x])
-	{
-		printf("%s\n", map[x]);
-		x++;
-	}
 	ft_check_every_cell(map, error);
 }
