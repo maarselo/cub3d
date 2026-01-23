@@ -40,7 +40,7 @@ static void	ft_detect_invalid_chars(char **map, t_error *error)
 		return (ft_set_error_static(MAP_MULTI_STARTS, error, VALIDATOR));
 }
 
-static int	ft_get_map_height(char **map)//////////
+static int	ft_get_map_height(char **map)
 {
 	int	i;
 
@@ -50,7 +50,7 @@ static int	ft_get_map_height(char **map)//////////
 	return (i);
 }
 
-static void	ft_check_cell(int i, int j, char **map, t_error *error)/////////
+static void	ft_check_cell(int i, int j, char **map, t_error *error)
 {
 	if (ft_has_error(error))
 		return ;
