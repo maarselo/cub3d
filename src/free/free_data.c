@@ -14,6 +14,8 @@
 #include "MLX42.h" //delete to free_some_mlx_structs
 #include "free.h" //stdlib.h and fre_file_contetn
 #include <stdlib.h> //free()
+#include "parser.h"//t_map
+#include "errorctx.h" //free_terror
 
 void	ft_free_data(t_data *data)
 {

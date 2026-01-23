@@ -12,7 +12,8 @@
 
 #include "cub3d.h"
 #include "validator.h" //function main validator
-#include "free.h"
+#include "free.h" //ft_free_Data
+#include "parser.h"
 
 int	main(int argc, char **argv)
 {
@@ -21,7 +22,8 @@ int	main(int argc, char **argv)
 
 	error = ft_init_error();
 	ft_validator(argc, argv, error);
-	ft_parser(data, error);
+	data = ft_init_data(error);
+	ft_parser(argv[1], data, error);
 	if (ft_error_handler(error))
 		return (FAILED);
 	ft_free_data(data);
