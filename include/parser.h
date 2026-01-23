@@ -14,6 +14,7 @@
 # define PARSER_H
 
 # include "MLX42.h"
+# include "cub3d.h"
 
 typedef enum s_start_orientation
 {
@@ -51,7 +52,11 @@ typedef struct s_player
 	int	orientation;
 } t_player;
 
+//parser.c
+void	ft_parser(char *file, t_data *data, t_error *error);
 
+//init_data.c
+t_data	*ft_init_data(t_error *error);
 
 
 #endif

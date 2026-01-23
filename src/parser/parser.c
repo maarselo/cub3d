@@ -13,19 +13,9 @@
 #include "parser.h" //struct in parser
 #include "cub3d.h" //t_data struct
 #include "errorctx.h" //error struct
-#include "libft.h" //ft_calloc
 #include "free.h" //ft_free_data
 #include "utils.h" //ft_read_file
-
-t_data	*ft_init_data(t_error *error)
-{
-	t_data	*data;
-
-	data = (t_data *)ft_calloc(1, (sizeof(t_data)));
-	if (!data)
-		return (ft_set_error_system(error), NULL);
-	return (data);
-}
+#include <stdlib.h>
 
 void	ft_init_colors(char *file, t_data *data)
 {
@@ -44,9 +34,7 @@ void	ft_parser(char *file, t_data *data, t_error *error)
 {
 	if (ft_has_error(error))
 		return ;
-	data = ft_init_data(error);
-	if (!data)
-		return ;
 	data->error = error;
 	ft_init_colors(file, data);
+	data->map->map = ft_read_file(file, error);
 }
