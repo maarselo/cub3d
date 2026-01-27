@@ -16,6 +16,9 @@
 # include "MLX42.h"
 # include "cub3d.h"
 
+# define WINDOW_WIDTH  1920
+# define WINDOW_HEIGHT 1080
+
 typedef enum s_start_orientation
 {
 	NORTH,
@@ -40,8 +43,8 @@ typedef struct textures
 
 typedef struct s_map
 {
-	int		max_len;
-	int		max_height;
+	int		width;
+	int		height;
 	char	**map;
 } t_map;
 
@@ -51,6 +54,10 @@ typedef struct s_player
 	int	pos_y;
 	int	orientation;
 } t_player;
+
+typedef struct s_mlx{
+	mlx_t	*window;
+} t_mlx;
 
 //parser.c
 void	ft_parser(char *file, t_data *data, t_error *error);
