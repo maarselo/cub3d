@@ -13,6 +13,7 @@
 #include "errorctx.h" //struct
 #include "map.h" //auxliar functions
 #include "libft.h" //ft_isspace
+#include "free.h"
 
 static void	ft_detect_invalid_chars(char **map, t_error *error)
 {
@@ -97,4 +98,5 @@ void	ft_check_map(char *file, t_error *error)
 	ft_detect_invalid_chars(map, error);
 	ft_fill_spaces(map, error);
 	ft_check_every_cell(map, error);
+	ft_free_file_content(map);
 }

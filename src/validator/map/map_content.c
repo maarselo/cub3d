@@ -98,6 +98,7 @@ static char	*ft_replace_spaces(int chars, char *str, t_error *error)
 {
 	char	*str1;
 	char	*str2;
+	char	*join;
 	int		i;
 
 	str1 = (char *)malloc(sizeof(char) * chars + 1);
@@ -118,7 +119,8 @@ static char	*ft_replace_spaces(int chars, char *str, t_error *error)
 		else
 			str2[i] = str[i];
 	}
-	return (free(str), ft_strjoin(str2, str1));
+	join = ft_strjoin(str2, str1);
+	return (free(str), free(str1), free(str2), join);
 }
 
 void	ft_fill_spaces(char **map, t_error *error)
