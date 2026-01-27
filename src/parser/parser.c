@@ -15,13 +15,14 @@
 #include "errorctx.h" //error struct
 #include "free.h" //ft_free_data
 #include "utils.h" //ft_read_file
+#include "libft.h"
 
 void	ft_init_colors(char *file, t_data *data)
 {
 	char		**content;
 	t_colors	*colors;
 
-	colors = (t_colors *)ft_calloc(sizeof(t_colors));
+	colors = (t_colors *)ft_calloc(1, sizeof(t_colors));
 	if (!colors)
 		return (ft_free_data(data), ft_set_error_system(data->error));
 	content = ft_read_file(file, data->error);
