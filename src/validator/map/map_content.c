@@ -91,7 +91,7 @@ char	**ft_get_map(char *file, t_error *error)
 				ft_free_file_content(content),
 				ft_set_error_system(error), NULL);
 	}
-	return (map[idx + 1] = NULL, ft_free_file_content(content), map);
+	return (ft_free_file_content(content), map);
 }
 
 static char	*ft_replace_spaces(int chars, char *str, t_error *error)
@@ -107,7 +107,7 @@ static char	*ft_replace_spaces(int chars, char *str, t_error *error)
 	while (++i < chars)
 		str1[i] = '-';
 	str1[i] = '\0';
-	str2 = (char *)malloc(sizeof(char) * ft_strlen(str) + 1);
+	str2 = (char *)ft_calloc(1, sizeof(char) * ft_strlen(str) + 1);
 	if (!str2)
 		return (ft_set_error_system(error), NULL);
 	i = -1;
@@ -118,7 +118,6 @@ static char	*ft_replace_spaces(int chars, char *str, t_error *error)
 		else
 			str2[i] = str[i];
 	}
-	str2[i] = '\0';
 	return (free(str), ft_strjoin(str2, str1));
 }
 
