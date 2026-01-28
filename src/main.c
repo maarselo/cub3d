@@ -20,7 +20,6 @@ int	main(int argc, char **argv)
 	t_error	*error;
 	t_data	*data;
 
-	data = NULL;
 	error = ft_init_error();
 	ft_validator(argc, argv, error);
 	data = ft_init_data(error);

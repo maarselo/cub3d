@@ -40,6 +40,8 @@ t_data	*ft_init_data(t_error *error)
 {
 	t_data	*data;
 
+	if (ft_has_error(error))
+		return (NULL);
 	data = (t_data *)ft_calloc(1, (sizeof(t_data)));
 	if (!data)
 		return (ft_set_error_system(error), NULL);
