@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,19 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h" //struct in parser
 #include "cub3d.h" //t_data struct
+#include "parser.h" //struct in parser
+#include "validator/map/map.h" //get_map
 #include "errorctx.h" //error struct
-#include "parser_internal.h" //add to struct data
 
-void	ft_parser(char *file, t_data *data, t_error *error)
+void	ft_init_map(char *file, t_data *data)
 {
-	if (ft_has_error(error))
+	int	width;
+	int	height;
+
+	if (ft_has_error(data->error))
 		return ;
-	data->error = error;
-	// ft_init_colors(file, data)
-	ft_init_map(file, data);
-	ft_init_player(data);
-	ft_init_mlx(data);
-	ft_init_textures(file, data);
+	data->map->map = ft_get_map(file, data->error);
+	if (!data->map->map)
+		ft_set_error_system(data->error);
+	ft_fill_spaces(data->map->map, data->error);
+	if (ft_has_error(data->error))
+		return ;
+	width = 0;
+	height = 0;
+	while (data->map->map[0][width])
+		width++;
+	while (data->map->map[height])
+		height++;
+	data->map->height = height;
+	data->map->width = width;
 }

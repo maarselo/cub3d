@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   mlx.c	                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,19 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h" //struct in parser
 #include "cub3d.h" //t_data struct
-#include "errorctx.h" //error struct
-#include "parser_internal.h" //add to struct data
+#include "parser.h" //struct in parser
+#include "errorctx.h" //ft+_set_error_mlx
 
-void	ft_parser(char *file, t_data *data, t_error *error)
+void	ft_init_mlx(t_data *data)
 {
-	if (ft_has_error(error))
-		return ;
-	data->error = error;
-	// ft_init_colors(file, data)
-	ft_init_map(file, data);
-	ft_init_player(data);
-	ft_init_mlx(data);
-	ft_init_textures(file, data);
+	data->mlx->window = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D", true);
+	if (!data->mlx->window)
+		return (ft_set_error_mlx(data->error));
 }

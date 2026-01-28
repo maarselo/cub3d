@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,19 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h" //struct in parser
 #include "cub3d.h" //t_data struct
+#include "parser.h" //struct in parser
 #include "errorctx.h" //error struct
-#include "parser_internal.h" //add to struct data
+#include "libft.h" //ft_isaplha
+#include "cub3d.h" //t_data struct
 
-void	ft_parser(char *file, t_data *data, t_error *error)
+void	ft_init_player(t_data *data)
 {
-	if (ft_has_error(error))
+	int	i;
+	int	j;
+
+	if (ft_has_error(data->error))
 		return ;
-	data->error = error;
-	// ft_init_colors(file, data)
-	ft_init_map(file, data);
-	ft_init_player(data);
-	ft_init_mlx(data);
-	ft_init_textures(file, data);
+	i = -1;
+	while (data->map->map[++i])
+	{
+		j = -1;
+		while (data->map->map[i][++j])
+			if (ft_isalpha(data->map->map[i][j]))
+			{
+				data->player->pos_x = j;
+				data->player->pos_y = i;
+				if (data->map->map[i][j] == 'N')
+					data->player->orientation = NORTH;
+				else if (data->map->map[i][j] == 'S')
+					data->player->orientation = SOUTH;
+				else if (data->map->map[i][j] == 'W')
+					data->player->orientation = WEST;
+				else
+					data->player->orientation = EAST;
+			}
+	}
 }

@@ -13,47 +13,55 @@
 #include "cub3d.h" //t_data struct
 #include "errorctx.h" //error struct
 #include "parser.h" //struct in parser
-
-mlx_image_t	*ft_texture_to_img(t_data *data, char *texture_str)
+#include "utils.h" //ft__read_fle
+#include "libft.h" // ft_fstr*
+#include "validator/config/config.h" //detect cfg
+#include "free.h" //ft_free_split
+ 
+static mlx_image_t	*ft_texture_to_img(t_data *data, char *texture_str)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
 
 	texture = mlx_load_png(texture_str);
 	if (!texture)
-		ft_set_error_mlx(data->error);
+		return (ft_set_error_mlx(data->error), NULL);
 	image = mlx_texture_to_image(data->mlx->window, texture);
 	mlx_delete_texture(texture);
 	if (!image)
-		ft_set_error_mlx(data->error);
+		return (ft_set_error_mlx(data->error), NULL);
 	return (image);
 }
 
 void	ft_init_textures(char *file, t_data *data)
 {
+	int		i;
 	char	**content;
 	char	**line;
-	int		i;
-	int		j;
 
+	if (ft_has_error(data->error))
+		return ;
 	content = ft_read_file(file, data->error);
 	if (!content)
-		return (ft_free_data(data), ft_set_error_system(data->error));
+		return (ft_set_error_system(data->error));
 	i = -1;
-	j = 0;
 	while (content[++i])
 	{
-		if (ft_find_config(content[i]) != -1)
+		if (ft_find_config(content[i], data->error) != -1)
 		{
 			line = ft_split(content[i], ' ');
-			if (ft_strncmp(line[1], "NO", 2))
+			if (!line)
+				return (ft_free_file_content(content), ft_set_error_system(data->error));
+			if (!ft_strncmp(line[0], "NO", 2))
 				data->textures->north = ft_texture_to_img(data, line[1]);
-			if (ft_strncmp(line[1], "SO", 2))
+			else if (!ft_strncmp(line[0], "SO", 2))
 				data->textures->south = ft_texture_to_img(data, line[1]);
-			if (ft_strncmp(line[1], "WE", 2))
+			else if (!ft_strncmp(line[0], "WE", 2))
 				data->textures->west = ft_texture_to_img(data, line[1]);
-			if (ft_strncmp(line[1], "EA", 2))
+			else if (!ft_strncmp(line[0], "EA", 2))
 				data->textures->east = ft_texture_to_img(data, line[1]);
+			ft_free_split(line);
 		}
 	}
+	return (ft_free_file_content(content));
 }

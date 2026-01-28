@@ -20,11 +20,12 @@ int	main(int argc, char **argv)
 	t_error	*error;
 	t_data	*data;
 
+	data = NULL;
 	error = ft_init_error();
 	ft_validator(argc, argv, error);
 	data = ft_init_data(error);
 	ft_parser(argv[1], data, error);
-	if (ft_error_handler(error))
+	if (ft_error_handler(error, data))
 		return (FAILED);
 	ft_free_data(data);
 	return (SUCCES);

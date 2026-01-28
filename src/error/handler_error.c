@@ -11,14 +11,15 @@
 /* ************************************************************************** */
 
 #include "errorctx.h" //enum vars
-#include "libft.h"
+#include "libft.h" // put messages
+#include "free.h"
 
 bool	ft_has_error(t_error *error)
 {
 	return (error->error_number != ERROR_NONE);
 }
 
-bool	ft_error_handler(t_error *error)
+bool	ft_error_handler(t_error *error, t_data *data)
 {
 	if (!ft_has_error(error))
 		return (false);
@@ -29,5 +30,7 @@ bool	ft_error_handler(t_error *error)
 		free(error->message);
 	free(error);
 	error = NULL;
+	if (data)
+		ft_free_data(data);
 	return (true);
 }
