@@ -25,10 +25,14 @@ void	ft_free_data(t_data *data)
 		free(data->colors);
 	if (data->textures)
 	{
-		// mlx_delete_image(data->textures->north);
-		// mlx_delete_image(data->textures->south);
-		// mlx_delete_image(data->textures->west);
-		// mlx_delete_image(data->textures->east);
+		if (data->textures->north && mlx_errno != MLX_INVPNG)
+			mlx_delete_image(data->mlx->window, data->textures->north);
+		if (data->textures->south && mlx_errno != MLX_INVPNG)
+			mlx_delete_image(data->mlx->window, data->textures->south);
+		if (data->textures->west && mlx_errno != MLX_INVPNG)
+			mlx_delete_image(data->mlx->window, data->textures->west);
+		if (data->textures->east && mlx_errno != MLX_INVPNG)
+			mlx_delete_image(data->mlx->window, data->textures->east);
 		free(data->textures);
 	}
 	if (data->map)
@@ -39,6 +43,12 @@ void	ft_free_data(t_data *data)
 	}
 	if (data->player)
 		free(data->player);
+	if(data->mlx)
+	{
+		if (data->mlx->window)
+			mlx_terminate(data->mlx->window);
+		free(data->mlx);
+	}
 	if (data->error)
 	{
 		if (data->error->is_freeable)
