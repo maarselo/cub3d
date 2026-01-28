@@ -21,11 +21,9 @@ char	*ft_multijoin(int total_str, ...)
 	va_list	va;
 
 	va_start(va, total_str);
-	tmp_str = va_arg(va, char *);
-	strjoin = (char *)malloc(ft_strlen(tmp_str) + 1 * sizeof(char));
+	strjoin = ft_strdup(va_arg(va, char *));
 	if (!strjoin)
-		return (NULL);
-	ft_strlcpy(strjoin, tmp_str, ft_strlen(tmp_str) + 1);
+		return (va_end(va), NULL);
 	i = 1;
 	while (++i <= total_str)
 	{
@@ -34,7 +32,7 @@ char	*ft_multijoin(int total_str, ...)
 		strjoin = (char *)ft_realloc(strjoin, previous_len, previous_len
 				+ ft_strlen(tmp_str) + 1);
 		if (!strjoin)
-			return (NULL);
+			return (va_end(va), NULL);
 		ft_strlcpy(strjoin + previous_len, tmp_str, ft_strlen(tmp_str) + 1);
 	}
 	va_end(va);
