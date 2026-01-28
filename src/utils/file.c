@@ -55,9 +55,9 @@ char	**ft_read_file(char *file, t_error *error)
 	int		total_lines;
 	char	**file_content;
 
-	total_lines = ft_count_lines(file, error);
 	if (ft_has_error(error))
 		return (NULL);
+	total_lines = ft_count_lines(file, error);
 	fd = ft_open_file(file, error);
 	if (ft_has_error(error))
 		return (NULL);
