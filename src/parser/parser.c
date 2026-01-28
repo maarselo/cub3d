@@ -20,7 +20,7 @@ void	ft_parser(char *file, t_data *data, t_error *error)
 	if (ft_has_error(error))
 		return ;
 	data->error = error;
-	// ft_init_colors(file, data)
+	ft_init_colors(file, data);
 	ft_init_map(file, data);
 	ft_init_player(data);
 	ft_init_mlx(data);
