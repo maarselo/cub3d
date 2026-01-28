@@ -29,8 +29,7 @@ bool	ft_error_handler(t_error *error, t_data *data)
 	if (error->is_freeable)
 		free(error->message);
 	free(error);
-	data->error = NULL;
 	if (data)
-		ft_free_data(data);
+		return (data->error = NULL, ft_free_data(data), true);
 	return (true);
 }
