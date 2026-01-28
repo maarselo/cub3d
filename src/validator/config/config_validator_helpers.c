@@ -79,7 +79,7 @@ bool	ft_has_invalid_characters(char **split)
 			return (true);
 		while (split[i][++j])
 		{
-			if (ft_isalpha(split[i][j]))
+			if (!ft_isdigit(split[i][j]))
 				return (true);
 		}
 	}
