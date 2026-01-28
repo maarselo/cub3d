@@ -1,0 +1,71 @@
+{
+	Ignore_MLX_And_System_Leaks
+	Memcheck:Leak
+	...
+	obj:*/libmlx42.a*
+}
+{
+	Ignore_DL_Open_System_Leaks
+	Memcheck:Leak
+	...
+	fun:dlopen@@GLIBC_2.34
+	...
+}
+{
+	Ignore_DL_Loader_Invalid_Reads
+	Memcheck:Addr8
+	...
+	fun:strncmp
+	fun:is_dst
+	...
+}
+{
+	Ignore_X11_And_GL
+	Memcheck:Leak
+	...
+	obj:*/libX11.so*
+}
+{
+	Ignore_GLFW_Internal
+	Memcheck:Leak
+	...
+	obj:*/libglfw.so*
+}
+{
+	Ignore_LLVM_Leaks
+	Memcheck:Leak
+	...
+	obj:*/libLLVM-*.so*
+}
+{
+	Ignore_LibGL_Leaks
+	Memcheck:Leak
+	...
+	obj:*/libGL*.so*
+}
+{
+	Ignore_Std_C++_Leaks
+	Memcheck:Leak
+	...
+	fun:_Znwm
+}
+{
+	Ignore_Glfw_Leaks
+	Memcheck:Leak
+	...
+	obj:*/libglfw.so*
+}
+{
+	Ignore_System_DL_Reachable
+	Memcheck:Leak
+	...
+	fun:_dl_open
+	...
+}
+{
+	Ignore_LibStdCPP_Init
+	Memcheck:Leak
+	...
+	obj:*/libstdc++.so.*
+	fun:call_init*
+}
