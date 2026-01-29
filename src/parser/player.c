@@ -6,7 +6,7 @@
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/27 21:05:38 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/01/29 17:35:53 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	ft_init_player(t_data *data)
 		while (data->map->map[i][++j])
 			if (ft_isalpha(data->map->map[i][j]))
 			{
-				data->player->pos_x = j;
-				data->player->pos_y = i;
+				data->player->pos_x = (double)j + 0.5;
+				data->player->pos_y = (double)i + 0.5;
 				if (data->map->map[i][j] == 'N')
 					data->player->orientation = NORTH;
 				else if (data->map->map[i][j] == 'S')

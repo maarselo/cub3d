@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/10 23:33:47 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/01/29 17:36:08 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int	pos_x;
-	int	pos_y;
-	int	orientation;
+	double	pos_x;
+	double	pos_y;
+	int		orientation;
 } t_player;
 
 typedef struct s_mlx{
