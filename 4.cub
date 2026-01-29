@@ -1,9 +1,9 @@
-WE hola.png
-EA path
-C 0,0,134
-NO path
-SO path
-F 33, 3,  3
+WE ./textures/wall1.png
+EA ./textures/wall2.png
+C 0,0,0
+NO ./textures/wall3.png
+SO ./textures/wall4.png
+F 37, 55,  56
 
 111111
 100001
