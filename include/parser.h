@@ -6,7 +6,7 @@
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/29 17:36:08 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/01/29 20:32:59 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ typedef struct s_player
 {
 	double	pos_x;
 	double	pos_y;
-	int		orientation;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 } t_player;
 
 typedef struct s_mlx{

@@ -6,7 +6,7 @@
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/29 17:35:53 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/01/29 20:28:31 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,40 @@
 #include "errorctx.h" //error struct
 #include "libft.h" //ft_isaplha
 #include "cub3d.h" //t_data struct
+
+static void	ft_set_player_cfg(int y, int x, t_data *data)
+{
+	data->player->pos_x = (double)x + 0.5;
+	data->player->pos_y = (double)y + 0.5;
+	if (data->map->map[x][y] == 'N')
+	{
+		data->player->dir_x = 0;
+		data->player->dir_y = -1;
+		data->player->plane_x = 1;
+		data->player->plane_y = 0;
+	}
+	else if (data->map->map[x][y] == 'S')
+	{
+		data->player->dir_x = 0;
+		data->player->dir_y = 1;
+		data->player->plane_x = -1;
+		data->player->plane_y = 0;
+	}
+	else if (data->map->map[x][y] == 'W')
+	{
+		data->player->dir_x = -1;
+		data->player->dir_y = 0;
+		data->player->plane_x = 0;
+		data->player->plane_y = -1;
+	}
+	else
+	{
+		data->player->dir_x = 1;
+		data->player->dir_y = 0;
+		data->player->plane_x = 0;
+		data->player->plane_y = 1;
+	}
+}
 
 void	ft_init_player(t_data *data)
 {
@@ -29,17 +63,6 @@ void	ft_init_player(t_data *data)
 		j = -1;
 		while (data->map->map[i][++j])
 			if (ft_isalpha(data->map->map[i][j]))
-			{
-				data->player->pos_x = (double)j + 0.5;
-				data->player->pos_y = (double)i + 0.5;
-				if (data->map->map[i][j] == 'N')
-					data->player->orientation = NORTH;
-				else if (data->map->map[i][j] == 'S')
-					data->player->orientation = SOUTH;
-				else if (data->map->map[i][j] == 'W')
-					data->player->orientation = WEST;
-				else
-					data->player->orientation = EAST;
-			}
+				ft_set_player_cfg(j, i, data);
 	}
 }
