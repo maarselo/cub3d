@@ -25,6 +25,7 @@ DIR_VALIDATOR_ARGUMENTS = arguments
 DIR_VALIDATOR_CONFIG = config
 DIR_VALIDATOR_MAP = map
 DIR_PARSER = parser
+DIR_GAME = game
 DIR_ERROR = error
 DIR_UTILS = utils
 DIR_FREE = free
@@ -35,6 +36,7 @@ SRC_VALIDATOR = validator.c \
 			$(DIR_VALIDATOR_CONFIG)/config.c $(DIR_VALIDATOR_CONFIG)/config_helpers.c $(DIR_VALIDATOR_CONFIG)/config_validator.c $(DIR_VALIDATOR_CONFIG)/config_validator_helpers.c $(DIR_VALIDATOR_CONFIG)/config_content.c \
 			$(DIR_VALIDATOR_MAP)/map.c $(DIR_VALIDATOR_MAP)/map_content.c 
 SRC_PARSER = parser.c data.c mlx.c player.c map.c textures.c colors.c 
+SRC_GAME = game.c
 SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
 SRC_UTILS = file.c file_utils.c
 SRC_FREE = free_file_content.c free_content_assigned.c free_split.c free_data.c
@@ -43,13 +45,14 @@ SRC_FREE = free_file_content.c free_content_assigned.c free_split.c free_data.c
 #diferent folder with files
 FILES_VALIDATOR = $(addprefix $(DIR_VALIDATOR)/, $(SRC_VALIDATOR))
 FILES_PARSER = $(addprefix $(DIR_PARSER)/, $(SRC_PARSER))
+FILES_GAME = $(addprefix $(DIR_GAME)/, $(SRC_GAME))
 FILES_ERROR = $(addprefix $(DIR_ERROR)/, $(SRC_ERROR))
 FILES_UTILS = $(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 FILES_FREE = $(addprefix $(DIR_FREE)/, $(SRC_FREE))
 
 
 #all files
-FILES = main.c $(FILES_VALIDATOR) $(FILES_PARSER) \
+FILES = main.c $(FILES_VALIDATOR) $(FILES_PARSER) $(FILES_GAME) \
 	 $(FILES_ERROR) $(FILES_UTILS) $(FILES_FREE)
 
 SRCS = $(addprefix $(DIR_SRC)/,$(FILES))
