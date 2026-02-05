@@ -15,6 +15,6 @@
 
 # include "cub3d.h"
 
-void	ft_game_loop(t_data *data);
+void	ft_game_loop(t_data *data, t_error *error);
 
 #endif

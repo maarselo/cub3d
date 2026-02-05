@@ -13,11 +13,13 @@
 #include "MLX42.h"
 #include "cub3d.h"
 #include "parser.h"
+#include "errorctx.h"
 
-#include <stdio.h>
 
-void	ft_game_loop(t_data *data)
+void	ft_game_loop(t_data *data, t_error *error)
 {
+	if (ft_has_error(error))
+		return ;
 	mlx_put_pixel(data->textures->north, 0, 0, data->colors->ceiling);
 	mlx_loop(data->mlx->window);
 }

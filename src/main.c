@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	ft_validator(argc, argv, error);
 	data = ft_init_data(error);
 	ft_parser(argv[1], data, error);
-	ft_game_loop(data);
+	ft_game_loop(data, error);
 	if (ft_error_handler(error, data))
 		return (FAILED);
 	ft_free_data(data);
