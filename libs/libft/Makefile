@@ -45,7 +45,7 @@ DEPS = $(addprefix $(DEPS_DIR)/, $(FILES_LIBFT:.c=.d) $(FILES_GNL:.c=.d) $(FILES
 
 CC = cc
 CC_LIB = ar -rcs
-CFLAGS = -Wall -Werror -Wextra -Iinclude -MMD -MP
+CFLAGS = -Wall -Werror -Wextra -Iinclude -MMD -MP -fPIC
 RM = rm -rf
 
 all: $(NAME)
