@@ -85,7 +85,7 @@ RM = rm -rf
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS) Makefile
-	$(CC) $(CFLAGS) $(CFLAGS_MLX) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(CFLAGS_MLX) -o $(NAME)
 
 $(LIBFT):
 	make -C $(DIR_LIBFT)
@@ -101,7 +101,8 @@ clean:
 	$(RM) $(DIR_OBJS) $(DIR_DEPS)
 
 fclean: clean
-	$(RM) $(LIBFT) $(DIR_MLX) $(NAME)
+	$(RM) $(NAME) $(DIR_MLX) 
+	make fclean -C $(DIR_LIBFT)
 
 re: fclean all
 
