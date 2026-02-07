@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/10 21:14:32 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/07 21:46:43 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "cub3d.h"
 
-void	ft_game_loop(t_data *data, t_error *error);
+void	ft_game_loop(t_data *data);
+void	ft_move(mlx_key_data_t key, void *param);
 
 #endif

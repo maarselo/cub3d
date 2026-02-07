@@ -6,7 +6,7 @@
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/29 20:32:59 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/02/07 21:06:56 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ typedef struct s_player
 } t_player;
 
 typedef struct s_mlx{
-	mlx_t	*window;
+	mlx_t		*window;
+	mlx_image_t *img;
 } t_mlx;
 
 //parser.c
@@ -67,6 +68,5 @@ void	ft_parser(char *file, t_data *data, t_error *error);
 
 //init_data.c
 t_data	*ft_init_data(t_error *error);
-
 
 #endif
