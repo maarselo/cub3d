@@ -128,23 +128,23 @@ void	ft_render(void *param)
 			draw_start = 0;
 		if (draw_end >= WINDOW_HEIGHT) //proteger que n estes al lado de la parex y pinta +arriba de pantalla
 			draw_end = WINDOW_HEIGHT - 1;
-		if (side == 0)
+		if (side == 0) //si se ha chocado con una pared vertical
 		{
 			if (step_x == -1)
-				wall_texture = data->textures->east;
+				wall_texture = data->textures->east; //Depende de donde aunte el rayo
 			else 
-				wall_texture = data->textures->west;
+				wall_texture = data->textures->west; //Depende de donde aunte el rayo
 		}
-		else
+		else //si se ha chocado con una pared horizontal
 		{
 			if (step_y == -1)
-				wall_texture = data->textures->south;
+				wall_texture = data->textures->south; //Depende de donde aunte el rayo
 			else
-				wall_texture = data->textures->north;
+				wall_texture = data->textures->north;//Depende de donde aunte el rayo
 		}
-		tex_x = (int)((double)wall_texture->width * wall_x);
-		step = (double)wall_texture->height / wall_height;
-		tex_pos = (draw_start - WINDOW_HEIGHT / 2 + wall_height / 2) * step;
+		tex_x = (int)((double)wall_texture->width * wall_x); //columna actual para printar sus pixeles
+		step = (double)wall_texture->height / wall_height; //Calcular si la foto no se ve completa, cuantos pixeles ha de saltar para pasar al siguiente
+		tex_pos = (draw_start - WINDOW_HEIGHT / 2 + wall_height / 2) * step; //posisicon principal para empezar a printar la pared, protege de en caso ver toda una pared con zoom empezar del medio
 		int	i = 0;
 		while (i < draw_start) //pintar suelo
 		{
@@ -153,7 +153,7 @@ void	ft_render(void *param)
 		}
 		while (i < draw_end) //pintar pared
 		{
-			int	pixel = ft_get_pixel(wall_texture, tex_x, (int)tex_pos);
+			int	pixel = ft_get_pixel(wall_texture, tex_x, (int)tex_pos); //Coger el pixel exacto y pasarlo a uint32_t
 			mlx_put_pixel(data->mlx->img, current_col, i, pixel);
 			tex_pos += step;
 			i++;
@@ -170,13 +170,13 @@ void	ft_render(void *param)
 
 #include <stdlib.h>
 
-double	old_plane_x;
 void	ft_move(mlx_key_data_t key, void *param)
 {
 	t_data	*data;
 	double	speed;
 	double	rot_speed;
 	double	old_dir_x;
+	double	old_plane_x;
 	double	buffer;
 
 	data = (t_data *)param;
