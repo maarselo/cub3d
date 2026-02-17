@@ -16,7 +16,7 @@
 #include "libft.h" //ft_isaplha
 #include "cub3d.h" //t_data struct
 
-static void	ft_set_player_cfg(int y, int x, t_data *data)
+static void	ft_set_player_cfg(int x, int y, t_data *data)
 {
 	data->player->pos_x = (double)x + 0.5;
 	data->player->pos_y = (double)y + 0.5;
