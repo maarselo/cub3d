@@ -18,12 +18,12 @@
 #include "validator/config/config.h" //detect cfg
 #include "free.h" //ft_free_split
  
-static mlx_image_t	*ft_texture_to_img(t_data *data, char *texture_str)
+static mlx_image_t	*ft_texture_to_img(t_data *data, char *texture_path)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
 
-	texture = mlx_load_png(texture_str);
+	texture = mlx_load_png(texture_path);
 	if (!texture)
 		return (ft_set_error_mlx(data->error), NULL);
 	image = mlx_texture_to_image(data->mlx->window, texture);
@@ -63,5 +63,6 @@ void	ft_init_textures(char *file, t_data *data)
 			ft_free_split(line);
 		}
 	}
+	data->textures->door = ft_texture_to_img(data, "./textures/door.png");
 	return (ft_free_file_content(content));
 }

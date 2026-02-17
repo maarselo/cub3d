@@ -39,6 +39,7 @@ typedef struct textures
 	mlx_image_t *south;
 	mlx_image_t	*west;
 	mlx_image_t	*east;
+	mlx_image_t	*door;
 } t_textures;
 
 typedef struct s_map
