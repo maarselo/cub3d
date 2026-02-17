@@ -14,6 +14,7 @@
 #include "cub3d.h"
 #include "parser.h"
 #include "errorctx.h"
+#include "game.h"
 #include <math.h>
 
 uint32_t	ft_get_pixel(mlx_image_t *texture, int col, int row)
@@ -178,7 +179,7 @@ void	ft_move(mlx_key_data_t key, void *param)
 
 	data = (t_data *)param;
 	speed = 0.2;
-	buffer = 0.3;
+	buffer = 0.2; //change this
 	if (key.key == MLX_KEY_ESCAPE)
 		exit(1);
 	if (key.key == MLX_KEY_W)
@@ -212,26 +213,90 @@ void	ft_move(mlx_key_data_t key, void *param)
 	if (key.key == MLX_KEY_LEFT)
 	{
 		old_dir_x = data->player->dir_x;
-		data->player->dir_x = old_dir_x * cos(speed) - data->player->dir_y * sin(speed);
-		data->player->dir_y = old_dir_x * sin(speed) + data->player->dir_y * cos(speed);
-		old_plane_x = data->player->plane_x;
-		data->player->plane_x = old_plane_x * cos(speed) - data->player->plane_y * sin(speed);
-		data->player->plane_y = old_plane_x * sin(speed) + data->player->plane_y * cos(speed);
-	}
-	if (key.key == MLX_KEY_RIGHT)
-	{
-		old_dir_x = data->player->dir_x;
 		data->player->dir_x = old_dir_x * cos(-speed) - data->player->dir_y * sin(-speed);
 		data->player->dir_y = old_dir_x * sin(-speed) + data->player->dir_y * cos(-speed);
 		old_plane_x = data->player->plane_x;
 		data->player->plane_x = old_plane_x * cos(-speed) - data->player->plane_y * sin(-speed);
 		data->player->plane_y = old_plane_x * sin(-speed) + data->player->plane_y * cos(-speed);
 	}
+	if (key.key == MLX_KEY_RIGHT)
+	{
+		old_dir_x = data->player->dir_x;
+		data->player->dir_x = old_dir_x * cos(speed) - data->player->dir_y * sin(speed);
+		data->player->dir_y = old_dir_x * sin(speed) + data->player->dir_y * cos(speed);
+		old_plane_x = data->player->plane_x;
+		data->player->plane_x = old_plane_x * cos(speed) - data->player->plane_y * sin(speed);
+		data->player->plane_y = old_plane_x * sin(speed) + data->player->plane_y * cos(speed);
+	}
+}
+
+# define RED_COLOR 0xFF0000FF
+# define WHITE_COLOR 0xFFFFFFFF
+# define PURPLE_COLOR 0x333333FF
+# define BLACK_COLOR 0x000000FF
+
+void	ft_draw_player(t_data *data)
+{
+	int	player_side = 8;	
+	int init_row = WINDOW_HEIGHT - MINIMAP_HEIGHT + (MINIMAP_HEIGHT / 2 - (player_side / 2));
+	int final_row = WINDOW_HEIGHT - MINIMAP_HEIGHT + (MINIMAP_HEIGHT / 2 + (player_side / 2));
+	int init_col = MINIMAP_WIDTH / 2 - (player_side / 2);
+	int final_col = MINIMAP_WIDTH / 2 + (player_side / 2);
+	int current_col;
+
+	while (init_row++ <= final_row)
+	{
+		current_col = init_col;
+		while (current_col++ <= final_col)
+			mlx_put_pixel(data->mlx->img, current_col, init_row, RED_COLOR);
+	}
+}
+
+void ft_minimap(void *param)
+{
+	t_data	*data = (t_data *)param;
+	int pixel_row  = WINDOW_HEIGHT - MINIMAP_HEIGHT;
+	int pixel_col;
+
+	double view = 7.0; //constant
+	double	pixels_each_field = (double)MINIMAP_HEIGHT / view; //34
+	
+	double rel_x;
+	double rel_y;
+	int		map_x;
+	int		map_y;
+	while (pixel_row < WINDOW_HEIGHT - 1)
+	{
+		pixel_col = 1;
+		while (pixel_col < MINIMAP_WIDTH)
+		{
+			if (pixel_row == WINDOW_HEIGHT - MINIMAP_HEIGHT || pixel_row == WINDOW_HEIGHT - MINIMAP_HEIGHT + 1 || pixel_row == WINDOW_HEIGHT - 2 || pixel_row == WINDOW_HEIGHT - 3
+				|| pixel_col == 1 || pixel_col == 2 || pixel_col == MINIMAP_WIDTH - 1 || pixel_col == MINIMAP_WIDTH - 2)
+				mlx_put_pixel(data->mlx->img, pixel_col, pixel_row, RED_COLOR);
+			else
+			{
+				rel_x = (pixel_col - (MINIMAP_WIDTH / 2)) / pixels_each_field;
+				rel_y = (pixel_row - (WINDOW_HEIGHT - (MINIMAP_HEIGHT / 2))) / pixels_each_field;
+				map_x = (data->player->pos_x + rel_x);
+				map_y = (data->player->pos_y + rel_y);
+
+				if (map_x >= 0 && map_y >= 0 &&  map_x < data->map->width && map_y < data->map->height
+						&& data->map->map[map_y] && data->map->map[map_y][map_x] == '1')
+					mlx_put_pixel(data->mlx->img, pixel_col, pixel_row, WHITE_COLOR);
+				else
+					mlx_put_pixel(data->mlx->img, pixel_col, pixel_row, BLACK_COLOR);
+			}
+			pixel_col++;
+		}
+		pixel_row++;
+	}
+	ft_draw_player(data);
 }
 
 void	ft_game_loop(t_data *data)
 {
 	mlx_loop_hook(data->mlx->window, ft_render, data);
 	mlx_key_hook(data->mlx->window, ft_move, data);
+	mlx_loop_hook(data->mlx->window, ft_minimap, data);
 	mlx_loop(data->mlx->window);
 }

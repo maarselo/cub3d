@@ -15,6 +15,9 @@
 
 # include "cub3d.h"
 
+# define MINIMAP_HEIGHT WINDOW_HEIGHT / 4
+# define MINIMAP_WIDTH MINIMAP_HEIGHT
+
 void	ft_game_loop(t_data *data);
 void	ft_move(mlx_key_data_t key, void *param);
 
