@@ -20,21 +20,21 @@ static void	ft_set_player_cfg(int x, int y, t_data *data)
 {
 	data->player->pos_x = (double)x + 0.5;
 	data->player->pos_y = (double)y + 0.5;
-	if (data->map->map[x][y] == 'N')
+	if (data->map->map[y][x] == 'N')
 	{
 		data->player->dir_x = 0;
 		data->player->dir_y = -1;
 		data->player->plane_x = 1;
 		data->player->plane_y = 0;
 	}
-	else if (data->map->map[x][y] == 'S')
+	else if (data->map->map[y][x] == 'S')
 	{
 		data->player->dir_x = 0;
 		data->player->dir_y = 1;
 		data->player->plane_x = -1;
 		data->player->plane_y = 0;
 	}
-	else if (data->map->map[x][y] == 'W')
+	else if (data->map->map[y][x] == 'W')
 	{
 		data->player->dir_x = -1;
 		data->player->dir_y = 0;

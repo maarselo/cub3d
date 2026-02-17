@@ -184,30 +184,30 @@ void	ft_move(mlx_key_data_t key, void *param)
 		exit(1);
 	if (key.key == MLX_KEY_W)
 	{
-		if (data->map->map[(int)(data->player->pos_y + data->player->dir_y * (speed + buffer))][(int)data->player->pos_x] == '0')
+		if (data->map->map[(int)(data->player->pos_y + data->player->dir_y * (speed + buffer))][(int)data->player->pos_x] != '1')
 			data->player->pos_y += data->player->dir_y * speed;
-		if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x + data->player->dir_x * (speed + buffer))] == '0')
+		if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x + data->player->dir_x * (speed + buffer))] != '1')
 			data->player->pos_x += data->player->dir_x * speed;
 	}
 	if (key.key == MLX_KEY_S)
 	{
-		if (data->map->map[(int)(data->player->pos_y - data->player->dir_y * (speed + buffer))][(int)data->player->pos_x] == '0')
+		if (data->map->map[(int)(data->player->pos_y - data->player->dir_y * (speed + buffer))][(int)data->player->pos_x] != '1')
 			data->player->pos_y -= data->player->dir_y * speed;
-		if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x - data->player->dir_x * (speed + buffer))] == '0')
+		if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x - data->player->dir_x * (speed + buffer))] != '1')
 			data->player->pos_x -= data->player->dir_x * speed;
 	}
-	if (key.key == MLX_KEY_A)	
+	if (key.key == MLX_KEY_A)
 	{
-		if (data->map->map[(int)(data->player->pos_y - data->player->plane_y * (speed + buffer))][(int)data->player->pos_x] == '0')
+		if (data->map->map[(int)(data->player->pos_y - data->player->plane_y * (speed + buffer))][(int)data->player->pos_x] != '1')
 			data->player->pos_y -= data->player->plane_y * speed;
-		if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x - data->player->dir_x * (speed + buffer))] == '0')
+		if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x - data->player->plane_x * (speed + buffer))] != '1')
 			data->player->pos_x -= data->player->plane_x * speed;
 	}
 	if (key.key == MLX_KEY_D)
 	{
-		if (data->map->map[(int)(data->player->pos_y + data->player->plane_y * (speed + buffer))][(int)data->player->pos_x] == '0')
+		if (data->map->map[(int)(data->player->pos_y + data->player->plane_y * (speed + buffer))][(int)data->player->pos_x] != '1')
 			data->player->pos_y += data->player->plane_y * speed;
-		if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x + data->player->plane_x * (speed + buffer))] == '0')
+		if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x + data->player->plane_x * (speed + buffer))] != '1')
 			data->player->pos_x += data->player->plane_x * speed;
 	}
 	if (key.key == MLX_KEY_LEFT)
@@ -277,8 +277,8 @@ void ft_minimap(void *param)
 			{
 				rel_x = (pixel_col - (MINIMAP_WIDTH / 2)) / pixels_each_field;
 				rel_y = (pixel_row - (WINDOW_HEIGHT - (MINIMAP_HEIGHT / 2))) / pixels_each_field;
-				map_x = (data->player->pos_x + rel_x);
-				map_y = (data->player->pos_y + rel_y);
+				map_x = (int)floor(data->player->pos_x + rel_x);
+				map_y = (int)floor(data->player->pos_y + rel_y);
 
 				if (map_x >= 0 && map_y >= 0 &&  map_x < data->map->width && map_y < data->map->height
 						&& data->map->map[map_y] && data->map->map[map_y][map_x] == '1')
