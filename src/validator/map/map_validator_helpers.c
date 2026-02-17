@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "errorctx.h" //struct
+#include "libft.h" //ft_stlen
 
-static int	ft_get_map_height(char **map)
+int	ft_get_map_height(char **map)
 {
 	int	i;
 
@@ -22,14 +23,35 @@ static int	ft_get_map_height(char **map)
 	return (i);
 }
 
-void	ft_check_cell(int i, int j, char **map, t_error *error)
+int	ft_get_map_width(char **map)
+{
+	int j;
+
+	j = 0;
+	while (map[0][j])
+		j++;
+	return (j);
+}
+
+void	ft_check_any_doors(int row, int col, char **map, t_error *error)
 {
 	if (ft_has_error(error))
 		return ;
-	if (i < 0 || i >= ft_get_map_height(map))
+	else if (row < 0 || row >= ft_get_map_height(map) ||
+		col < 0 || col >= ft_get_map_width(map))
+		return ;
+	else if (map[row][col] == '_' || map[row][col] == '|')
+		return ft_set_error_static(MAP_DOORS_ON_THE_EDGES, error, VALIDATOR);
+}
+
+void	ft_check_cell(int row, int col, char **map, t_error *error)
+{
+	if (ft_has_error(error))
+		return ;
+	if (row < 0 || row >= ft_get_map_height(map))
 		return (ft_set_error_static(MAP_NOT_CLOSED, error, VALIDATOR));
-	if (j < 0 || j >= (int)ft_strlen(map[i]))
+	if (col < 0 || col >= ft_get_map_width(map))
 		return (ft_set_error_static(MAP_NOT_CLOSED, error, VALIDATOR));
-	if (map[i][j] == '-')
-		return (ft_set_error_static(MAP_NOT_CLOSED, error, VALIDATOR));
+	if (map[row][col] == '-')
+		return (ft_set_error_static(MAP_SPACE_NEXTTO_FLOOR, error, VALIDATOR));
 }
