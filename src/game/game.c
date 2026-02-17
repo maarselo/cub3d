@@ -108,7 +108,7 @@ void	ft_render(void *param)
 				map_y += step_y; //Usamos para seguir la direccion a la que apuntamos
 				side = 1;  //chocamos con una line horizontal
 			}
-			if (data->map->map[map_y][map_x] == '1') //comrpobamos que hemos llegado al final dela vista(muro)
+			if (data->map->map[map_y][map_x] == '1' || data->map->map[map_y][map_x] == '_' || data->map->map[map_y][map_x] == '|') //comrpobamos que hemos llegado al final dela vista(muro)
 				hit = true;
 		}
 		if (side == 0)
@@ -173,43 +173,82 @@ void	ft_move(mlx_key_data_t key, void *param)
 {
 	t_data	*data;
 	double	speed;
-	double	old_dir_x;
-	double	old_plane_x;
 	double	buffer;
+	double	move_x;
+	double	move_y;
+	double	total_move_x;
+	double	total_move_y;
 
 	data = (t_data *)param;
 	speed = 0.2;
 	buffer = 0.2; //change this
+	move_x = 0;
+	move_y = 0;
+	total_move_x = 0;
+	total_move_y = 0;
 	if (key.key == MLX_KEY_ESCAPE)
 		exit(1);
-	if (key.key == MLX_KEY_W)
+	if (key.key == MLX_KEY_W || key.key == MLX_KEY_A || key.key == MLX_KEY_D || key.key == MLX_KEY_S)
 	{
-		if (data->map->map[(int)(data->player->pos_y + data->player->dir_y * (speed + buffer))][(int)data->player->pos_x] != '1')
-			data->player->pos_y += data->player->dir_y * speed;
-		if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x + data->player->dir_x * (speed + buffer))] != '1')
-			data->player->pos_x += data->player->dir_x * speed;
+		//Se calcula el total del movimiento
+		if (key.key == MLX_KEY_W)
+		{
+			move_x = data->player->dir_x * speed;
+			move_y = data->player->dir_y * speed;
+			// if (data->map->map[(int)(data->player->pos_y + data->player->dir_y * (speed + buffer))][(int)data->player->pos_x] != '1')
+				// data->player->pos_y += data->player->dir_y * speed;
+			// if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x + data->player->dir_x * (speed + buffer))] != '1')
+				// data->player->pos_x += data->player->dir_x * speed;
+		}
+		//Se hace -data porque la tecla S va para atras de donde apuntamos
+		if (key.key == MLX_KEY_S)
+		{
+			move_x = -data->player->dir_x * speed;
+			move_y = -data->player->dir_y * speed;
+			// if (data->map->map[(int)(data->player->pos_y - data->player->dir_y * (speed + buffer))][(int)data->player->pos_x] != '1')
+				// data->player->pos_y -= data->player->dir_y * speed;
+			// if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x - data->player->dir_x * (speed + buffer))] != '1')
+				// data->player->pos_x -= data->player->dir_x * speed;
+		}
+		//Se usa plan porque es horizontal y el valor es de nuestro hombro a la derecha es +1, por eso A = izquierda(-1) y D normal
+		if (key.key == MLX_KEY_A)
+		{
+			move_x = -data->player->plane_x * speed;
+			move_y = -data->player->plane_y *speed;
+			// if (data->map->map[(int)(data->player->pos_y - data->player->plane_y * (speed + buffer))][(int)data->player->pos_x] != '1')
+				// data->player->pos_y -= data->player->plane_y * speed;
+			// if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x - data->player->plane_x * (speed + buffer))] != '1')
+				// data->player->pos_x -= data->player->plane_x * speed;
+		}
+		if (key.key == MLX_KEY_D)
+		{
+			move_x = data->player->plane_x * speed;
+			move_y = data->player->plane_y * speed;
+			// if (data->map->map[(int)(data->player->pos_y + data->player->plane_y * (speed + buffer))][(int)data->player->pos_x] != '1')
+				// data->player->pos_y += data->player->plane_y * speed;
+			// if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x + data->player->plane_x * (speed + buffer))] != '1')
+				// data->player->pos_x += data->player->plane_x * speed;
+		}
+		//Porque hay que sumar buffer a la direccion a la que vayamos porque hace de escudo,
+		if (move_x > 0)
+			total_move_x = move_x + buffer;
+		else
+			total_move_x = move_x - buffer;
+		if (move_y > 0)
+			total_move_y = move_y + buffer;
+		else
+			total_move_y = move_y - buffer;
+		if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x + total_move_x)] != '1' &&
+			data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x + total_move_x)] != '_' && 
+			data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x + total_move_x)] != '|')
+			data->player->pos_x += move_x;
+		if (data->map->map[(int)(data->player->pos_y + total_move_y)][(int)data->player->pos_x] != '1' &&
+			data->map->map[(int)(data->player->pos_y + total_move_y)][(int)data->player->pos_x] != '_' &&
+			data->map->map[(int)(data->player->pos_y + total_move_y)][(int)data->player->pos_x] != '|')
+			data->player->pos_y += move_y;
 	}
-	if (key.key == MLX_KEY_S)
-	{
-		if (data->map->map[(int)(data->player->pos_y - data->player->dir_y * (speed + buffer))][(int)data->player->pos_x] != '1')
-			data->player->pos_y -= data->player->dir_y * speed;
-		if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x - data->player->dir_x * (speed + buffer))] != '1')
-			data->player->pos_x -= data->player->dir_x * speed;
-	}
-	if (key.key == MLX_KEY_A)
-	{
-		if (data->map->map[(int)(data->player->pos_y - data->player->plane_y * (speed + buffer))][(int)data->player->pos_x] != '1')
-			data->player->pos_y -= data->player->plane_y * speed;
-		if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x - data->player->plane_x * (speed + buffer))] != '1')
-			data->player->pos_x -= data->player->plane_x * speed;
-	}
-	if (key.key == MLX_KEY_D)
-	{
-		if (data->map->map[(int)(data->player->pos_y + data->player->plane_y * (speed + buffer))][(int)data->player->pos_x] != '1')
-			data->player->pos_y += data->player->plane_y * speed;
-		if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x + data->player->plane_x * (speed + buffer))] != '1')
-			data->player->pos_x += data->player->plane_x * speed;
-	}
+	double	old_dir_x;
+	double	old_plane_x;
 	if (key.key == MLX_KEY_LEFT)
 	{
 		old_dir_x = data->player->dir_x;
@@ -227,6 +266,36 @@ void	ft_move(mlx_key_data_t key, void *param)
 		old_plane_x = data->player->plane_x;
 		data->player->plane_x = old_plane_x * cos(speed) - data->player->plane_y * sin(speed);
 		data->player->plane_y = old_plane_x * sin(speed) + data->player->plane_y * cos(speed);
+	}
+
+	int		map_x;
+	int		map_y;
+	
+	map_x = (int)data->player->pos_x;
+	map_y = (int)data->player->pos_y;
+	if (key.key == MLX_KEY_E && key.action == MLX_PRESS)
+	{	
+		 
+		if (map_y + 1 < data->map->height && (data->map->map[map_y + 1][map_x] == '_' || data->map->map[map_y + 1][map_x] == '|'))
+			data->map->map[map_y + 1][map_x] = 'O';
+		else if (map_y - 1 >= 0 &&  (data->map->map[map_y - 1][map_x] == '_' || data->map->map[map_y - 1][map_x] == '|'))
+			data->map->map[map_y - 1][map_x] = 'O';
+		else if (map_x + 1 < data->map->width && (data->map->map[map_y][map_x + 1] == '_' || data->map->map[map_y][map_x + 1] == '|'))
+			data->map->map[map_y][map_x + 1] = 'O';
+		else if (map_x - 1 >= 0 && (data->map->map[map_y][map_x - 1] == '_' || data->map->map[map_y][map_x - 1] == '|'))
+			data->map->map[map_y][map_x - 1] = 'O';
+		else {
+			//if (data->map->map[(int)data->player->pos_y][(int)data->player->pos_x] == 'O')
+			//	return ;
+			if (map_y + 1 < data->map->height && data->map->map[map_y + 1][map_x] == 'O')
+				data->map->map[map_y + 1][map_x] = '_';
+			else if (map_y - 1 >= 0 && data->map->map[map_y - 1][map_x] == 'O')
+				data->map->map[map_y - 1][map_x] = '_';
+			else if (map_x + 1 < data->map->width && data->map->map[map_y][map_x + 1] == 'O')
+				data->map->map[map_y][map_x + 1] = '|';
+			else if (map_x - 1 >= 0 && data->map->map[map_y][map_x - 1] == 'O')
+				data->map->map[map_y][map_x - 1] = '|';
+		}
 	}
 }
 
