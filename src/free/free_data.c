@@ -34,13 +34,7 @@ void	ft_free_data(t_data *data)
 		if (data->textures->east && mlx_errno != MLX_INVPNG)
 			mlx_delete_image(data->mlx->window, data->textures->east);
 		if (data->textures->door)
-		{
-			if (data->textures->door->close)
-				mlx_delete_image(data->mlx->window, data->textures->door->close);
-			if (data->textures->door->open)
-				mlx_delete_image(data->mlx->window, data->textures->door->open);
-			free(data->textures->door);
-		}
+			mlx_delete_image(data->mlx->window, data->textures->door);
 		if (data->textures->weapon)
 		{
 			if (data->textures->weapon->idle)

@@ -23,8 +23,7 @@
 #define WEST "WE"
 #define EAST "EA"
 
-#define PATH_CLOSE_DOOR "./textures/door/close.png"
-#define PATH_OPEN_DOOR "./textures/door/open.png"
+#define PATH_DOOR "./textures/door/door.png"
 
 #define PATH_WEAPON_IDLE "./textures/weapon/idle.png"
 #define PATH_WEAPON_RELOAD "./textures/weapon/reload.png"
@@ -66,7 +65,7 @@ static void	ft_init_doors_textures(t_data *data)
 	data->textures->door->close = ft_texture_to_img(PATH_CLOSE_DOOR, data);
 	data->textures->door->open = ft_texture_to_img(PATH_OPEN_DOOR, data);
 }
-
+/*
 static void	ft_init_weapons_textures(t_data *data)
 {
 	if (ft_has_error(data->error))
@@ -75,7 +74,7 @@ static void	ft_init_weapons_textures(t_data *data)
 	data->textures->weapon->reload = ft_texture_to_img(PATH_WEAPON_RELOAD, data);
 	data->textures->weapon->aim = ft_texture_to_img(PATH_WEAPON_AIM, data);
 	data->textures->weapon->shoot = ft_texture_to_img(PATH_WEAPON_SHOOT, data);
-}
+}*/
 
 void	ft_init_textures(char *file, t_data *data)
 {
@@ -100,6 +99,6 @@ void	ft_init_textures(char *file, t_data *data)
 		}
 	}
 	ft_init_doors_textures(data);
-	ft_init_weapons_textures(data);
+	//ft_init_weapons_textures(data);
 	return (ft_free_file_content(content));
 }

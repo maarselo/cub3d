@@ -33,11 +33,6 @@ typedef struct s_colors
 
 
 //Textures
-typedef struct s_door
-{
-	mlx_image_t	*open;
-	mlx_image_t	*close;
-} t_door;
 typedef struct s_weapon
 {
 	mlx_image_t	*idle;
@@ -51,7 +46,7 @@ typedef struct textures
 	mlx_image_t *south;
 	mlx_image_t	*west;
 	mlx_image_t	*east;
-	t_door		*door;
+	mlx_image_t	*door;
 	t_weapon	*weapon;
 } t_textures;
 
