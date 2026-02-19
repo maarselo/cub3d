@@ -195,39 +195,23 @@ void	ft_move(mlx_key_data_t key, void *param)
 		{
 			move_x = data->player->dir_x * speed;
 			move_y = data->player->dir_y * speed;
-			// if (data->map->map[(int)(data->player->pos_y + data->player->dir_y * (speed + buffer))][(int)data->player->pos_x] != '1')
-				// data->player->pos_y += data->player->dir_y * speed;
-			// if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x + data->player->dir_x * (speed + buffer))] != '1')
-				// data->player->pos_x += data->player->dir_x * speed;
 		}
 		//Se hace -data porque la tecla S va para atras de donde apuntamos
 		if (key.key == MLX_KEY_S)
 		{
 			move_x = -data->player->dir_x * speed;
 			move_y = -data->player->dir_y * speed;
-			// if (data->map->map[(int)(data->player->pos_y - data->player->dir_y * (speed + buffer))][(int)data->player->pos_x] != '1')
-				// data->player->pos_y -= data->player->dir_y * speed;
-			// if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x - data->player->dir_x * (speed + buffer))] != '1')
-				// data->player->pos_x -= data->player->dir_x * speed;
 		}
 		//Se usa plan porque es horizontal y el valor es de nuestro hombro a la derecha es +1, por eso A = izquierda(-1) y D normal
 		if (key.key == MLX_KEY_A)
 		{
 			move_x = -data->player->plane_x * speed;
 			move_y = -data->player->plane_y *speed;
-			// if (data->map->map[(int)(data->player->pos_y - data->player->plane_y * (speed + buffer))][(int)data->player->pos_x] != '1')
-				// data->player->pos_y -= data->player->plane_y * speed;
-			// if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x - data->player->plane_x * (speed + buffer))] != '1')
-				// data->player->pos_x -= data->player->plane_x * speed;
 		}
 		if (key.key == MLX_KEY_D)
 		{
 			move_x = data->player->plane_x * speed;
 			move_y = data->player->plane_y * speed;
-			// if (data->map->map[(int)(data->player->pos_y + data->player->plane_y * (speed + buffer))][(int)data->player->pos_x] != '1')
-				// data->player->pos_y += data->player->plane_y * speed;
-			// if (data->map->map[(int)data->player->pos_y][(int)(data->player->pos_x + data->player->plane_x * (speed + buffer))] != '1')
-				// data->player->pos_x += data->player->plane_x * speed;
 		}
 		//Porque hay que sumar buffer a la direccion a la que vayamos porque hace de escudo,
 		if (move_x > 0)
@@ -285,8 +269,6 @@ void	ft_move(mlx_key_data_t key, void *param)
 		else if (map_x - 1 >= 0 && (data->map->map[map_y][map_x - 1] == '_' || data->map->map[map_y][map_x - 1] == '|'))
 			data->map->map[map_y][map_x - 1] = 'O';
 		else {
-			//if (data->map->map[(int)data->player->pos_y][(int)data->player->pos_x] == 'O')
-			//	return ;
 			if (map_y + 1 < data->map->height && data->map->map[map_y + 1][map_x] == 'O')
 				data->map->map[map_y + 1][map_x] = '_';
 			else if (map_y - 1 >= 0 && data->map->map[map_y - 1][map_x] == 'O')
