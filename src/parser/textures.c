@@ -62,8 +62,7 @@ static void	ft_init_doors_textures(t_data *data)
 {
 	if (ft_has_error(data->error))
 		return ;
-	data->textures->door->close = ft_texture_to_img(PATH_CLOSE_DOOR, data);
-	data->textures->door->open = ft_texture_to_img(PATH_OPEN_DOOR, data);
+	data->textures->door = ft_texture_to_img(PATH_DOOR, data);
 }
 /*
 static void	ft_init_weapons_textures(t_data *data)
