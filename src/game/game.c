@@ -58,8 +58,9 @@ void	ft_render(void *param)
 
 	data = (t_data *)param;
 	current_col = -1;
-	while (current_col++ < WINDOW_WIDTH)
+	while (++current_col < WINDOW_WIDTH)
 	{
+		wall_texture = NULL;
 		camera_x = 2 * current_col / (double)WINDOW_WIDTH - 1; //calculas columna actual -1 - +1.(0-1920)
 		ray_dir_x = data->player->dir_x + (data->player->plane_x * camera_x); //te dicen hacia dónde estás mirando exactamente para esa columna de la pantalla.
 		ray_dir_y = data->player->dir_y + (data->player->plane_y * camera_x); //te dicen hacia dónde estás mirando exactamente para esa columna de la pantalla.
@@ -108,8 +109,13 @@ void	ft_render(void *param)
 				map_y += step_y; //Usamos para seguir la direccion a la que apuntamos
 				side = 1;  //chocamos con una line horizontal
 			}
-			if (data->map->map[map_y][map_x] == '1' || data->map->map[map_y][map_x] == '_' || data->map->map[map_y][map_x] == '|') //comrpobamos que hemos llegado al final dela vista(muro)
+			if (data->map->map[map_y][map_x] == '1') //comrpobamos que hemos llegado al final dela vista(muro)
 				hit = true;
+			else if (data->map->map[map_y][map_x] == '_' || data->map->map[map_y][map_x] == '|') //Si he chocado con una puerta
+			{
+				hit = true;
+				wall_texture = data->textures->door;
+			}
 		}
 		if (side == 0)
 		{
@@ -129,19 +135,22 @@ void	ft_render(void *param)
 			draw_start = 0;
 		if (draw_end >= WINDOW_HEIGHT) //proteger que n estes al lado de la parex y pinta +arriba de pantalla
 			draw_end = WINDOW_HEIGHT - 1;
-		if (side == 0) //si se ha chocado con una pared vertical
+		if (!wall_texture) //Si no es una puerta
 		{
-			if (step_x == -1)
-				wall_texture = data->textures->east; //Depende de donde aunte el rayo
-			else 
-				wall_texture = data->textures->west; //Depende de donde aunte el rayo
-		}
-		else //si se ha chocado con una pared horizontal
-		{
+			if (side == 0) //si se ha chocado con una pared vertical y no ha sido ninguna puerta
+			{
+				if (step_x == -1)
+					wall_texture = data->textures->east; //Depende de donde aunte el rayo
+				else 
+					wall_texture = data->textures->west; //Depende de donde aunte el rayo
+			}
+			else//si se ha chocado con una pared horizontal y no ha sido ninnguna puerta
+			{
 			if (step_y == -1)
 				wall_texture = data->textures->south; //Depende de donde aunte el rayo
 			else
 				wall_texture = data->textures->north;//Depende de donde aunte el rayo
+			}
 		}
 		tex_x = (int)((double)wall_texture->width * wall_x); //columna actual para printar sus pixeles
 		step = (double)wall_texture->height / wall_height; //Calcular si la foto no se ve completa, cuantos pixeles ha de saltar para pasar al siguiente
@@ -331,10 +340,12 @@ void ft_minimap(void *param)
 				map_x = (int)floor(data->player->pos_x + rel_x);
 				map_y = (int)floor(data->player->pos_y + rel_y);
 
-				if (map_x >= 0 && map_y >= 0 &&  map_x < data->map->width && map_y < data->map->height
-						&& data->map->map[map_y] && data->map->map[map_y][map_x] == '1')
+				if (map_x >= 0 && map_y >= 0 && map_x < data->map->width && map_y < data->map->height && data->map->map[map_y][map_x] == '1')
 					mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, WHITE_COLOR);
-				else
+				else if (map_x >= 0 && map_y >= 0 && map_x < data->map->width && map_y < data->map->height && (data->map->map[map_y][map_x] == '_'
+					|| data->map->map[map_y][map_x] == '|'))
+					mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, PURPLE_COLOR);
+				else 
 					mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, BLACK_COLOR);
 			}
 			pixel_col++;
@@ -346,6 +357,8 @@ void ft_minimap(void *param)
 
 void	ft_game_loop(t_data *data)
 {
+	if (ft_has_error(data->error))
+		return ;
 	mlx_loop_hook(data->mlx->window, ft_render, data);
 	mlx_key_hook(data->mlx->window, ft_move, data);
 	mlx_loop_hook(data->mlx->window, ft_minimap, data);
