@@ -45,11 +45,11 @@ void	ft_free_data(t_data *data)
 		{
 			if (data->textures->weapon->idle)
 				mlx_delete_image(data->mlx->window, data->textures->weapon->idle);
-			if (data->textures->weapon->idle)
+			if (data->textures->weapon->aim)
 				mlx_delete_image(data->mlx->window, data->textures->weapon->aim);
-			if (data->textures->weapon->idle)
+			if (data->textures->weapon->shoot)
 				mlx_delete_image(data->mlx->window, data->textures->weapon->shoot);
-			if (data->textures->weapon->idle)
+			if (data->textures->weapon->reload)
 				mlx_delete_image(data->mlx->window, data->textures->weapon->reload);
 			free(data->textures->weapon);
 		}
