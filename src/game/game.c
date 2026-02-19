@@ -149,19 +149,19 @@ void	ft_render(void *param)
 		int	i = 0;
 		while (i < draw_start) //pintar suelo
 		{
-			mlx_put_pixel(data->mlx->img, current_col, i, data->colors->floor);
+			mlx_put_pixel(data->mlx->framebuffer, current_col, i, data->colors->floor);
 			i++;
 		}
 		while (i < draw_end) //pintar pared
 		{
 			int	pixel = ft_get_pixel(wall_texture, tex_x, (int)tex_pos); //Coger el pixel exacto y pasarlo a uint32_t
-			mlx_put_pixel(data->mlx->img, current_col, i, pixel);
+			mlx_put_pixel(data->mlx->framebuffer, current_col, i, pixel);
 			tex_pos += step;
 			i++;
 		}
 		while (i < WINDOW_HEIGHT) //pintar cielo
 		{
-			mlx_put_pixel(data->mlx->img, current_col, i, data->colors->ceiling);
+			mlx_put_pixel(data->mlx->framebuffer, current_col, i, data->colors->ceiling);
 			i++;
 		}
 	}
@@ -299,7 +299,7 @@ void	ft_draw_player(t_data *data)
 	{
 		current_col = init_col;
 		while (current_col++ <= final_col)
-			mlx_put_pixel(data->mlx->img, current_col, init_row, RED_COLOR);
+			mlx_put_pixel(data->mlx->framebuffer, current_col, init_row, RED_COLOR);
 	}
 }
 
@@ -323,7 +323,7 @@ void ft_minimap(void *param)
 		{
 			if (pixel_row == WINDOW_HEIGHT - MINIMAP_HEIGHT || pixel_row == WINDOW_HEIGHT - MINIMAP_HEIGHT + 1 || pixel_row == WINDOW_HEIGHT - 2 || pixel_row == WINDOW_HEIGHT - 3
 				|| pixel_col == 1 || pixel_col == 2 || pixel_col == MINIMAP_WIDTH - 1 || pixel_col == MINIMAP_WIDTH - 2)
-				mlx_put_pixel(data->mlx->img, pixel_col, pixel_row, RED_COLOR);
+				mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, RED_COLOR);
 			else
 			{
 				rel_x = (pixel_col - (MINIMAP_WIDTH / 2)) / pixels_each_field;
@@ -333,9 +333,9 @@ void ft_minimap(void *param)
 
 				if (map_x >= 0 && map_y >= 0 &&  map_x < data->map->width && map_y < data->map->height
 						&& data->map->map[map_y] && data->map->map[map_y][map_x] == '1')
-					mlx_put_pixel(data->mlx->img, pixel_col, pixel_row, WHITE_COLOR);
+					mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, WHITE_COLOR);
 				else
-					mlx_put_pixel(data->mlx->img, pixel_col, pixel_row, BLACK_COLOR);
+					mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, BLACK_COLOR);
 			}
 			pixel_col++;
 		}

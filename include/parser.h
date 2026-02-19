@@ -16,9 +16,6 @@
 # include "MLX42.h"
 # include "cub3d.h"
 
-# define WINDOW_WIDTH  1920
-# define WINDOW_HEIGHT 1080
-
 typedef enum s_start_orientation
 {
 	NORTH,
@@ -61,7 +58,7 @@ typedef struct s_player
 
 typedef struct s_mlx{
 	mlx_t		*window;
-	mlx_image_t *img;
+	mlx_image_t *framebuffer;
 } t_mlx;
 
 //parser.c
