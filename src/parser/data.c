@@ -25,6 +25,12 @@ static void	ft_init_structs_utils(t_data *data, t_error *error)
 	data->textures = (t_textures *)ft_calloc(1, sizeof(t_textures));
 	if (!data->textures)
 		return (ft_set_error_system(error));
+	data->textures->door = (t_door *)ft_calloc(1, sizeof(t_door));
+	if (!data->textures->door)
+		return (ft_set_error_system(error));
+	data->textures->weapon = (t_weapon *)ft_calloc(1, sizeof(t_weapon));
+	if (!data->textures->weapon)
+		return (ft_set_error_system(error));
 	data->map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!data->map)
 		return (ft_set_error_system(error));

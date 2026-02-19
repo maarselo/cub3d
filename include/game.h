@@ -15,6 +15,8 @@
 
 # include "cub3d.h"
 
+#define WINDOW_NAME "cub3D"
+
 # define WINDOW_WIDTH  1920
 # define WINDOW_HEIGHT 1080
 

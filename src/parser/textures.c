@@ -13,12 +13,25 @@
 #include "cub3d.h" //t_data struct
 #include "errorctx.h" //error struct
 #include "parser.h" //struct in parser
-#include "utils.h" //ft__read_fle
+#include "utils.h" //ft_read_fle
 #include "libft.h" // ft_fstr*
 #include "validator/config/config.h" //detect cfg
 #include "free.h" //ft_free_split
  
-static mlx_image_t	*ft_texture_to_img(t_data *data, char *texture_path)
+#define NORTH "NO"
+#define SOUTH "SO"
+#define WEST "WE"
+#define EAST "EA"
+
+#define PATH_CLOSE_DOOR "./textures/door/close.png"
+#define PATH_OPEN_DOOR "./textures/door/open.png"
+
+#define PATH_WEAPON_IDLE "./textures/weapon/idle.png"
+#define PATH_WEAPON_RELOAD "./textures/weapon/reload.png"
+#define PATH_WEAPON_AIM "./textures/weapon/aim.png"
+#define PATH_WEAPON_SHOOT "./textures/weapon/shoot.png"
+
+static mlx_image_t	*ft_texture_to_img(char *texture_path, t_data *data)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
@@ -33,11 +46,42 @@ static mlx_image_t	*ft_texture_to_img(t_data *data, char *texture_path)
 	return (image);
 }
 
+static void	ft_init_orientation_texture(char *cfg_line, t_data *data)
+{
+	if (!ft_strncmp(cfg_line[0], NORTH, 2))
+		data->textures->north = ft_texture_to_img(cfg_line[1], data);
+	else if (!ft_strncmp(cfg_line[0], SOUTH, 2))
+		data->textures->south = ft_texture_to_img(cfg_line[1], data);
+	else if (!ft_strncmp(cfg_line[0], WEST, 2))
+		data->textures->west = ft_texture_to_img(cfg_line[1], data);
+	else if (!ft_strncmp(cfg_line[0], EAST, 2))
+		data->textures->east = ft_texture_to_img(cfg_line[1], data);
+	ft_free_split(cfg_line);
+}
+
+static void	ft_init_doors_textures(t_data *data)
+{
+	if (ft_has_error(data->error))
+		return ;
+	data->textures->door->close = ft_texture_to_img(PATH_CLOSE_DOOR, data);
+	data->textures->door->open = ft_texture_to_img(PATH_OPEN_DOOR, data);
+}
+
+static void	ft_init_weapons_textures(t_data *data)
+{
+	if (ft_has_error(data->error))
+		return ;
+	data->textures->weapon->idle = ft_texture_to_img(PATH_WEAPON_IDLE, data);
+	data->textures->weapon->reload = ft_texture_to_img(PATH_WEAPON_RELOAD, data);
+	data->textures->weapon->aim = ft_texture_to_img(PATH_WEAPON_AIM, data);
+	data->textures->weapon->shoot = ft_texture_to_img(PATH_WEAPON_SHOOT, data);
+}
+
 void	ft_init_textures(char *file, t_data *data)
 {
 	int		i;
 	char	**content;
-	char	**line;
+	char	**cfg_line;
 
 	if (ft_has_error(data->error))
 		return ;
@@ -49,20 +93,13 @@ void	ft_init_textures(char *file, t_data *data)
 	{
 		if (ft_find_config(content[i], data->error) != -1)
 		{
-			line = ft_split(content[i], ' ');
-			if (!line)
+			cfg_line = ft_split(content[i], ' ');
+			if (!cfg_line)
 				return (ft_free_file_content(content), ft_set_error_system(data->error));
-			if (!ft_strncmp(line[0], "NO", 2))
-				data->textures->north = ft_texture_to_img(data, line[1]);
-			else if (!ft_strncmp(line[0], "SO", 2))
-				data->textures->south = ft_texture_to_img(data, line[1]);
-			else if (!ft_strncmp(line[0], "WE", 2))
-				data->textures->west = ft_texture_to_img(data, line[1]);
-			else if (!ft_strncmp(line[0], "EA", 2))
-				data->textures->east = ft_texture_to_img(data, line[1]);
-			ft_free_split(line);
+			ft_init_orientation_texture(cfg_line, data);
 		}
 	}
-	data->textures->door = ft_texture_to_img(data, "./textures/door.png");
+	ft_init_doors_textures(data);
+	ft_init_weapons_textures(data);
 	return (ft_free_file_content(content));
 }

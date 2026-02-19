@@ -19,7 +19,7 @@ void	ft_init_mlx(t_data *data)
 {
 	if (ft_has_error(data->error))
 		return ;
-	data->mlx->window = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D", true);
+	data->mlx->window = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, true);
 	if (!data->mlx->window)
 		return (ft_set_error_mlx(data->error));
 	data->mlx->framebuffer = mlx_new_image(data->mlx->window, WINDOW_WIDTH, WINDOW_HEIGHT);

@@ -24,21 +24,39 @@ typedef enum s_start_orientation
 	EAST,
 } t_start_orientation;
 
+//Colors
 typedef struct s_colors
 {
 	uint32_t	floor;
 	uint32_t	ceiling;
 } t_colors;
 
+
+//Textures
+typedef struct s_door
+{
+	mlx_image_t	*open;
+	mlx_image_t	*close;
+} t_door;
+typedef struct s_weapon
+{
+	mlx_image_t	*idle;
+	mlx_image_t	*reload;
+	mlx_image_t	*aim;
+	mlx_image_t	*shoot;
+} t_weapon;
 typedef struct textures
 {
 	mlx_image_t	*north;
 	mlx_image_t *south;
 	mlx_image_t	*west;
 	mlx_image_t	*east;
-	mlx_image_t	*door;
+	t_door		*door;
+	t_weapon	*weapon;
 } t_textures;
 
+
+//Map
 typedef struct s_map
 {
 	int		width;
@@ -46,6 +64,8 @@ typedef struct s_map
 	char	**map;
 } t_map;
 
+
+//Player
 typedef struct s_player
 {
 	double	pos_x;
@@ -56,10 +76,15 @@ typedef struct s_player
 	double	plane_y;
 } t_player;
 
-typedef struct s_mlx{
+
+//Game
+typedef struct s_mlx
+{
 	mlx_t		*window;
 	mlx_image_t *framebuffer;
 } t_mlx;
+
+
 
 //parser.c
 void	ft_parser(char *file, t_data *data, t_error *error);
