@@ -46,7 +46,7 @@ static mlx_image_t	*ft_texture_to_img(char *texture_path, t_data *data)
 	return (image);
 }
 
-static void	ft_init_orientation_texture(char *cfg_line, t_data *data)
+static void	ft_init_orientation_texture(char **cfg_line, t_data *data)
 {
 	if (!ft_strncmp(cfg_line[0], NORTH, 2))
 		data->textures->north = ft_texture_to_img(cfg_line[1], data);
