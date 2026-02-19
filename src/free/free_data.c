@@ -12,7 +12,7 @@
 
 #include "cub3d.h" //t_data
 #include "MLX42.h" //delete to free_some_mlx_structs
-#include "free.h" //stdlib.h and fre_file_contetn
+#include "free.h" //fre_file_contetn
 #include <stdlib.h> //free()
 #include "parser.h"//t_map
 #include "errorctx.h" //free_terror
@@ -33,6 +33,26 @@ void	ft_free_data(t_data *data)
 			mlx_delete_image(data->mlx->window, data->textures->west);
 		if (data->textures->east && mlx_errno != MLX_INVPNG)
 			mlx_delete_image(data->mlx->window, data->textures->east);
+		if (data->textures->door)
+		{
+			if (data->textures->door->close)
+				mlx_delete_image(data->mlx->window, data->textures->door->close);
+			if (data->textures->door->open)
+				mlx_delete_image(data->mlx->window, data->textures->door->open);
+			free(data->textures->door);
+		}
+		if (data->textures->weapon)
+		{
+			if (data->textures->weapon->idle)
+				mlx_delete_image(data->mlx->window, data->textures->weapon->idle);
+			if (data->textures->weapon->idle)
+				mlx_delete_image(data->mlx->window, data->textures->weapon->aim);
+			if (data->textures->weapon->idle)
+				mlx_delete_image(data->mlx->window, data->textures->weapon->shoot);
+			if (data->textures->weapon->idle)
+				mlx_delete_image(data->mlx->window, data->textures->weapon->reload);
+			free(data->textures->weapon);
+		}
 		free(data->textures);
 	}
 	if (data->map)
