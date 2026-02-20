@@ -64,7 +64,7 @@ static void	ft_init_doors_textures(t_data *data)
 		return ;
 	data->textures->door = ft_texture_to_img(PATH_DOOR, data);
 }
-/*
+
 static void	ft_init_weapons_textures(t_data *data)
 {
 	if (ft_has_error(data->error))
@@ -73,7 +73,7 @@ static void	ft_init_weapons_textures(t_data *data)
 	data->textures->weapon->reload = ft_texture_to_img(PATH_WEAPON_RELOAD, data);
 	data->textures->weapon->aim = ft_texture_to_img(PATH_WEAPON_AIM, data);
 	data->textures->weapon->shoot = ft_texture_to_img(PATH_WEAPON_SHOOT, data);
-}*/
+}
 
 void	ft_init_textures(char *file, t_data *data)
 {
@@ -98,6 +98,6 @@ void	ft_init_textures(char *file, t_data *data)
 		}
 	}
 	ft_init_doors_textures(data);
-	//ft_init_weapons_textures(data);
+	ft_init_weapons_textures(data);
 	return (ft_free_file_content(content));
 }
