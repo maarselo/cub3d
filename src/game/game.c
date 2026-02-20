@@ -355,13 +355,66 @@ void ft_minimap(void *param)
 	ft_draw_player(data);
 }
 
-/*void	ft_weapon(void *param)
+#define MIDDLE_WIDTH WINDOW_WIDTH / 2
+#define IDLE 0
+#define AIM 1
+#define RELOAD 2
+#define SHOOT 3
+
+void	ft_put_weapon_images(t_data *data)
 {
-	t_data	*data;
+	int	row;
+
+	row = WINDOW_HEIGHT - data->textures->weapon->idle->height;
+	mlx_image_to_window(data->mlx->window, data->textures->weapon->idle, MIDDLE_WIDTH, row);
+	data->textures->weapon->idle->enabled = false;
+	row = WINDOW_HEIGHT - data->textures->weapon->aim->height;
+	mlx_image_to_window(data->mlx->window, data->textures->weapon->aim, MIDDLE_WIDTH, row);
+	data->textures->weapon->aim->enabled = false;
+	row = WINDOW_HEIGHT - data->textures->weapon->reload->height;
+	mlx_image_to_window(data->mlx->window, data->textures->weapon->reload, MIDDLE_WIDTH, row);
+	data->textures->weapon->reload->enabled = false;
+	row = WINDOW_HEIGHT - data->textures->weapon->shoot->height;
+	mlx_image_to_window(data->mlx->window, data->textures->weapon->shoot, MIDDLE_WIDTH, row);
+	data->textures->weapon->shoot->enabled = false;
+}
+
+void	ft_weapon(void *param)
+{
+	t_data		*data;
+	static int	counter;
+	static int	idx;
 
 	data = (t_data *)param;
-
-}*/
+	counter++;
+	if (counter >= 15)
+	{
+		if (idx == IDLE)
+		{
+			data->textures->weapon->shoot->enabled = false;
+			data->textures->weapon->idle->enabled = true;
+		}
+		else if (idx == AIM)
+		{
+			data->textures->weapon->idle->enabled = false;
+			data->textures->weapon->aim->enabled = true;
+		}
+		else if (idx == RELOAD)
+		{
+			data->textures->weapon->aim->enabled = false;
+			data->textures->weapon->reload->enabled = true;
+		}
+		else if (idx == SHOOT)
+		{
+			data->textures->weapon->reload->enabled = false;
+			data->textures->weapon->shoot->enabled = true;
+		}
+		idx++;
+		if (idx > 3)
+			idx = 0;
+		counter = 0;
+	}
+}
 
 void	ft_game_loop(t_data *data)
 {
@@ -369,7 +422,8 @@ void	ft_game_loop(t_data *data)
 		return ;
 	mlx_loop_hook(data->mlx->window, ft_render, data);
 	mlx_key_hook(data->mlx->window, ft_move, data);
-//	mlx_loop_hook(data->mlx->window, ft_weapon, data);
+	ft_put_weapon_images(data);
+	mlx_loop_hook(data->mlx->window, ft_weapon, data);
 	mlx_loop_hook(data->mlx->window, ft_minimap, data);
 	mlx_loop(data->mlx->window);
 }
