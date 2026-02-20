@@ -382,7 +382,7 @@ void	ft_put_weapon_images(t_data *data)
 void	ft_weapon(void *param)
 {
 	t_data		*data;
-	static int	counter;
+	static int	counter = 15;
 	static int	idx;
 
 	data = (t_data *)param;
@@ -416,10 +416,80 @@ void	ft_weapon(void *param)
 	}
 }
 
+#include "libft.h"
+
+void	ft_timer(void *param)
+{
+	t_data	*data;
+	char	*tmp;
+	char	*timer_str;
+	data = (t_data *)param;
+
+	if (data->textures->timer)
+		mlx_delete_image(data->mlx->window, data->textures->timer);
+	tmp = ft_itoa((int)mlx_get_time());
+	timer_str = ft_strjoin("Time played: ", tmp);
+	free(tmp);
+	data->textures->timer = mlx_put_string(data->mlx->window, timer_str, 0,0);
+	mlx_resize_image(data->textures->timer, 200, 30);
+	free(timer_str);
+}
+
+#include <sys/time.h>
+
+void	ft_date(void *param)
+{
+	static long	last_update = -1;
+	struct timeval	time_struct;
+	long	today_seconds;
+	long	actual_hours_nb;
+	long	actual_minutes_nb;
+	char	*tmp;
+	char	*actual_hours;
+	char	*actual_minutes;
+	char	*date;
+	t_data	*data;
+
+	gettimeofday(&time_struct, NULL);
+	if (last_update == time_struct.tv_sec / 60)
+		return ;
+	last_update = time_struct.tv_sec / 60;
+	data = (t_data *)param;
+	if (data->textures->date)
+		mlx_delete_image(data->mlx->window, data->textures->date);
+	gettimeofday(&time_struct, NULL);
+	today_seconds = time_struct.tv_sec % 86400; 
+	actual_hours_nb = today_seconds / 60 / 60;
+	if (actual_hours_nb < 10)
+	{
+		tmp = ft_itoa(actual_hours_nb);
+		actual_hours = ft_strjoin("0",tmp);
+		free(tmp);
+	}
+	else
+		actual_hours = ft_itoa(actual_hours_nb);
+	actual_minutes_nb = (today_seconds / 60) % 60;
+	if (actual_minutes_nb < 10)
+	{
+		tmp = ft_itoa(actual_minutes_nb);
+		actual_minutes = ft_strjoin("0", tmp);
+		free(tmp);
+	}
+	else
+		actual_minutes = ft_itoa(actual_minutes_nb);
+	date = ft_multijoin(3, actual_hours, ":", actual_minutes);
+	data->textures->date = mlx_put_string(data->mlx->window, date, MIDDLE_WIDTH, 1);
+	free(actual_hours);
+	free(actual_minutes);
+	free(date);
+}
+
 void	ft_game_loop(t_data *data)
 {
 	if (ft_has_error(data->error))
 		return ;
+	mlx_loop_hook(data->mlx->window, ft_date, data);
+	mlx_loop_hook(data->mlx->window, ft_timer, data);
 	mlx_loop_hook(data->mlx->window, ft_render, data);
 	mlx_key_hook(data->mlx->window, ft_move, data);
 	ft_put_weapon_images(data);

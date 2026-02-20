@@ -47,6 +47,8 @@ typedef struct textures
 	mlx_image_t	*west;
 	mlx_image_t	*east;
 	mlx_image_t	*door;
+	mlx_image_t	*timer;
+	mlx_image_t *date;
 	t_weapon	*weapon;
 } t_textures;
 
@@ -75,8 +77,10 @@ typedef struct s_player
 //Game
 typedef struct s_mlx
 {
-	mlx_t		*window;
-	mlx_image_t *framebuffer;
+	unsigned int	width;
+	unsigned int	height;
+	mlx_t			*window;
+	mlx_image_t		*framebuffer;
 } t_mlx;
 
 

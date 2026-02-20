@@ -47,6 +47,10 @@ void	ft_free_data(t_data *data)
 				mlx_delete_image(data->mlx->window, data->textures->weapon->reload);
 			free(data->textures->weapon);
 		}
+		if (data->textures->timer)
+			mlx_delete_image(data->mlx->window, data->textures->timer);
+		if (data->textures->date)
+			mlx_delete_image(data->mlx->window, data->textures->date);
 		free(data->textures);
 	}
 	if (data->map)
