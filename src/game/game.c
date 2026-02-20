@@ -355,12 +355,21 @@ void ft_minimap(void *param)
 	ft_draw_player(data);
 }
 
+/*void	ft_weapon(void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+
+}*/
+
 void	ft_game_loop(t_data *data)
 {
 	if (ft_has_error(data->error))
 		return ;
 	mlx_loop_hook(data->mlx->window, ft_render, data);
 	mlx_key_hook(data->mlx->window, ft_move, data);
+//	mlx_loop_hook(data->mlx->window, ft_weapon, data);
 	mlx_loop_hook(data->mlx->window, ft_minimap, data);
 	mlx_loop(data->mlx->window);
 }
