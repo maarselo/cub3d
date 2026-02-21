@@ -6,7 +6,7 @@
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/10 19:46:48 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/02/21 19:36:00 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,29 +263,24 @@ void	ft_move(mlx_key_data_t key, void *param)
 
 	int		map_x;
 	int		map_y;
+	char	cell;
 	
-	map_x = (int)data->player->pos_x;
-	map_y = (int)data->player->pos_y;
 	if (key.key == MLX_KEY_E && key.action == MLX_PRESS)
 	{	
-		 
-		if (map_y + 1 < data->map->height && (data->map->map[map_y + 1][map_x] == '_' || data->map->map[map_y + 1][map_x] == '|'))
-			data->map->map[map_y + 1][map_x] = 'O';
-		else if (map_y - 1 >= 0 &&  (data->map->map[map_y - 1][map_x] == '_' || data->map->map[map_y - 1][map_x] == '|'))
-			data->map->map[map_y - 1][map_x] = 'O';
-		else if (map_x + 1 < data->map->width && (data->map->map[map_y][map_x + 1] == '_' || data->map->map[map_y][map_x + 1] == '|'))
-			data->map->map[map_y][map_x + 1] = 'O';
-		else if (map_x - 1 >= 0 && (data->map->map[map_y][map_x - 1] == '_' || data->map->map[map_y][map_x - 1] == '|'))
-			data->map->map[map_y][map_x - 1] = 'O';
-		else {
-			if (map_y + 1 < data->map->height && data->map->map[map_y + 1][map_x] == 'O')
-				data->map->map[map_y + 1][map_x] = '_';
-			else if (map_y - 1 >= 0 && data->map->map[map_y - 1][map_x] == 'O')
-				data->map->map[map_y - 1][map_x] = '_';
-			else if (map_x + 1 < data->map->width && data->map->map[map_y][map_x + 1] == 'O')
-				data->map->map[map_y][map_x + 1] = '|';
-			else if (map_x - 1 >= 0 && data->map->map[map_y][map_x - 1] == 'O')
-				data->map->map[map_y][map_x - 1] = '|';
+		map_x = (int)(data->player->pos_x + data->player->dir_x * 1.0);
+		map_y = (int)(data->player->pos_y + data->player->dir_y * 1.0);
+		if (map_x >= 0 && map_y >= 0 && map_x < data->map->width && map_y < data->map->height)
+		{
+			cell = data->map->map[map_y][map_x];
+			if (cell == '_' || cell == '|')
+				data->map->map[map_y][map_x] = 'O';
+			else if (cell == 'O')
+			{
+				if (data->player->dir_x != 0)
+					data->map->map[map_y][map_x] = '|';
+				else
+					data->map->map[map_y][map_x] = '_';
+			}
 		}
 	}
 }
