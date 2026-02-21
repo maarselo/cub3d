@@ -6,7 +6,7 @@
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/21 19:36:00 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/02/21 22:01:17 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -479,6 +479,33 @@ void	ft_date(void *param)
 	free(date);
 }
 
+void	ft_mouse(double x, double y, void *param)
+{
+	t_data			*data;
+	double			angle;
+	double			delta_x;
+	double			old_plane_x;
+	double			old_dir_x;
+	static double	old_x;
+
+	(void)y;
+	data = (t_data *)param;
+	if (old_x == 0)
+	{
+		old_x = x;
+		return ;
+	}
+	delta_x = x - old_x;
+	angle = delta_x * 0.002;
+	old_dir_x = data->player->dir_x;
+	data->player->dir_x = old_dir_x * cos(angle) - data->player->dir_y * sin(angle);
+	data->player->dir_y = old_dir_x * sin(angle) + data->player->dir_y * cos(angle);
+	old_plane_x = data->player->plane_x;
+	data->player->plane_x = old_plane_x * cos(angle) - data->player->plane_y * sin(angle);
+	data->player->plane_y = old_plane_x * sin(angle) + data->player->plane_y * cos(angle);
+	old_x = x;
+}
+
 void	ft_game_loop(t_data *data)
 {
 	if (ft_has_error(data->error))
@@ -490,5 +517,6 @@ void	ft_game_loop(t_data *data)
 	ft_put_weapon_images(data);
 	mlx_loop_hook(data->mlx->window, ft_weapon, data);
 	mlx_loop_hook(data->mlx->window, ft_minimap, data);
+	mlx_cursor_hook(data->mlx->window, ft_mouse, data);
 	mlx_loop(data->mlx->window);
 }
