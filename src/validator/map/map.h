@@ -18,6 +18,7 @@
 //map_validator.c
 void	ft_detect_invalid_chars(char **map, t_error *error);
 void	ft_check_spaces(char **map, t_error *error);
+void	ft_check_doors(char **map, t_error *error);
 void	ft_check_every_cell(char **map, t_error *error);
 
 //map_content.c

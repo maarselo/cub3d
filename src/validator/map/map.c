@@ -21,9 +21,12 @@ void	ft_check_map(char *file, t_error *error)
 	if (ft_has_error(error))
 		return ;
 	map = ft_get_map(file, error);
+	if (!map)
+		return ;
 	ft_detect_invalid_chars(map, error);
 	ft_fill_spaces(map, error);
 	ft_check_spaces(map, error);
+	ft_check_doors(map, error);
 	ft_check_every_cell(map, error);
 	ft_free_file_content(map);
 }

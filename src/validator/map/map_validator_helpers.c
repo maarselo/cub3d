@@ -25,7 +25,7 @@ int	ft_get_map_height(char **map)
 
 int	ft_get_map_width(char **map)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (map[0][j])
@@ -37,13 +37,25 @@ void	ft_check_space_side(int row, int col, char **map, t_error *error)
 {
 	if (ft_has_error(error))
 		return ;
-	else if (row < 0 || row >= ft_get_map_height(map) ||
-		col < 0 || col >= ft_get_map_width(map))
+	else if (row < 0 || row >= ft_get_map_height(map)
+		|| col < 0 || col >= ft_get_map_width(map))
 		return ;
 	else if (map[row][col] == '_' || map[row][col] == '|')
-		return ft_set_error_static(MAP_DOORS_OUTSIDE_WALLS, error, VALIDATOR);
+		return (ft_set_error_static(MAP_DOORS_OUTSIDE_WALLS, error, VALIDATOR));
 	else if (map[row][col] == 'e')
-		return (ft_set_error_static(MAP_ENEMIES_OUTSIDE_WALLS, error, VALIDATOR));
+		return (ft_set_error_static(MAP_ENEMIES_OUTSIDE_WALLS, error,
+				VALIDATOR));
+}
+
+void	ft_check_door_side(int row, int col, char **map, t_error *error)
+{
+	if (ft_has_error(error))
+		return ;
+	else if (row < 0 || row >= ft_get_map_height(map)
+		|| col < 0 || col >= ft_get_map_width(map))
+		return (ft_set_error_static(MAP_DOORS_OUTSIDE_WALLS, error, VALIDATOR));
+	else if (map[row][col] != '1')
+		return (ft_set_error_static(MAP_DOORS_OUTSIDE_WALLS, error, VALIDATOR));
 }
 
 void	ft_check_cell(int row, int col, char **map, t_error *error)

@@ -16,6 +16,7 @@
 int		ft_get_map_height(char **map);
 int		ft_get_map_width(char **map);
 void	ft_check_space_side(int row, int col, char **map, t_error *error);
+void	ft_check_door_side(int row, int col, char **map, t_error *error);
 void	ft_check_cell(int i, int j, char **map, t_error *error);
 
 void	ft_detect_invalid_chars(char **map, t_error *error)
@@ -24,8 +25,6 @@ void	ft_detect_invalid_chars(char **map, t_error *error)
 	int		j;
 	int		total_start_positions;
 
-	if (ft_has_error(error))
-		return ;
 	i = -1;
 	total_start_positions = 0;
 	while (map[++i])
@@ -38,7 +37,8 @@ void	ft_detect_invalid_chars(char **map, t_error *error)
 			if (map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'W' || map[i][j] == 'E')
 				total_start_positions++;
-			else if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '|' && map[i][j] != '_' && map[i][j] != 'e')
+			else if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '|'
+				&& map[i][j] != '_' && map[i][j] != 'e')
 				return (ft_set_error_static(MAP_INVALID_CHARS, error,
 						VALIDATOR));
 		}
@@ -50,7 +50,7 @@ void	ft_detect_invalid_chars(char **map, t_error *error)
 void	ft_check_spaces(char **map, t_error *error)
 {
 	int	i;
-	int j;
+	int	j;
 
 	if (ft_has_error(error))
 		return ;
@@ -62,20 +62,42 @@ void	ft_check_spaces(char **map, t_error *error)
 		{
 			if (map[i][j] == '-')
 			{
-				ft_check_space_side(i + 1, j, map, error);
 				ft_check_space_side(i - 1, j, map, error);
-				ft_check_space_side(i, j + 1, map, error);
+				ft_check_space_side(i + 1, j, map, error);
 				ft_check_space_side(i, j - 1, map, error);
+				ft_check_space_side(i, j + 1, map, error);
 			}
 			if (ft_has_error(error))
 				return ;
-			if (map[i][j] == '|' || map[i][j] == '_')
+		}
+	}
+}
+
+void	ft_check_doors(char **map, t_error *error)
+{
+	int	i;
+	int	j;
+
+	if (ft_has_error(error))
+		return ;
+	i = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+		{
+			if (map[i][j] == '|')
 			{
-				if (map[i][j] == '|' && (i - 1 < 0 || i + 1 >= ft_get_map_height(map) || (map[i - 1][j] != '1' || map[i + 1][j] != '1')))
-					return (ft_set_error_static(MAP_DOORS_NOT_BETWEEN_WALLS, error, VALIDATOR));
-				else if (map[i][j] == '_' && (j - 1 < 0 || j + 1 >= ft_get_map_width(map) || map[i][j - 1] != '1' || map[i][j + 1] != '1'))
-					return (ft_set_error_static(MAP_DOORS_NOT_BETWEEN_WALLS, error, VALIDATOR));
+				ft_check_door_side(i - 1, j, map, error);
+				ft_check_door_side(i + 1, j, map, error);
 			}
+			else if (map[i][j] == '_')
+			{
+				ft_check_door_side(i, j - 1, map, error);
+				ft_check_door_side(i, j + 1, map, error);
+			}
+			if (ft_has_error(error))
+				return ;
 		}
 	}
 }
