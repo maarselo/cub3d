@@ -391,53 +391,12 @@ void	ft_put_weapon_images(t_data *data)
 
 	row = WINDOW_HEIGHT - data->textures->weapon->idle->height;
 	mlx_image_to_window(data->mlx->window, data->textures->weapon->idle, MIDDLE_WIDTH, row);
-	data->textures->weapon->idle->enabled = false;
-	row = WINDOW_HEIGHT - data->textures->weapon->aim->height;
-	mlx_image_to_window(data->mlx->window, data->textures->weapon->aim, MIDDLE_WIDTH, row);
-	data->textures->weapon->aim->enabled = false;
-	row = WINDOW_HEIGHT - data->textures->weapon->reload->height;
-	mlx_image_to_window(data->mlx->window, data->textures->weapon->reload, MIDDLE_WIDTH, row);
-	data->textures->weapon->reload->enabled = false;
 	row = WINDOW_HEIGHT - data->textures->weapon->shoot->height;
 	mlx_image_to_window(data->mlx->window, data->textures->weapon->shoot, MIDDLE_WIDTH, row);
 	data->textures->weapon->shoot->enabled = false;
-}
-
-void	ft_weapon(void *param)
-{
-	t_data		*data;
-	static int	counter = 15;
-	static int	idx;
-
-	data = (t_data *)param;
-	counter++;
-	if (counter >= 15)
-	{
-		if (idx == IDLE)
-		{
-			data->textures->weapon->shoot->enabled = false;
-			data->textures->weapon->idle->enabled = true;
-		}
-		else if (idx == AIM)
-		{
-			data->textures->weapon->idle->enabled = false;
-			data->textures->weapon->aim->enabled = true;
-		}
-		else if (idx == RELOAD)
-		{
-			data->textures->weapon->aim->enabled = false;
-			data->textures->weapon->reload->enabled = true;
-		}
-		else if (idx == SHOOT)
-		{
-			data->textures->weapon->reload->enabled = false;
-			data->textures->weapon->shoot->enabled = true;
-		}
-		idx++;
-		if (idx > 3)
-			idx = 0;
-		counter = 0;
-	}
+	row = WINDOW_HEIGHT - data->textures->weapon->after_shoot->height;
+	mlx_image_to_window(data->mlx->window, data->textures->weapon->after_shoot, MIDDLE_WIDTH, row);
+	data->textures->weapon->after_shoot->enabled = false;
 }
 
 #include "libft.h"
@@ -585,20 +544,34 @@ void	ft_point(void *param)
 		i++;
 	}
 }
+/*
+#include <unistd.h>
+
+void ft_shoot(mouse_key_t button, action_t action, modifier_key_t mods, void* param)
+{
+	t_data	*data;
+
+	data =(t_data *)param;
+	(void)mods;
+	if (button == MLX_MOUSE_BUTTON_LEFT && !data->textures->weapon->is_shooting)
+	{
+		
+	}
+}*/
 
 void	ft_game_loop(t_data *data)
 {
 	if (ft_has_error(data->error))
 		return ;
+	ft_put_weapon_images(data);
 	mlx_set_cursor_mode(data->mlx->window, MLX_MOUSE_DISABLED);
 	mlx_loop_hook(data->mlx->window, ft_date, data);
 	mlx_loop_hook(data->mlx->window, ft_timer, data);
 	mlx_loop_hook(data->mlx->window, ft_render, data);
 	mlx_key_hook(data->mlx->window, ft_move, data);
-	ft_put_weapon_images(data);
-	mlx_loop_hook(data->mlx->window, ft_weapon, data);
 	mlx_loop_hook(data->mlx->window, ft_point, data);
 	mlx_loop_hook(data->mlx->window, ft_minimap, data);
 	mlx_cursor_hook(data->mlx->window, ft_mouse, data);
+	//mlx_mouse_hook(data->mlx->window, ft_shoot, data);
 	mlx_loop(data->mlx->window);
 }

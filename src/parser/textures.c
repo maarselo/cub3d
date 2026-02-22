@@ -25,10 +25,9 @@
 
 #define PATH_DOOR "./textures/door/door.png"
 
-#define PATH_WEAPON_IDLE "./textures/weapon/idle.png"
-#define PATH_WEAPON_RELOAD "./textures/weapon/reload.png"
-#define PATH_WEAPON_AIM "./textures/weapon/aim.png"
-#define PATH_WEAPON_SHOOT "./textures/weapon/shoot.png"
+#define PATH_WEAPON_IDLE "./textures/weapon/shotgun1.png"
+#define PATH_WEAPON_SHOOT "./textures/weapon/shotgun2.png"
+#define PATH_WEAPON_AFTER_SHOOT "./textures/weapon/shotgun3.png"
 
 static mlx_image_t	*ft_texture_to_img(char *texture_path, t_data *data)
 {
@@ -70,9 +69,8 @@ static void	ft_init_weapons_textures(t_data *data)
 	if (ft_has_error(data->error))
 		return ;
 	data->textures->weapon->idle = ft_texture_to_img(PATH_WEAPON_IDLE, data);
-	data->textures->weapon->reload = ft_texture_to_img(PATH_WEAPON_RELOAD, data);
-	data->textures->weapon->aim = ft_texture_to_img(PATH_WEAPON_AIM, data);
 	data->textures->weapon->shoot = ft_texture_to_img(PATH_WEAPON_SHOOT, data);
+	data->textures->weapon->after_shoot = ft_texture_to_img(PATH_WEAPON_AFTER_SHOOT, data);
 }
 
 void	ft_init_textures(char *file, t_data *data)

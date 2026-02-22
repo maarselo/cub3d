@@ -36,9 +36,9 @@ typedef struct s_colors
 typedef struct s_weapon
 {
 	mlx_image_t	*idle;
-	mlx_image_t	*reload;
-	mlx_image_t	*aim;
 	mlx_image_t	*shoot;
+	mlx_image_t	*after_shoot;
+	bool		is_shooting;
 } t_weapon;
 typedef struct textures
 {
