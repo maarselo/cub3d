@@ -473,7 +473,7 @@ void	ft_date(void *param)
 	else
 		actual_minutes = ft_itoa(actual_minutes_nb);
 	date = ft_multijoin(3, actual_hours, ":", actual_minutes);
-	data->textures->date = mlx_put_string(data->mlx->window, date, MIDDLE_WIDTH, 1);
+	data->textures->date = mlx_put_string(data->mlx->window, date, MIDDLE_WIDTH - 25, 1);
 	free(actual_hours);
 	free(actual_minutes);
 	free(date);
