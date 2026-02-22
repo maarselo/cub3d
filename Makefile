@@ -28,6 +28,7 @@ DIR_PARSER = parser
 DIR_GAME = game
 DIR_ERROR = error
 DIR_UTILS = utils
+DIR_UTILS_FILE = file
 DIR_FREE = free
 
 
@@ -38,7 +39,7 @@ SRC_VALIDATOR = validator.c \
 SRC_PARSER = parser.c data.c mlx.c player.c map.c textures.c colors.c 
 SRC_GAME = game.c
 SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
-SRC_UTILS = file.c file_utils.c
+SRC_UTILS = $(DIR_UTILS_FILE)/file.c $(DIR_UTILS_FILE)/file_utils.c
 SRC_FREE = free_file_content.c free_content_assigned.c free_split.c free_data.c
 
 

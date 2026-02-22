@@ -14,8 +14,10 @@
 #include <errno.h> //errno in open file
 #include <fcntl.h> //open()
 #include "libft.h" //gnl, and ft_substr
-#include "utils/utils_internal.h"
 #include "free.h" //ft_free_content_asigned
+
+//file_utils.c
+char	*ft_get_clean_line(int *fd);
 
 int	ft_open_file(char *file, t_error *error)
 {
