@@ -14,7 +14,7 @@
 # define ERRORCTX_H
 
 # include <stdbool.h> //struct variable
-#include "cub3d.h" //t_data struct
+# include "cub3d.h" //t_data struct
 
 # define SUCCES 0 //exit_code in main
 # define FAILED 1 //exit_code in main
@@ -23,7 +23,6 @@ typedef enum e_process
 {
 	SYSTEM,
 	VALIDATOR,
-
 }	t_process;
 
 typedef struct s_error
@@ -37,7 +36,6 @@ typedef struct s_error
 typedef enum e_validator_error
 {
 	ERROR_NONE,
-
 	ARGUMENTS_NUMBER,
 	EMPTY_ARGUMENT,
 	MAP_EXTENSION,
@@ -63,7 +61,6 @@ typedef enum e_validator_error
 	MAP_ENEMIES_OUTSIDE_WALLS,
 	MAP_NOT_CLOSED,
 	MLX_ERROR,
-
 	ERROR_COUNT
 }	t_validator_error;
 

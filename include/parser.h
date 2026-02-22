@@ -22,15 +22,14 @@ typedef enum s_start_orientation
 	SOUTH,
 	WEST,
 	EAST,
-} t_start_orientation;
+}	t_start_orientation;
 
 //Colors
 typedef struct s_colors
 {
 	uint32_t	floor;
 	uint32_t	ceiling;
-} t_colors;
-
+}	t_colors;
 
 //Textures
 typedef struct s_weapon
@@ -39,19 +38,18 @@ typedef struct s_weapon
 	mlx_image_t	*shoot;
 	mlx_image_t	*smoke;
 	bool		is_shooting;
-} t_weapon;
+}	t_weapon;
 typedef struct textures
 {
 	mlx_image_t	*north;
-	mlx_image_t *south;
+	mlx_image_t	*south;
 	mlx_image_t	*west;
 	mlx_image_t	*east;
 	mlx_image_t	*door;
 	mlx_image_t	*timer;
-	mlx_image_t *date;
+	mlx_image_t	*date;
 	t_weapon	*weapon;
-} t_textures;
-
+}	t_textures;
 
 //Map
 typedef struct s_map
@@ -59,8 +57,7 @@ typedef struct s_map
 	int		width;
 	int		height;
 	char	**map;
-} t_map;
-
+}	t_map;
 
 //Enemies
 typedef struct s_enemy
@@ -68,13 +65,12 @@ typedef struct s_enemy
 	double			pos_x;
 	double			pos_y;
 	struct s_enemy	*next;
-} t_enemy;
+}	t_enemy;
 typedef struct s_enemies
 {
 	int		total_enemies;
 	t_enemy	*enemies;
-} t_enemies;
-
+}	t_enemies;
 
 //Player
 typedef struct s_player
@@ -85,8 +81,7 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-} t_player;
-
+}	t_player;
 
 //Game
 typedef struct s_mlx
@@ -95,9 +90,7 @@ typedef struct s_mlx
 	unsigned int	height;
 	mlx_t			*window;
 	mlx_image_t		*framebuffer;
-} t_mlx;
-
-
+}	t_mlx;
 
 //parser.c
 void	ft_parser(char *file, t_data *data, t_error *error);
