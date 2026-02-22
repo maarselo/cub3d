@@ -510,6 +510,7 @@ void	ft_game_loop(t_data *data)
 {
 	if (ft_has_error(data->error))
 		return ;
+	mlx_set_cursor_mode(data->mlx->window, MLX_MOUSE_HIDDEN);
 	mlx_loop_hook(data->mlx->window, ft_date, data);
 	mlx_loop_hook(data->mlx->window, ft_timer, data);
 	mlx_loop_hook(data->mlx->window, ft_render, data);
