@@ -434,7 +434,7 @@ void	ft_timer(void *param)
 
 void	ft_date(void *param)
 {
-	static long	last_update = -1;
+	static long	last_min_update = -1;
 	struct timeval	time_struct;
 	long	today_seconds;
 	long	actual_hours_nb;
@@ -446,15 +446,14 @@ void	ft_date(void *param)
 	t_data	*data;
 
 	gettimeofday(&time_struct, NULL);
-	if (last_update == time_struct.tv_sec / 60)
+	if (last_min_update == time_struct.tv_sec / 60)
 		return ;
-	last_update = time_struct.tv_sec / 60;
+	last_min_update = time_struct.tv_sec / 60;
 	data = (t_data *)param;
+	today_seconds = (time_struct.tv_sec + 3600) % 86400; //suma de 3600 para que de la hora espanoa invierno
+	actual_hours_nb = today_seconds / 3600;
 	if (data->textures->date)
 		mlx_delete_image(data->mlx->window, data->textures->date);
-	gettimeofday(&time_struct, NULL);
-	today_seconds = time_struct.tv_sec % 86400; 
-	actual_hours_nb = today_seconds / 60 / 60;
 	if (actual_hours_nb < 10)
 	{
 		tmp = ft_itoa(actual_hours_nb);
