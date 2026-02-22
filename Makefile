@@ -40,7 +40,9 @@ SRC_PARSER = parser.c data.c mlx.c enemies.c player.c map.c textures.c colors.c
 SRC_GAME = game.c
 SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
 SRC_UTILS = $(DIR_UTILS_FILE)/file.c $(DIR_UTILS_FILE)/file_utils.c
-SRC_FREE = free_file_content.c free_content_assigned.c free_split.c free_data.c
+SRC_FREE = file_content.c content_assigned.c split.c \
+			data.c \
+			textures_struct.c map_struct.c enemies_struct.c mlx_struct.c error_struct.c
 
 
 #diferent folder with files

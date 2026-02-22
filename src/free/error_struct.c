@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_content_asigned.c                             :+:      :+:    :+:   */
+/*   error_struct.c                                       :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,11 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "cub3d.h" //t_data
+#include "parser.h"//t_map
+#include "errorctx.h" //free_terror
+#include <stdlib.h> //free()
 
-void	ft_free_content_assigned(int i, char **file_content)
+void	ft_free_error_struct(t_data *data)
 {
-	while (--i >= 0)
-		free(file_content[i]);
-	free(file_content);
+	if (data->error->is_freeable)
+		free(data->error->message);
+	free(data->error);
+	data->error = NULL;
 }
