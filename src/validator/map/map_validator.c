@@ -12,7 +12,6 @@
 
 #include "libft.h" //ft_isspace
 #include "errorctx.h" //struct
-#include "validator/map/map_validator.h" //hepers func
 
 int		ft_get_map_height(char **map);
 int		ft_get_map_width(char **map);
