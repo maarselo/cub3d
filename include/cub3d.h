@@ -14,11 +14,12 @@
 # define CUB3D_H
 
 
-typedef struct s_colors	t_colors;
-typedef struct textures	t_textures;
-typedef struct s_map	t_map;
-typedef struct s_player	t_player;
-typedef struct s_mlx	t_mlx;
+typedef struct s_colors		t_colors;
+typedef struct textures		t_textures;
+typedef struct s_map		t_map;
+typedef struct s_enemies	t_enemies;
+typedef struct s_player		t_player;
+typedef struct s_mlx		t_mlx;
 
 typedef struct s_error	t_error;
 
@@ -28,6 +29,7 @@ typedef struct s_data
 	t_colors	*colors;
 	t_textures	*textures;
 	t_map		*map;
+	t_enemies	*enemies;
 	t_player	*player;
 	t_mlx		*mlx;
 

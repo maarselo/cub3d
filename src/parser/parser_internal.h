@@ -18,6 +18,7 @@
 
 void		ft_init_colors(char *file, t_data *data);
 void		ft_init_map(char *file, t_data *data);
+void		ft_init_enemies(t_data *data);
 void		ft_init_player(t_data *data);
 void		ft_init_mlx(t_data *data);
 void		ft_init_textures(char *file, t_data *data);

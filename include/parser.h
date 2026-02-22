@@ -62,6 +62,20 @@ typedef struct s_map
 } t_map;
 
 
+//Enemies
+typedef struct s_enemy
+{
+	double			pos_x;
+	double			pos_y;
+	struct s_enemy	*next;
+} t_enemy;
+typedef struct s_enemies
+{
+	int		total_enemies;
+	t_enemy	*enemies;
+} t_enemies;
+
+
 //Player
 typedef struct s_player
 {

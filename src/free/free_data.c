@@ -17,6 +17,20 @@
 #include "parser.h"//t_map
 #include "errorctx.h" //free_terror
 
+void	ft_free_enemy_linked_list(t_enemies *enemies)
+{
+	t_enemy	*tmp;
+	t_enemy	*next_node;
+
+	tmp = enemies->enemies;
+	while (tmp)
+	{
+		next_node = tmp->next;
+		free(tmp);
+		tmp = next_node;
+	}
+}
+
 void	ft_free_data(t_data *data)
 {
 	if (!data)
@@ -58,6 +72,15 @@ void	ft_free_data(t_data *data)
 		if (data->map->map)
 			ft_free_file_content(data->map->map);
 		free(data->map);
+	}
+	if (data->enemies)
+	{
+		if (data->enemies->enemies)
+		{
+			ft_free_enemy_linked_list(data->enemies);
+			data->enemies->enemies = NULL;
+		}
+		free(data->enemies);
 	}
 	if (data->player)
 		free(data->player);

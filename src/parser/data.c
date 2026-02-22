@@ -31,6 +31,9 @@ static void	ft_init_structs_utils(t_data *data, t_error *error)
 	data->map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!data->map)
 		return (ft_set_error_system(error));
+	data->enemies = (t_enemies *)ft_calloc(1, sizeof(t_enemies));
+	if (!data->enemies)
+		return (ft_set_error_system(error));
 	data->player = (t_player *)ft_calloc(1, sizeof(t_player));
 	if (!data->player)
 		return (ft_set_error_system(error));
