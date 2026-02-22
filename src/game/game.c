@@ -295,8 +295,8 @@ void	ft_draw_player(t_data *data)
 	int	player_side = 8;	
 	int init_row = WINDOW_HEIGHT - MINIMAP_HEIGHT + (MINIMAP_HEIGHT / 2 - (player_side / 2));
 	int final_row = WINDOW_HEIGHT - MINIMAP_HEIGHT + (MINIMAP_HEIGHT / 2 + (player_side / 2));
-	int init_col = MINIMAP_WIDTH / 2 - (player_side / 2);
-	int final_col = MINIMAP_WIDTH / 2 + (player_side / 2);
+	int init_col = MINIMAP_WIDTH / 2 - (player_side / 2) - 1;
+	int final_col = MINIMAP_WIDTH / 2 + (player_side / 2) - 1;
 	int current_col;
 
 	while (init_row++ <= final_row)
@@ -304,6 +304,34 @@ void	ft_draw_player(t_data *data)
 		current_col = init_col;
 		while (current_col++ <= final_col)
 			mlx_put_pixel(data->mlx->framebuffer, current_col, init_row, RED_COLOR);
+	}
+}
+
+#define RAY_LENGTH 40
+
+void ft_draw_fov(t_data *data)
+{
+	double	pos_x;
+	double	pos_y;
+	double	ray_x;
+	double	ray_y;
+	double	init_col;
+	int		i;
+
+	pos_x = MINIMAP_WIDTH / 2;
+	pos_y = WINDOW_HEIGHT - (MINIMAP_HEIGHT / 2);
+	init_col = -1.0;
+	while (init_col <= 1.0)
+	{
+		ray_x = data->player->dir_x + data->player->plane_x * init_col;
+		ray_y = data->player->dir_y + data->player->plane_y * init_col;
+		i = 0;
+		while (i < RAY_LENGTH)
+		{
+			mlx_put_pixel(data->mlx->framebuffer, pos_x + (ray_x * i), pos_y + (ray_y * i), RED_COLOR);
+			i++;
+		}
+		init_col += 0.04;
 	}
 }
 
@@ -348,6 +376,7 @@ void ft_minimap(void *param)
 		pixel_row++;
 	}
 	ft_draw_player(data);
+	ft_draw_fov(data);
 }
 
 #define MIDDLE_WIDTH WINDOW_WIDTH / 2
@@ -426,7 +455,6 @@ void	ft_timer(void *param)
 	timer_str = ft_strjoin("Time played: ", tmp);
 	free(tmp);
 	data->textures->timer = mlx_put_string(data->mlx->window, timer_str, 0,0);
-	mlx_resize_image(data->textures->timer, 200, 30);
 	free(timer_str);
 }
 
@@ -509,7 +537,7 @@ void	ft_game_loop(t_data *data)
 {
 	if (ft_has_error(data->error))
 		return ;
-	mlx_set_cursor_mode(data->mlx->window, MLX_MOUSE_HIDDEN);
+	mlx_set_cursor_mode(data->mlx->window, MLX_MOUSE_DISABLED);
 	mlx_loop_hook(data->mlx->window, ft_date, data);
 	mlx_loop_hook(data->mlx->window, ft_timer, data);
 	mlx_loop_hook(data->mlx->window, ft_render, data);
