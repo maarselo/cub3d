@@ -13,8 +13,12 @@
 #include "cub3d.h" //t_data struct
 #include "parser.h" //struct in parser
 #include "errorctx.h" //error struct
-#include "libft.h" //ft_isaplha
 #include "cub3d.h" //t_data struct
+
+static bool	ft_is_start_position(int c)
+{
+	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
+}
 
 static void	ft_set_player_cfg(int x, int y, t_data *data)
 {
@@ -62,7 +66,7 @@ void	ft_init_player(t_data *data)
 	{
 		j = -1;
 		while (data->map->map[i][++j])
-			if (ft_isalpha(data->map->map[i][j]))
+			if (ft_is_start_position(data->map->map[i][j]))
 				ft_set_player_cfg(j, i, data);
 	}
 }
