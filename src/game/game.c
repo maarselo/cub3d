@@ -394,9 +394,9 @@ void	ft_put_weapon_images(t_data *data)
 	row = WINDOW_HEIGHT - data->textures->weapon->shoot->height;
 	mlx_image_to_window(data->mlx->window, data->textures->weapon->shoot, MIDDLE_WIDTH, row);
 	data->textures->weapon->shoot->enabled = false;
-	row = WINDOW_HEIGHT - data->textures->weapon->after_shoot->height;
-	mlx_image_to_window(data->mlx->window, data->textures->weapon->after_shoot, MIDDLE_WIDTH, row);
-	data->textures->weapon->after_shoot->enabled = false;
+	row = WINDOW_HEIGHT - data->textures->weapon->smoke->height;
+	mlx_image_to_window(data->mlx->window, data->textures->weapon->smoke, MIDDLE_WIDTH, row);
+	data->textures->weapon->smoke->enabled = false;
 }
 
 #include "libft.h"

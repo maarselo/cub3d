@@ -55,8 +55,8 @@ void	ft_free_data(t_data *data)
 				mlx_delete_image(data->mlx->window, data->textures->weapon->idle);
 			if (data->textures->weapon->shoot)
 				mlx_delete_image(data->mlx->window, data->textures->weapon->shoot);
-			if (data->textures->weapon->after_shoot)
-				mlx_delete_image(data->mlx->window, data->textures->weapon->after_shoot);
+			if (data->textures->weapon->smoke)
+				mlx_delete_image(data->mlx->window, data->textures->weapon->smoke);
 			free(data->textures->weapon);
 		}
 		if (data->textures->timer)
