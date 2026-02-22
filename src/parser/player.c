@@ -15,10 +15,10 @@
 #include "errorctx.h" //error struct
 #include "cub3d.h" //t_data struct
 
-#define NORTH "N"
-#define SOUTH "S"
-#define WEST "W"
-#define EAST "E"
+#define NORTH 'N'
+#define SOUTH 'S'
+#define WEST 'W'
+#define EAST 'E'
 
 static bool	ft_is_start_position(int c)
 {
