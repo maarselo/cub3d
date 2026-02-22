@@ -54,12 +54,14 @@ single start position (N, S, E, W) and '|' or '_' to represent doors are \
 allowed.",
 [MAP_MULTI_STARTS] = "Cub3D: invalid map. Exactly one start position \
 (N, S, E, W) is required.",
-[MAP_DOORS_ON_THE_EDGES] = "Cub3d: invalid map. The doors have to be inside \
+[MAP_DOORS_OUTSIDE_WALLS] = "Cub3d: invalid map. The doors have to be inside \
  the walls.",
 [MAP_DOORS_NOT_BETWEEN_WALLS] = "Cub3d: invalid map. The doors need to be \
 between walls('1').",
 [MAP_SPACE_NEXTTO_FLOOR] = "Cub3d: invalid map. None space can go next to \
 a floor or inside the walls." ,
+[MAP_ENEMIES_OUTSIDE_WALLS] = "Cub3d: invalid map. The enemies must be inside \
+the walls.",
 [MAP_NOT_CLOSED] = "Cub3D: invalid map. The map is not properly closed by \
 walls.",
 };

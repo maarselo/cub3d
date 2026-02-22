@@ -17,7 +17,7 @@
 
 int		ft_get_map_height(char **map);
 int		ft_get_map_width(char **map);
-void	ft_check_any_doors(int row, int col, char **map, t_error *error);
+void	ft_check_space_side(int row, int col, char **map, t_error *error);
 void	ft_check_cell(int i, int j, char **map, t_error *error);
 
 #endif

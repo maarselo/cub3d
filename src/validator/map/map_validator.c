@@ -34,7 +34,7 @@ void	ft_detect_invalid_chars(char **map, t_error *error)
 			if (map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'W' || map[i][j] == 'E')
 				total_start_positions++;
-			else if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '|' && map[i][j] != '_')
+			else if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '|' && map[i][j] != '_' && map[i][j] != 'e')
 				return (ft_set_error_static(MAP_INVALID_CHARS, error,
 						VALIDATOR));
 		}
@@ -43,7 +43,7 @@ void	ft_detect_invalid_chars(char **map, t_error *error)
 		return (ft_set_error_static(MAP_MULTI_STARTS, error, VALIDATOR));
 }
 
-void	ft_check_doors(char **map, t_error *error)
+void	ft_check_spaces(char **map, t_error *error)
 {
 	int	i;
 	int j;
@@ -58,18 +58,18 @@ void	ft_check_doors(char **map, t_error *error)
 		{
 			if (map[i][j] == '-')
 			{
-				ft_check_any_doors(i + 1, j, map, error);
-				ft_check_any_doors(i - 1, j, map, error);
-				ft_check_any_doors(i, j + 1, map, error);
-				ft_check_any_doors(i, j - 1, map, error);
+				ft_check_space_side(i + 1, j, map, error);
+				ft_check_space_side(i - 1, j, map, error);
+				ft_check_space_side(i, j + 1, map, error);
+				ft_check_space_side(i, j - 1, map, error);
 			}
 			if (ft_has_error(error))
 				return ;
 			if (map[i][j] == '|' || map[i][j] == '_')
 			{
-				if (map[i][j] == '|' && (map[i - 1][j] != '1' || map[i + 1][j] != '1'))
+				if (map[i][j] == '|' && (i - 1 < 0 || i + 1 >= ft_get_map_height(map) || (map[i - 1][j] != '1' || map[i + 1][j] != '1')))
 					return (ft_set_error_static(MAP_DOORS_NOT_BETWEEN_WALLS, error, VALIDATOR));
-				else if (map[i][j] == '_' && (map[i][j - 1] != '1' || map[i][j + 1] != '1'))
+				else if (map[i][j] == '_' && (j - 1 < 0 || j + 1 >= ft_get_map_width(map) || map[i][j - 1] != '1' || map[i][j + 1] != '1'))
 					return (ft_set_error_static(MAP_DOORS_NOT_BETWEEN_WALLS, error, VALIDATOR));
 			}
 		}

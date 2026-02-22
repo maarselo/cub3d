@@ -19,7 +19,7 @@
 void	ft_detect_invalid_chars(char **map, t_error *error);
 int		ft_get_map_height(char **map);
 void	ft_check_cell(int i, int j, char **map, t_error *error);
-void	ft_check_doors(char **map, t_error *error);
+void	ft_check_spaces(char **map, t_error *error);
 void	ft_check_every_cell(char **map, t_error *error);
 
 //map_content.c
