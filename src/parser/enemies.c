@@ -45,14 +45,27 @@ static t_enemy	*ft_init_enemy(int row, int col)
 	return (enemy);
 }
 
+static void	ft_enemy_handler(int row, int col, t_data *data)
+{
+	static t_enemy	*last_enemy;
+	t_enemy			*current_enemy;
+
+	current_enemy = ft_init_enemy(row, col);
+	if (!current_enemy)
+		return (ft_set_error_system(data->error));
+	if (!data->enemies->enemies)
+		data->enemies->enemies = current_enemy;
+	else
+		last_enemy->next = current_enemy;
+	last_enemy = current_enemy;
+}
+
 void	ft_init_enemies(t_data *data)
 {
 	int		row;
 	int		col;
-	t_enemy	*last_enemy;
-	t_enemy	*current_enemy;
 
-	if (ft_has_error(data->error))	
+	if (ft_has_error(data->error))
 		return ;
 	data->enemies->total_enemies = ft_count_enemies(data);
 	if (data->enemies->total_enemies == 0)
@@ -60,22 +73,16 @@ void	ft_init_enemies(t_data *data)
 		data->enemies->enemies = NULL;
 		return ;
 	}
-	last_enemy = NULL;
 	row = -1;
 	while (data->map->map[++row])
 	{
 		col = -1;
 		while (data->map->map[row][++col])
+		{
 			if (data->map->map[row][col] == 'e')
-			{
-				current_enemy = ft_init_enemy(row, col);
-				if (!current_enemy)
-					return (ft_set_error_system(data->error));
-				if (!data->enemies->enemies)
-					data->enemies->enemies = current_enemy;
-				else
-					last_enemy->next = current_enemy;
-				last_enemy = current_enemy;
-			}
+				ft_enemy_handler(row, col, data);
+			if (ft_has_error(data->error))
+				return ;
+		}
 	}
 }

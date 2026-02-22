@@ -33,11 +33,13 @@ void	ft_init_mlx(t_data *data)
 {
 	if (ft_has_error(data->error))
 		return ;
-	data->mlx->window = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, false);
+	data->mlx->window = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT,
+			WINDOW_NAME, false);
 	if (!data->mlx->window)
 		return (ft_set_error_mlx(data->error));
 	ft_set_icon(data);
-	data->mlx->framebuffer = mlx_new_image(data->mlx->window, WINDOW_WIDTH, WINDOW_HEIGHT);
+	data->mlx->framebuffer = mlx_new_image(data->mlx->window, WINDOW_WIDTH,
+			WINDOW_HEIGHT);
 	if (!data->mlx->framebuffer)
 		return (ft_set_error_mlx(data->error));
 	mlx_image_to_window(data->mlx->window, data->mlx->framebuffer, 0, 0);

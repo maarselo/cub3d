@@ -34,7 +34,8 @@ static	bool	ft_is_cfgcolor(char *line)
 
 static uint32_t	ft_get_rgba(char **split_number)
 {
-	return (ft_atoi(split_number[0]) << 24 | ft_atoi(split_number[1]) << 16 | ft_atoi(split_number[2]) << 8 | 255);
+	return (ft_atoi(split_number[0]) << 24 | ft_atoi(split_number[1]) << 16
+		| ft_atoi(split_number[2]) << 8 | 255);
 }
 
 static uint32_t	ft_get_color(char *str, t_data *data)
@@ -49,7 +50,7 @@ static uint32_t	ft_get_color(char *str, t_data *data)
 		return (ft_set_error_system(data->error), -1);
 	ft_strtrim_spaces(split_numbers);
 	color = ft_get_rgba(split_numbers);
-	return(ft_free_split(split_numbers), color);
+	return (ft_free_split(split_numbers), color);
 }
 
 void	ft_init_colors(char *file, t_data *data)

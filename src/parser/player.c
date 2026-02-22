@@ -15,43 +15,73 @@
 #include "errorctx.h" //error struct
 #include "cub3d.h" //t_data struct
 
+#define NORTH "N"
+#define SOUTH "S"
+#define WEST "W"
+#define EAST "E"
+
 static bool	ft_is_start_position(int c)
 {
-	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
+	return (c == NORTH || c == SOUTH || c == WEST || c == EAST);
+}
+
+static void	ft_set_player_direction(char c, t_data *data)
+{
+	if (c == NORTH)
+	{
+		data->player->dir_x = 0;
+		data->player->dir_y = -1;
+	}
+	else if (c == SOUTH)
+	{
+		data->player->dir_x = 0;
+		data->player->dir_y = 1;
+	}
+	else if (c == WEST)
+	{
+		data->player->dir_x = -1;
+		data->player->dir_y = 0;
+	}
+	else if (c == EAST)
+	{
+		data->player->dir_x = 1;
+		data->player->dir_y = 0;
+	}
+}
+
+static void	ft_set_player_plane(char c, t_data *data)
+{
+	if (c == NORTH)
+	{
+		data->player->plane_x = 1;
+		data->player->plane_y = 0;
+	}
+	else if (c == SOUTH)
+	{
+		data->player->plane_x = -1;
+		data->player->plane_y = 0;
+	}
+	else if (c == WEST)
+	{
+		data->player->plane_x = 0;
+		data->player->plane_y = -1;
+	}
+	else if (c == EAST)
+	{
+		data->player->plane_x = 0;
+		data->player->plane_y = 1;
+	}
 }
 
 static void	ft_set_player_cfg(int x, int y, t_data *data)
 {
+	char	c;
+
 	data->player->pos_x = (double)x + 0.5;
 	data->player->pos_y = (double)y + 0.5;
-	if (data->map->map[y][x] == 'N')
-	{
-		data->player->dir_x = 0;
-		data->player->dir_y = -1;
-		data->player->plane_x = 1;
-		data->player->plane_y = 0;
-	}
-	else if (data->map->map[y][x] == 'S')
-	{
-		data->player->dir_x = 0;
-		data->player->dir_y = 1;
-		data->player->plane_x = -1;
-		data->player->plane_y = 0;
-	}
-	else if (data->map->map[y][x] == 'W')
-	{
-		data->player->dir_x = -1;
-		data->player->dir_y = 0;
-		data->player->plane_x = 0;
-		data->player->plane_y = -1;
-	}
-	else
-	{
-		data->player->dir_x = 1;
-		data->player->dir_y = 0;
-		data->player->plane_x = 0;
-		data->player->plane_y = 1;
-	}
+	c = data->map->map[y][x];
+	ft_set_player_direction(c, data);
+	ft_set_player_plane(c, data);
 }
 
 void	ft_init_player(t_data *data)

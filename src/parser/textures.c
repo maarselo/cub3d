@@ -17,7 +17,7 @@
 #include "libft.h" // ft_fstr*
 #include "validator/config/config.h" //detect cfg
 #include "free.h" //ft_free_split
- 
+
 #define NORTH "NO"
 #define SOUTH "SO"
 #define WEST "WE"
@@ -27,7 +27,7 @@
 
 #define PATH_WEAPON_IDLE "./textures/weapon/shotgun1.png"
 #define PATH_WEAPON_SHOOT "./textures/weapon/shotgun2.png"
-#define PATH_WEAPON_AFTER_SHOOT "./textures/weapon/shotgun3.png"
+#define PATH_WEAPON_SMOKE "./textures/weapon/shotgun3.png"
 
 static mlx_image_t	*ft_texture_to_img(char *texture_path, t_data *data)
 {
@@ -70,7 +70,7 @@ static void	ft_init_weapons_textures(t_data *data)
 		return ;
 	data->textures->weapon->idle = ft_texture_to_img(PATH_WEAPON_IDLE, data);
 	data->textures->weapon->shoot = ft_texture_to_img(PATH_WEAPON_SHOOT, data);
-	data->textures->weapon->after_shoot = ft_texture_to_img(PATH_WEAPON_AFTER_SHOOT, data);
+	data->textures->weapon->smoke = ft_texture_to_img(PATH_WEAPON_SMOKE, data);
 }
 
 void	ft_init_textures(char *file, t_data *data)
@@ -91,7 +91,8 @@ void	ft_init_textures(char *file, t_data *data)
 		{
 			cfg_line = ft_split(content[i], ' ');
 			if (!cfg_line)
-				return (ft_free_file_content(content), ft_set_error_system(data->error));
+				return (ft_free_file_content(content),
+					ft_set_error_system(data->error));
 			ft_init_orientation_texture(cfg_line, data);
 		}
 	}
