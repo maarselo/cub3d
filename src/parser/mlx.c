@@ -28,16 +28,6 @@ static void	ft_set_icon(t_data *data)
 		return (ft_set_error_mlx(data->error));
 	mlx_set_icon(data->mlx->window, icon);
 }
-/*
-static void	ft_set_window_size(t_data *data)
-{
-	int	monitor_height;
-	int	monitor_witdh;
-
-	if (ft_has_error(data->error))
-		return ;	
-	mlx_get_monitor_size(0, data->mlx->width, data->mlx->height);
-}*/
 
 void	ft_init_mlx(t_data *data)
 {
