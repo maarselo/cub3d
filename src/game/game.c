@@ -533,6 +533,59 @@ void	ft_mouse(double x, double y, void *param)
 	old_x = x;
 }
 
+void	ft_point(void *param)
+{
+	int		i;
+	int		j;
+	t_data	*data;
+
+	data = (t_data *)param;
+	i = WINDOW_HEIGHT / 2 - 24;
+	while (i < WINDOW_HEIGHT / 2 - 14)
+	{
+		j = WINDOW_WIDTH / 2 - 10;
+		while (j < WINDOW_WIDTH / 2 + 10)
+		{
+			mlx_put_pixel(data->mlx->framebuffer, j, i, 0x681e05FF);
+			j++;
+		}
+		i++;
+	}
+	i = WINDOW_HEIGHT / 2 + 14;
+	while (i < WINDOW_HEIGHT / 2 + 24)
+	{
+		j = WINDOW_WIDTH / 2 - 10;
+		while (j < WINDOW_WIDTH / 2 + 10)
+		{
+			mlx_put_pixel(data->mlx->framebuffer, j, i, 0x681e05FF);
+			j++;
+		}
+		i++;
+	}
+	i = WINDOW_HEIGHT / 2 - 10;
+	while (i < WINDOW_HEIGHT / 2 + 10)
+	{
+		j = WINDOW_WIDTH / 2 - 24;
+		while (j < WINDOW_WIDTH / 2 - 14)
+		{
+			mlx_put_pixel(data->mlx->framebuffer, j, i, 0x681e05FF);
+			j++;
+		}
+		i++;
+	}
+	i = WINDOW_HEIGHT / 2 - 10;
+	while (i < WINDOW_HEIGHT / 2 + 10)
+	{
+		j = WINDOW_WIDTH / 2 + 14;
+		while (j < WINDOW_WIDTH / 2 + 24)
+		{
+			mlx_put_pixel(data->mlx->framebuffer, j, i, 0x681e05FF);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	ft_game_loop(t_data *data)
 {
 	if (ft_has_error(data->error))
@@ -544,6 +597,7 @@ void	ft_game_loop(t_data *data)
 	mlx_key_hook(data->mlx->window, ft_move, data);
 	ft_put_weapon_images(data);
 	mlx_loop_hook(data->mlx->window, ft_weapon, data);
+	mlx_loop_hook(data->mlx->window, ft_point, data);
 	mlx_loop_hook(data->mlx->window, ft_minimap, data);
 	mlx_cursor_hook(data->mlx->window, ft_mouse, data);
 	mlx_loop(data->mlx->window);
