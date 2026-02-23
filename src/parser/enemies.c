@@ -15,8 +15,8 @@
 #include "errorctx.h" //error struct
 #include "libft.h" //ft_calloc
 
-#define PATH_ENEMY1 "./textures/enemies/enemy1"
-#define PATH_ENEMY2 "./textures/enemies/enemy2"
+#define PATH_ENEMY1 "./textures/enemies/enemy1.png"
+#define PATH_ENEMY2 "./textures/enemies/enemy2.png"
 
 mlx_image_t	*ft_texture_to_img(char *texture_path, t_data *data);
 
@@ -65,10 +65,10 @@ static void	ft_enemy_handler(int row, int col, t_data *data)
 	last_enemy = current_enemy;
 }
 
-static void	ft_init_textures(t_data *data)
+static void	ft_init_enemies_texture(t_data *data)
 {
 	data->enemies->enemy_frame1 = ft_texture_to_img(PATH_ENEMY1, data);
-	if (ft_has_error(data))
+	if (ft_has_error(data->error))
 		return ;
 	data->enemies->enemy_frame2 = ft_texture_to_img(PATH_ENEMY2, data);
 }
@@ -98,5 +98,5 @@ void	ft_init_enemies(t_data *data)
 				return ;
 		}
 	}
-	ft_init_textures(data);
+	ft_init_enemies_texture(data);
 }

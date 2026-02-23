@@ -22,8 +22,8 @@ void	ft_parser(char *file, t_data *data, t_error *error)
 	data->error = error;
 	ft_init_colors(file, data);
 	ft_init_map(file, data);
-	ft_init_enemies(data);
 	ft_init_player(data);
 	ft_init_mlx(data);
+	ft_init_enemies(data);
 	ft_init_textures(file, data);
 }
