@@ -20,8 +20,9 @@
 # define WINDOW_WIDTH  1920
 # define WINDOW_HEIGHT 1080
 
-# define MINIMAP_HEIGHT 480
-# define MINIMAP_WIDTH 480
+# define MINIMAP_HEIGHT 250
+# define MINIMAP_WIDTH 250
+# define MARGE_MINIMAP 40
 
 void	ft_game_loop(t_data *data);
 

@@ -293,10 +293,10 @@ void	ft_move(mlx_key_data_t key, void *param)
 void	ft_draw_player(t_data *data)
 {
 	int	player_side = 8;	
-	int init_row = WINDOW_HEIGHT - MINIMAP_HEIGHT + (MINIMAP_HEIGHT / 2 - (player_side / 2));
-	int final_row = WINDOW_HEIGHT - MINIMAP_HEIGHT + (MINIMAP_HEIGHT / 2 + (player_side / 2));
-	int init_col = MINIMAP_WIDTH / 2 - (player_side / 2) - 1;
-	int final_col = MINIMAP_WIDTH / 2 + (player_side / 2) - 1;
+	int init_row = WINDOW_HEIGHT - MINIMAP_HEIGHT + (MINIMAP_HEIGHT / 2 - (player_side / 2)) - MARGE_MINIMAP;
+	int final_row = WINDOW_HEIGHT - MINIMAP_HEIGHT + (MINIMAP_HEIGHT / 2 + (player_side / 2)) - MARGE_MINIMAP;
+	int init_col = MINIMAP_WIDTH / 2 - (player_side / 2) - 1 + MARGE_MINIMAP;
+	int final_col = MINIMAP_WIDTH / 2 + (player_side / 2) - 1 + MARGE_MINIMAP;
 	int current_col;
 
 	while (init_row++ <= final_row)
@@ -318,8 +318,8 @@ void ft_draw_fov(t_data *data)
 	double	init_col;
 	int		i;
 
-	pos_x = MINIMAP_WIDTH / 2;
-	pos_y = WINDOW_HEIGHT - (MINIMAP_HEIGHT / 2);
+	pos_x = MINIMAP_WIDTH / 2 + MARGE_MINIMAP;
+	pos_y = WINDOW_HEIGHT - (MINIMAP_HEIGHT / 2) - MARGE_MINIMAP;
 	init_col = -1.0;
 	while (init_col <= 1.0)
 	{
@@ -338,39 +338,33 @@ void ft_draw_fov(t_data *data)
 void ft_minimap(void *param)
 {
 	t_data	*data = (t_data *)param;
-	int pixel_row  = WINDOW_HEIGHT - MINIMAP_HEIGHT;
+	int pixel_row  = WINDOW_HEIGHT - MINIMAP_HEIGHT - MARGE_MINIMAP; //790 para comenzar
 	int pixel_col;
 
 	double view = 7.0; //constant
-	double	pixels_each_field = (double)MINIMAP_HEIGHT / view; //34
+	double	pixels_each_field = (double)MINIMAP_HEIGHT / view;
 	
 	double rel_x;
 	double rel_y;
 	int		map_x;
 	int		map_y;
-	while (pixel_row < WINDOW_HEIGHT - 1)
+	while (pixel_row < WINDOW_HEIGHT - MARGE_MINIMAP)
 	{
-		pixel_col = 1;
-		while (pixel_col < MINIMAP_WIDTH)
+		pixel_col = MARGE_MINIMAP;
+		while (pixel_col < MINIMAP_WIDTH + MARGE_MINIMAP)
 		{
-			if (pixel_row == WINDOW_HEIGHT - MINIMAP_HEIGHT || pixel_row == WINDOW_HEIGHT - MINIMAP_HEIGHT + 1 || pixel_row == WINDOW_HEIGHT - 2 || pixel_row == WINDOW_HEIGHT - 3
-				|| pixel_col == 1 || pixel_col == 2 || pixel_col == MINIMAP_WIDTH - 1 || pixel_col == MINIMAP_WIDTH - 2)
-				mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, RED_COLOR);
-			else
-			{
-				rel_x = (pixel_col - (MINIMAP_WIDTH / 2)) / pixels_each_field;
-				rel_y = (pixel_row - (WINDOW_HEIGHT - (MINIMAP_HEIGHT / 2))) / pixels_each_field;
-				map_x = (int)floor(data->player->pos_x + rel_x);
-				map_y = (int)floor(data->player->pos_y + rel_y);
+			rel_x = (pixel_col - (MINIMAP_WIDTH / 2) - MARGE_MINIMAP) / pixels_each_field;
+			rel_y = (pixel_row - (WINDOW_HEIGHT - (MINIMAP_HEIGHT / 2)) + MARGE_MINIMAP) / pixels_each_field;
+			map_x = (int)floor(data->player->pos_x + rel_x);
+			map_y = (int)floor(data->player->pos_y + rel_y);
 
-				if (map_x >= 0 && map_y >= 0 && map_x < data->map->width && map_y < data->map->height && data->map->map[map_y][map_x] == '1')
-					mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, WHITE_COLOR);
-				else if (map_x >= 0 && map_y >= 0 && map_x < data->map->width && map_y < data->map->height && (data->map->map[map_y][map_x] == '_'
-					|| data->map->map[map_y][map_x] == '|'))
-					mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, PURPLE_COLOR);
-				else 
-					mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, BLACK_COLOR);
-			}
+			if (map_x < 0 || map_y < 0 || map_x >= data->map->width || map_y >= data->map->height || (map_x >= 0 && map_y >= 0 && map_x < data->map->width && map_y < data->map->height && data->map->map[map_y][map_x] == '1'))
+				mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, BLACK_COLOR);
+			else if (map_x >= 0 && map_y >= 0 && map_x < data->map->width && map_y < data->map->height && (data->map->map[map_y][map_x] == '_'
+				|| data->map->map[map_y][map_x] == '|'))
+				mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, PURPLE_COLOR);
+			else 
+				mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, WHITE_COLOR);
 			pixel_col++;
 		}
 		pixel_row++;
