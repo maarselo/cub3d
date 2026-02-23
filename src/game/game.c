@@ -177,6 +177,7 @@ void	ft_render(void *param)
 }
 
 #include <stdlib.h>
+#include <sys/time.h>
 
 void	ft_move(mlx_key_data_t key, void *param)
 {
@@ -406,8 +407,6 @@ void	ft_timer(void *param)
 	data->textures->timer = mlx_put_string(data->mlx->window, timer_str, 0,0);
 	free(timer_str);
 }
-
-#include <sys/time.h>
 
 void	ft_date(void *param)
 {
