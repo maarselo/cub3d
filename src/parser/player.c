@@ -82,6 +82,7 @@ static void	ft_set_player_cfg(int x, int y, t_data *data)
 	c = data->map->map[y][x];
 	ft_set_player_direction(c, data);
 	ft_set_player_plane(c, data);
+	data->map->map[y][x] = '0';
 }
 
 void	ft_init_player(t_data *data)

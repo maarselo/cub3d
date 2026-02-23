@@ -63,6 +63,7 @@ static void	ft_enemy_handler(int row, int col, t_data *data)
 	else
 		last_enemy->next = current_enemy;
 	last_enemy = current_enemy;
+	data->map->map[row][col] = '0';
 }
 
 static void	ft_init_enemies_texture(t_data *data)
