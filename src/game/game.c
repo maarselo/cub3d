@@ -374,10 +374,6 @@ void ft_minimap(void *param)
 }
 
 #define MIDDLE_WIDTH WINDOW_WIDTH / 2
-#define IDLE 0
-#define AIM 1
-#define RELOAD 2
-#define SHOOT 3
 
 void	ft_put_weapon_images(t_data *data)
 {
@@ -538,20 +534,58 @@ void	ft_point(void *param)
 		i++;
 	}
 }
-/*
-#include <unistd.h>
 
 void ft_shoot(mouse_key_t button, action_t action, modifier_key_t mods, void* param)
 {
 	t_data	*data;
 
-	data =(t_data *)param;
 	(void)mods;
-	if (button == MLX_MOUSE_BUTTON_LEFT && !data->textures->weapon->is_shooting)
+	data =(t_data *)param;
+	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS && !data->textures->weapon->is_shooting)
+		data->textures->weapon->is_shooting = true;
+}
+
+#define IDLE 0
+#define SHOOT 1
+#define SMOKE 2
+
+void	ft_change_frame(void *param)
+{
+	t_data		*data;
+	static int	counter;
+	static int	frame;
+
+	data = (t_data *)param;
+	if (!data->textures->weapon->is_shooting)
 	{
-		
+		frame = SHOOT;
+		return ;
 	}
-}*/
+	counter++;	
+	if (counter >= 4)
+	{
+		if (frame == SHOOT)
+		{
+			data->textures->weapon->idle->enabled = false;
+			data->textures->weapon->shoot->enabled = true;
+			frame++;
+		}
+		else if (frame == SMOKE)
+		{
+			data->textures->weapon->shoot->enabled = false;
+			data->textures->weapon->smoke->enabled = true;
+			frame = 0;
+		}
+		else if (frame == IDLE)
+		{
+			data->textures->weapon->is_shooting = false;
+			data->textures->weapon->smoke->enabled = false;
+			data->textures->weapon->idle->enabled = true;
+			frame++;
+		}
+		counter = 0;
+	}
+}
 
 void	ft_game_loop(t_data *data)
 {
@@ -566,6 +600,7 @@ void	ft_game_loop(t_data *data)
 	mlx_loop_hook(data->mlx->window, ft_point, data);
 	mlx_loop_hook(data->mlx->window, ft_minimap, data);
 	mlx_cursor_hook(data->mlx->window, ft_mouse, data);
-	//mlx_mouse_hook(data->mlx->window, ft_shoot, data);
+	mlx_mouse_hook(data->mlx->window, ft_shoot, data);
+	mlx_loop_hook(data->mlx->window, ft_change_frame, data);
 	mlx_loop(data->mlx->window);
 }
