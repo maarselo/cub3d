@@ -32,6 +32,10 @@ void	ft_free_enemies_struct(t_data *data)
 {
 	if (data->enemies->enemies)
 		ft_free_enemy_linked_list(data->enemies);
+	if (data->enemies->enemy_frame1 && mlx_errno != MLX_INVPNG)
+		mlx_delete_image(data->mlx->window, data->enemies->enemy_frame1);
+	if (data->enemies->enemy_frame2 && mlx_errno != MLX_INVPNG)
+		mlx_delete_image(data->mlx->window, data->enemies->enemy_frame2);
 	free(data->enemies);
 	data->enemies = NULL;
 }

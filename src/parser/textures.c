@@ -29,7 +29,7 @@
 #define PATH_WEAPON_SHOOT "./textures/weapon/shotgun2.png"
 #define PATH_WEAPON_SMOKE "./textures/weapon/shotgun3.png"
 
-static mlx_image_t	*ft_texture_to_img(char *texture_path, t_data *data)
+mlx_image_t	*ft_texture_to_img(char *texture_path, t_data *data)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;

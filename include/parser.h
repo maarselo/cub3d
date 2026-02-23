@@ -15,6 +15,7 @@
 
 # include "MLX42.h"
 # include "cub3d.h"
+# include "game.h"
 
 typedef enum s_start_orientation
 {
@@ -68,7 +69,9 @@ typedef struct s_enemy
 }	t_enemy;
 typedef struct s_enemies
 {
-	int		total_enemies;
+	int			total_enemies;
+	mlx_image_t	*enemy_frame1;
+	mlx_image_t	*enemy_frame2;
 	t_enemy	*enemies;
 }	t_enemies;
 
@@ -90,6 +93,7 @@ typedef struct s_mlx
 	unsigned int	height;
 	mlx_t			*window;
 	mlx_image_t		*framebuffer;
+	//double			z_buffer[WINDOW_WIDTH];
 }	t_mlx;
 
 //parser.c
