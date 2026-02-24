@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 20:38:53 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/24 21:03:02 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "game.h"
 #include <math.h>
 
+void	ft_mouse(double x, double y, void *param);
 void 	ft_minimap(void *param);
 void	ft_point(void *param);
 void	ft_timer(void *param);
@@ -311,39 +312,6 @@ void	ft_put_weapon_images(t_data *data)
 	mlx_image_to_window(data->mlx->window, data->textures->weapon->smoke, MIDDLE_WIDTH, row);
 	data->textures->weapon->smoke->enabled = false;
 }
-
-#include "libft.h"
-
-
-
-void	ft_mouse(double x, double y, void *param)
-{
-	t_data			*data;
-	double			angle;
-	double			delta_x;
-	double			old_plane_x;
-	double			old_dir_x;
-	static double	old_x;
-
-	(void)y;
-	data = (t_data *)param;
-	if (old_x == 0)
-	{
-		old_x = x;
-		return ;
-	}
-	delta_x = x - old_x;
-	angle = delta_x * 0.002;
-	old_dir_x = data->player->dir_x;
-	data->player->dir_x = old_dir_x * cos(angle) - data->player->dir_y * sin(angle);
-	data->player->dir_y = old_dir_x * sin(angle) + data->player->dir_y * cos(angle);
-	old_plane_x = data->player->plane_x;
-	data->player->plane_x = old_plane_x * cos(angle) - data->player->plane_y * sin(angle);
-	data->player->plane_y = old_plane_x * sin(angle) + data->player->plane_y * cos(angle);
-	old_x = x;
-}
-
-
 
 #define COLLISION 0.1
 
