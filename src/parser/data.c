@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/10 20:47:47 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/24 19:32:57 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 #include "errorctx.h" //ft_set_error
 #include "parser.h" //struct in parser
 #include "free.h"//ft_free_data
+
+static void	ft_init_structs_bonus(t_data *data, t_error *error)
+{
+	if (ft_has_error(error))
+		return ;
+	data->enemies = (t_enemies *)ft_calloc(1, sizeof(t_enemies));
+	if (!data->enemies)
+		return (ft_set_error_system(error));
+	data->minimap = (t_minimap *)ft_calloc(1, sizeof(t_minimap));
+	if (!data->minimap)
+		return (ft_set_error_system(error));
+}
 
 static void	ft_init_structs_utils(t_data *data, t_error *error)
 {
@@ -30,9 +42,6 @@ static void	ft_init_structs_utils(t_data *data, t_error *error)
 		return (ft_set_error_system(error));
 	data->map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!data->map)
-		return (ft_set_error_system(error));
-	data->enemies = (t_enemies *)ft_calloc(1, sizeof(t_enemies));
-	if (!data->enemies)
 		return (ft_set_error_system(error));
 	data->player = (t_player *)ft_calloc(1, sizeof(t_player));
 	if (!data->player)
@@ -52,5 +61,6 @@ t_data	*ft_init_data(t_error *error)
 	if (!data)
 		return (ft_set_error_system(error), NULL);
 	ft_init_structs_utils(data, error);
+	ft_init_structs_bonus(data, error);
 	return (data);
 }

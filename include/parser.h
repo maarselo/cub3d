@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/07 21:06:56 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/02/24 19:26:48 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,23 @@ typedef struct s_player
 //Game
 typedef struct s_mlx
 {
-	unsigned int	width;
-	unsigned int	height;
 	mlx_t			*window;
 	mlx_image_t		*framebuffer;
 	double			z_buffer[WINDOW_WIDTH];
 }	t_mlx;
+
+//Bonus
+//Minimap
+typedef struct s_minimap
+{
+	int	start_x;
+	int	start_y;
+	int	final_x;
+	int	final_y;
+	int	center_x;
+	int	center_y;
+	int	tile_size;
+}	t_minimap;
 
 //parser.c
 void	ft_parser(char *file, t_data *data, t_error *error);

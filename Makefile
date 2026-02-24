@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+         #
+#    By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/29 19:14:28 by mvillavi          #+#    #+#              #
-#    Updated: 2026/01/27 21:06:08 by fbanzo-s         ###   ########.fr        #
+#    Updated: 2026/02/24 16:25:42 by mvillavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ DIR_VALIDATOR_ARGUMENTS = arguments
 DIR_VALIDATOR_CONFIG = config
 DIR_VALIDATOR_MAP = map
 DIR_PARSER = parser
+DIR_PARSER_BONUS = bonus
 DIR_GAME = game
+DIR_GAME_BONUS = bonus
 DIR_ERROR = error
 DIR_UTILS = utils
 DIR_UTILS_FILE = file
@@ -36,8 +38,8 @@ SRC_VALIDATOR = validator.c \
 			$(DIR_VALIDATOR_ARGUMENTS)/arguments.c \
 			$(DIR_VALIDATOR_CONFIG)/config.c $(DIR_VALIDATOR_CONFIG)/config_helpers.c $(DIR_VALIDATOR_CONFIG)/config_validator.c $(DIR_VALIDATOR_CONFIG)/config_validator_helpers.c $(DIR_VALIDATOR_CONFIG)/config_content.c \
 			$(DIR_VALIDATOR_MAP)/map.c $(DIR_VALIDATOR_MAP)/map_content.c $(DIR_VALIDATOR_MAP)/map_validator.c $(DIR_VALIDATOR_MAP)/map_validator_helpers.c
-SRC_PARSER = parser.c data.c mlx.c player.c enemies.c map.c textures.c colors.c 
-SRC_GAME = game.c
+SRC_PARSER = parser.c data.c mlx.c player.c enemies.c map.c textures.c colors.c $(DIR_PARSER_BONUS)/minimap.c
+SRC_GAME = game.c $(DIR_GAME_BONUS)/minimap.c
 SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
 SRC_UTILS = $(DIR_UTILS_FILE)/file.c $(DIR_UTILS_FILE)/file_utils.c
 SRC_FREE = file_content.c content_assigned.c split.c \

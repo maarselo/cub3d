@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/21 22:01:17 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/02/24 19:31:50 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "errorctx.h"
 #include "game.h"
 #include <math.h>
+
+void ft_minimap(void *param);
 
 uint32_t	ft_get_pixel(mlx_image_t *texture, int col, int row)
 {
@@ -291,90 +293,6 @@ void	ft_move(mlx_key_data_t key, void *param)
 # define WHITE_COLOR 0xFFFFFFFF
 # define PURPLE_COLOR 0x333333FF
 # define BLACK_COLOR 0x000000FF
-
-void	ft_draw_player(t_data *data)
-{
-	int	player_side = 8;	
-	int init_row = WINDOW_HEIGHT - MINIMAP_HEIGHT + (MINIMAP_HEIGHT / 2 - (player_side / 2)) - MARGE_MINIMAP;
-	int final_row = WINDOW_HEIGHT - MINIMAP_HEIGHT + (MINIMAP_HEIGHT / 2 + (player_side / 2)) - MARGE_MINIMAP;
-	int init_col = MINIMAP_WIDTH / 2 - (player_side / 2) - 1 + MARGE_MINIMAP;
-	int final_col = MINIMAP_WIDTH / 2 + (player_side / 2) - 1 + MARGE_MINIMAP;
-	int current_col;
-
-	while (init_row++ <= final_row)
-	{
-		current_col = init_col;
-		while (current_col++ <= final_col)
-			mlx_put_pixel(data->mlx->framebuffer, current_col, init_row, RED_COLOR);
-	}
-}
-
-#define RAY_LENGTH 40
-
-void ft_draw_fov(t_data *data)
-{
-	double	pos_x;
-	double	pos_y;
-	double	ray_x;
-	double	ray_y;
-	double	init_col;
-	int		i;
-
-	pos_x = MINIMAP_WIDTH / 2 + MARGE_MINIMAP;
-	pos_y = WINDOW_HEIGHT - (MINIMAP_HEIGHT / 2) - MARGE_MINIMAP;
-	init_col = -1.0;
-	while (init_col <= 1.0)
-	{
-		ray_x = data->player->dir_x + data->player->plane_x * init_col;
-		ray_y = data->player->dir_y + data->player->plane_y * init_col;
-		i = 0;
-		while (i < RAY_LENGTH)
-		{
-			mlx_put_pixel(data->mlx->framebuffer, pos_x + (ray_x * i), pos_y + (ray_y * i), RED_COLOR);
-			i++;
-		}
-		init_col += 0.04;
-	}
-}
-
-void ft_minimap(void *param)
-{
-	t_data	*data = (t_data *)param;
-	int pixel_row  = WINDOW_HEIGHT - MINIMAP_HEIGHT - MARGE_MINIMAP; //790 para comenzar
-	int pixel_col;
-
-	double view = 7.0; //constant
-	double	pixels_each_field = (double)MINIMAP_HEIGHT / view;
-	
-	double rel_x;
-	double rel_y;
-	int		map_x;
-	int		map_y;
-	while (pixel_row < WINDOW_HEIGHT - MARGE_MINIMAP)
-	{
-		pixel_col = MARGE_MINIMAP;
-		while (pixel_col < MINIMAP_WIDTH + MARGE_MINIMAP)
-		{
-			rel_x = (pixel_col - (MINIMAP_WIDTH / 2) - MARGE_MINIMAP) / pixels_each_field;
-			rel_y = (pixel_row - (WINDOW_HEIGHT - (MINIMAP_HEIGHT / 2)) + MARGE_MINIMAP) / pixels_each_field;
-			map_x = (int)floor(data->player->pos_x + rel_x);
-			map_y = (int)floor(data->player->pos_y + rel_y);
-
-			if (map_x < 0 || map_y < 0 || map_x >= data->map->width || map_y >= data->map->height || data->map->map[map_y][map_x] == '1')
-				mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, BLACK_COLOR);
-			else if (data->map->map[map_y][map_x] == '_' || data->map->map[map_y][map_x] == '|')
-				mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, PURPLE_COLOR);
-			else if (data->map->map[map_y][map_x] == 'e')
-				mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, RED_COLOR);
-			else
-				mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, WHITE_COLOR);
-			pixel_col++;
-		}
-		pixel_row++;
-	}
-	ft_draw_player(data);
-	ft_draw_fov(data);
-}
 
 #define MIDDLE_WIDTH WINDOW_WIDTH / 2
 

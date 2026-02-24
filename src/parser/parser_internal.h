@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/27 21:08:20 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:42:00 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void		ft_init_enemies(t_data *data);
 void		ft_init_player(t_data *data);
 void		ft_init_mlx(t_data *data);
 void		ft_init_textures(char *file, t_data *data);
+void		ft_init_minimap(t_data *data);
 
 #endif

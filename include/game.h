@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/07 21:46:43 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:34:12 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@
 
 # define WINDOW_WIDTH  1920
 # define WINDOW_HEIGHT 1080
-
-# define MINIMAP_HEIGHT 250
-# define MINIMAP_WIDTH 250
-# define MARGE_MINIMAP 40
 
 void	ft_game_loop(t_data *data);
 
