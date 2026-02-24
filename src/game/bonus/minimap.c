@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 17:29:16 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/24 19:47:58 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # define RED 0xFF0000FF
 # define WHITE 0xFFFFFFFF
-# define TRANSPARENT 0x333333FF
+# define GREY 0x333333FF
 # define BLACK 0x000000FF
 
 #define PLAYER_SIDE 8  //draw_player 
@@ -65,13 +65,21 @@ static void ft_draw_fov(t_data *data)
 	}
 }
 
-void	ft_draw_pixel_by_type(int row, int col, int pixel_col, int pixel_row, t_data *data)
+void	ft_draw_pixel_by_type(int pixel_col, int pixel_row, t_data *data)
 {
-	if (col < 0 || row < 0 || col >= data->map->width || row >= data->map->height || data->map->map[row][col] == '1')
+	if (data->minimap->relation_x < 0 || data->minimap->relation_y < 0
+		|| data->minimap->relation_x >= data->map->width
+		|| data->minimap->relation_y >= data->map->height
+		|| data->map->map[data->minimap->relation_y]
+		[data->minimap->relation_x] == '1')
 		mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, BLACK);
-	else if (data->map->map[row][col] == '_' || data->map->map[row][col] == '|')
-		mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, TRANSPARENT);
-	else if (data->map->map[row][col] == 'e')
+	else if (data->map->map[data->minimap->relation_y]
+		[data->minimap->relation_x] == '_'
+		|| data->map->map[data->minimap->relation_y]
+		[data->minimap->relation_x] == '|')
+		mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, GREY);
+	else if (data->map->map[data->minimap->relation_y]
+		[data->minimap->relation_x] == 'e')
 		mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, RED);
 	else
 		mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, WHITE);
@@ -83,8 +91,6 @@ void ft_minimap(void *param)
 	int 	pixel_col;
 	double 	rel_x;
 	double 	rel_y;
-	int		map_x;
-	int		map_y;
 	t_data	*data;
 
 	data = (t_data *)param;
@@ -96,9 +102,9 @@ void ft_minimap(void *param)
 		{
 			rel_x = (double)(pixel_col - data->minimap->center_x) / data->minimap->tile_size;
 			rel_y = (double)(pixel_row - data->minimap->center_y) / data->minimap->tile_size;
-			map_x = (int)floor(data->player->pos_x + rel_x);
-			map_y = (int)floor(data->player->pos_y + rel_y);
-			ft_draw_pixel_by_type(map_y, map_x, pixel_col, pixel_row, data);
+			data->minimap->relation_x = (int)floor(data->player->pos_x + rel_x);
+			data->minimap->relation_y = (int)floor(data->player->pos_y + rel_y);
+			ft_draw_pixel_by_type(pixel_col, pixel_row, data);
 		}
 	}
 	ft_draw_player(data);

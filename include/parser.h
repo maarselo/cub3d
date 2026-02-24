@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 19:26:48 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/24 19:38:53 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct s_minimap
 	int	final_y;
 	int	center_x;
 	int	center_y;
+	int	relation_x;
+	int	relation_y;
 	int	tile_size;
 }	t_minimap;
 
