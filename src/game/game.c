@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 20:16:46 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/24 20:28:42 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 #include "game.h"
 #include <math.h>
 
-void ft_minimap(void *param);
+void	ft_point(void *param);
+void 	ft_minimap(void *param);
 
 uint32_t	ft_get_pixel(mlx_image_t *texture, int col, int row)
 {
@@ -401,58 +402,7 @@ void	ft_mouse(double x, double y, void *param)
 	old_x = x;
 }
 
-void	ft_point(void *param)
-{
-	int		i;
-	int		j;
-	t_data	*data;
 
-	data = (t_data *)param;
-	i = WINDOW_HEIGHT / 2 - 24;
-	while (i < WINDOW_HEIGHT / 2 - 14)
-	{
-		j = WINDOW_WIDTH / 2 - 10;
-		while (j < WINDOW_WIDTH / 2 + 10)
-		{
-			mlx_put_pixel(data->mlx->framebuffer, j, i, 0x681e05FF);
-			j++;
-		}
-		i++;
-	}
-	i = WINDOW_HEIGHT / 2 + 14;
-	while (i < WINDOW_HEIGHT / 2 + 24)
-	{
-		j = WINDOW_WIDTH / 2 - 10;
-		while (j < WINDOW_WIDTH / 2 + 10)
-		{
-			mlx_put_pixel(data->mlx->framebuffer, j, i, 0x681e05FF);
-			j++;
-		}
-		i++;
-	}
-	i = WINDOW_HEIGHT / 2 - 10;
-	while (i < WINDOW_HEIGHT / 2 + 10)
-	{
-		j = WINDOW_WIDTH / 2 - 24;
-		while (j < WINDOW_WIDTH / 2 - 14)
-		{
-			mlx_put_pixel(data->mlx->framebuffer, j, i, 0x681e05FF);
-			j++;
-		}
-		i++;
-	}
-	i = WINDOW_HEIGHT / 2 - 10;
-	while (i < WINDOW_HEIGHT / 2 + 10)
-	{
-		j = WINDOW_WIDTH / 2 + 14;
-		while (j < WINDOW_WIDTH / 2 + 24)
-		{
-			mlx_put_pixel(data->mlx->framebuffer, j, i, 0x681e05FF);
-			j++;
-		}
-		i++;
-	}
-}
 
 #define COLLISION 0.1
 
