@@ -6,7 +6,7 @@
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 21:21:39 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/02/24 23:05:53 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct s_wall
 	int		draw_end; // point where you stop drawing the wall
 	double	wall_x; // in what x pixel of the wall the ray collides
 	int		tex_x; // x pixel (col) of the image wall_x represents
+	double	step; // how many pixels to skip, to resize the image
+	double	tex_pos; // initial position of the texture to draw
 }	t_wall;
 
 typedef struct s_render

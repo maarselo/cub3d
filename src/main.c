@@ -6,7 +6,7 @@
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/07 21:46:16 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/02/24 23:54:11 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "free.h" //ft_free_Data
 #include "parser.h" //ft_parser
 #include "game.h"
+#include <stdlib.h>
 
 int	main(int argc, char **argv)
 {
@@ -31,5 +32,6 @@ int	main(int argc, char **argv)
 	if (ft_error_handler(error, data))
 		return (FAILED);
 	ft_free_data(data);
+	exit(0);
 	return (SUCCES);
 }
