@@ -47,6 +47,7 @@ static t_enemy	*ft_init_enemy(int row, int col)
 		return (NULL);
 	enemy->pos_y = (double)row + 0.5;
 	enemy->pos_x = (double)col + 0.5;
+	enemy->frame = 1;
 	return (enemy);
 }
 
@@ -63,7 +64,6 @@ static void	ft_enemy_handler(int row, int col, t_data *data)
 	else
 		last_enemy->next = current_enemy;
 	last_enemy = current_enemy;
-	data->map->map[row][col] = '0';
 }
 
 static void	ft_init_enemies_texture(t_data *data)

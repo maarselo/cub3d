@@ -65,6 +65,8 @@ typedef struct s_enemy
 {
 	double			pos_x;
 	double			pos_y;
+	bool			is_died;
+	unsigned short	frame;
 	struct s_enemy	*next;
 }	t_enemy;
 typedef struct s_enemies
@@ -93,7 +95,7 @@ typedef struct s_mlx
 	unsigned int	height;
 	mlx_t			*window;
 	mlx_image_t		*framebuffer;
-	//double			z_buffer[WINDOW_WIDTH];
+	double			z_buffer[WINDOW_WIDTH];
 }	t_mlx;
 
 //parser.c

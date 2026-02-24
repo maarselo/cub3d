@@ -173,7 +173,7 @@ void	ft_render(void *param)
 			mlx_put_pixel(data->mlx->framebuffer, current_col, i, data->colors->ceiling);
 			i++;
 		}
-		//data->mlx->z_buffer[current_col] = perpendicular_dist;
+		data->mlx->z_buffer[current_col] = perpendicular_dist;
 	}
 }
 
@@ -360,12 +360,13 @@ void ft_minimap(void *param)
 			map_x = (int)floor(data->player->pos_x + rel_x);
 			map_y = (int)floor(data->player->pos_y + rel_y);
 
-			if (map_x < 0 || map_y < 0 || map_x >= data->map->width || map_y >= data->map->height || (map_x >= 0 && map_y >= 0 && map_x < data->map->width && map_y < data->map->height && data->map->map[map_y][map_x] == '1'))
+			if (map_x < 0 || map_y < 0 || map_x >= data->map->width || map_y >= data->map->height || data->map->map[map_y][map_x] == '1')
 				mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, BLACK_COLOR);
-			else if (map_x >= 0 && map_y >= 0 && map_x < data->map->width && map_y < data->map->height && (data->map->map[map_y][map_x] == '_'
-				|| data->map->map[map_y][map_x] == '|'))
+			else if (data->map->map[map_y][map_x] == '_' || data->map->map[map_y][map_x] == '|')
 				mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, PURPLE_COLOR);
-			else 
+			else if (data->map->map[map_y][map_x] == 'e')
+				mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, RED_COLOR);
+			else
 				mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, WHITE_COLOR);
 			pixel_col++;
 		}
@@ -535,14 +536,58 @@ void	ft_point(void *param)
 	}
 }
 
+#define COLLISION 0.1
+
+bool	ft_check_impact_enemy(double row, double col, t_data *data)
+{
+	double	result_x;
+	double	result_y;
+	t_enemy	*current_enemy;
+
+	current_enemy = data->enemies->enemies;
+	while (current_enemy)
+	{
+		result_x = fabs(col - current_enemy->pos_x);
+		result_y = fabs(row - current_enemy->pos_y);
+		if (result_x <= COLLISION && result_y <= COLLISION)
+		{
+			current_enemy->is_died = true;
+			data->map->map[(int)current_enemy->pos_y][(int)current_enemy->pos_x] = '0';
+			--data->enemies->total_enemies;
+			return (true);
+		}
+		current_enemy = current_enemy->next;
+	}
+	return (false);
+}
+
 void ft_shoot(mouse_key_t button, action_t action, modifier_key_t mods, void* param)
 {
-	t_data	*data;
+	t_data		*data;
+	double		bullet_x;
+	double		bullet_y;
+	double		distance;
 
 	(void)mods;
 	data =(t_data *)param;
+	distance = 0.0;
 	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS && !data->textures->weapon->is_shooting)
+	{
 		data->textures->weapon->is_shooting = true;
+		while (distance <= 2.5)
+		{
+			bullet_x = data->player->pos_x + data->player->dir_x * distance;
+			bullet_y = data->player->pos_y + data->player->dir_y * distance;
+			if ((int)bullet_x < 0 || (int)bullet_x >= data->map->width
+				|| (int)bullet_y < 0 || (int)bullet_y >= data->map->height)
+				break;
+			if (data->map->map[(int)bullet_y][(int)bullet_x] != 'e' && data->map->map[(int)bullet_y][(int)bullet_x] != '0')
+				break;
+			if (ft_check_impact_enemy(bullet_y, bullet_x, data))
+				return ;
+			distance += 0.1;
+		}
+	}
 }
 
 #define IDLE 0
@@ -587,71 +632,128 @@ void	ft_change_frame(void *param)
 	}
 }
 
-// void	ft_draw_enemies(void *param)
-// {
-// 	t_data	*data;
-// 	t_enemy	*curr;
-// 	double	sprite_x;// posicion del enemigo respecto a ti en x
-// 	double	sprite_y;// posicion del enemigo respecto a ti en y
-// 	double	trans_x;// posicion del enemigo en tu pantalla relativo a tu centro de vision en x (profundidad)
-// 	double	trans_y;// posicion del enemigo en tu pantalla relativo a tu centro de vision en y (profundidad)
-// 	double	inverse_det;// parecido a camara x, para pasar de un mapa 2d a una camara
-// 	double	screen_x;// posicion en la pantalla del enemigo (si esta en el centro 0, izq -1, der 1)
-// 	double	size;// size del enemigo
-// 	int		draw_start_x;// posicion inicial donde empezar a pintar al enemigo en x
-// 	int		draw_end_x;// posicion final donde pintar al enemigo en x
-// 	int		draw_start_y;// posicion inicial donde empezar a pintar al enemigo en y
-// 	int		draw_end_y;// posicion final donde pintar al enemigo en y
-// 	int		tex_x;// que pixel de la imagen corresponde a que pixel de la pantalla en x
-// 	int		tex_y;// que pixel de la imagen corresponde a que pixel de la pantalla en y
-// 	int		x;
-// 	int		y;
-// 	int		d;// distancia des del pixel actual de la pantalla hasta el inicio del sprite
-// 	uint32_t	color;
+void	ft_draw_enemies(void *param)
+{
+	t_data	*data;
+	t_enemy	*curr;
+	double	sprite_x;// posicion del enemigo respecto a ti en x
+	double	sprite_y;// posicion del enemigo respecto a ti en y
+	double	trans_x;// posicion del enemigo en tu pantalla relativo a tu centro de vision en x (profundidad)
+	double	trans_y;// posicion del enemigo en tu pantalla relativo a tu centro de vision en y (profundidad)
+	double	inverse_det;// parecido a camara x, para pasar de un mapa 2d a una camara
+	double	screen_x;// posicion en la pantalla del enemigo (si esta en el centro 0, izq -1, der 1)
+	double	size;// size del enemigo
+	int		draw_start_x;// posicion inicial donde empezar a pintar al enemigo en x
+	int		draw_end_x;// posicion final donde pintar al enemigo en x
+	int		draw_start_y;// posicion inicial donde empezar a pintar al enemigo en y
+	int		draw_end_y;// posicion final donde pintar al enemigo en y
+	int		tex_x;// que pixel de la imagen corresponde a que pixel de la pantalla en x
+	int		tex_y;// que pixel de la imagen corresponde a que pixel de la pantalla en y
+	int		x;
+	int		y;
+	int		d;// distancia des del pixel actual de la pantalla hasta el inicio del sprite
+	uint32_t	color;
+	mlx_image_t	*frame; ///////////////////
+	static int	counter; ///////////////////////
+	bool		should_change_frame;/////////////////
 
-// 	data = (t_data *)param;
-// 	curr = data->enemies->enemies;
-// 	while (curr)
-// 	{
-// 		sprite_x = curr->pos_x - data->player->pos_x;
-// 		sprite_y = curr->pos_y - data->player->pos_y;
-// 		inverse_det = 1 / (data->player->plane_x * data->player->dir_y - data->player->dir_x * data->player->plane_y);
-// 		trans_x = inverse_det * (data->player->dir_y * sprite_x - data->player->dir_x * sprite_y);
-// 		trans_y = inverse_det * (-data->player->plane_y * sprite_x + data->player->plane_x * sprite_y);
-// 		screen_x = (WINDOW_WIDTH / 2) * (1 + trans_x / trans_y);
-// 		size = fabs((WINDOW_HEIGHT / trans_y) / 1.5);
-// 		draw_end_y = (size / 2) + (WINDOW_HEIGHT / 2) + (int)(175.0 / trans_y);
-// 		draw_start_y = draw_end_y - size;
-// 		if (draw_start_y < 0)
-// 			draw_start_y = 0;
-// 		if (draw_end_y >= WINDOW_HEIGHT)
-// 			draw_end_y = WINDOW_HEIGHT - 1;
-// 		draw_start_x = -(size / 2) + screen_x;
-// 		draw_end_x = (size / 2) + screen_x;
-// 		if (draw_start_x < 0)
-// 			draw_start_x = 0;
-// 		if (draw_end_x >= WINDOW_WIDTH)
-// 			draw_end_x = WINDOW_WIDTH - 1;
-// 		x = draw_start_x - 1;
-// 		while (++x < draw_end_x)
-// 		{
-// 			tex_x = (int)((x - (screen_x - size / 2)) * data->enemies->enemy_frame1->width / size);
-// 			if (trans_y > 0 && x >= 0 && x < WINDOW_WIDTH && trans_y < data->mlx->z_buffer[x])
-// 			{
-// 				y = draw_start_y - 1;
-// 				while (++y < draw_end_y)
-// 				{
-// 					d = (y - (int)(175.0 / trans_y)) * 256 - WINDOW_HEIGHT * 128 + size * 128;
-// 					tex_y = ((d * data->enemies->enemy_frame1->height) / size) / 256;
-// 					color = ft_get_pixel(data->enemies->enemy_frame1, tex_x, tex_y);
-// 					if ((color & 0x000000FF) != 0)
-// 						mlx_put_pixel(data->mlx->framebuffer, x, y, color);
-// 				}
-// 			}
-// 		}
-// 		curr = curr->next;
-// 	}
-// }
+	data = (t_data *)param;
+	should_change_frame = false;///////////////
+	counter++; ////////////////
+	if (counter >= 15) ////////////
+	{ ////////////
+		should_change_frame = true;///////////////
+		counter = 0; ////////////
+	} ////////////
+	curr = data->enemies->enemies;
+	while (curr)
+	{
+		if (should_change_frame)//////////
+		{////////////
+			if (curr->frame == 1)////////////////
+				curr->frame = 2;/////////////////////////
+			else if (curr->frame == 2)/////////////////////////
+				curr->frame = 1;/////////////////////////
+		}//////////
+		if (curr->frame == 1)///////
+			frame = data->enemies->enemy_frame1;//////
+		else if (curr->frame == 2)///////
+			frame = data->enemies->enemy_frame2;/////////
+		if (curr->is_died)/////////////////////////
+		{/////////////////////////
+			curr = curr->next;/////////////////////////
+			continue ;/////////////////////////
+		}/////////
+		sprite_x = curr->pos_x - data->player->pos_x;
+		sprite_y = curr->pos_y - data->player->pos_y;
+		inverse_det = 1 / (data->player->plane_x * data->player->dir_y - data->player->dir_x * data->player->plane_y);
+		trans_x = inverse_det * (data->player->dir_y * sprite_x - data->player->dir_x * sprite_y);
+		trans_y = inverse_det * (-data->player->plane_y * sprite_x + data->player->plane_x * sprite_y);
+		screen_x = (WINDOW_WIDTH / 2) * (1 + trans_x / trans_y);
+		size = fabs((WINDOW_HEIGHT / trans_y) / 1.5);
+		draw_end_y = (size / 2) + (WINDOW_HEIGHT / 2) + (int)(175.0 / trans_y);
+		draw_start_y = draw_end_y - size;
+		if (draw_start_y < 0)
+			draw_start_y = 0;
+		if (draw_end_y >= WINDOW_HEIGHT)
+			draw_end_y = WINDOW_HEIGHT - 1;
+		draw_start_x = -(size / 2) + screen_x;
+		draw_end_x = (size / 2) + screen_x;
+		if (draw_start_x < 0)
+			draw_start_x = 0;
+		if (draw_end_x >= WINDOW_WIDTH)
+			draw_end_x = WINDOW_WIDTH - 1;
+		x = draw_start_x - 1;
+		while (++x < draw_end_x)
+		{
+			tex_x = (int)((x - (screen_x - size / 2)) * frame->width / size);
+			if (trans_y > 0 && x >= 0 && x < WINDOW_WIDTH && trans_y < data->mlx->z_buffer[x])
+			{
+				y = draw_start_y - 1;
+				while (++y < draw_end_y)
+				{
+					d = (y - (int)(175.0 / trans_y)) * 256 - WINDOW_HEIGHT * 128 + size * 128;
+					tex_y = ((d * frame->height) / size) / 256;
+					color = ft_get_pixel(frame, tex_x, tex_y);
+					if ((color & 0x000000FF) != 0)
+						mlx_put_pixel(data->mlx->framebuffer, x, y, color);
+				}
+			}
+		}
+		curr = curr->next;
+	}
+}
+
+#define COLLISION_DIE 0.3
+
+void	ft_check_position(void *param)
+{
+	double	result_y;
+	double	result_x;
+	t_data	*data;
+	t_enemy	*current_enemy;
+	
+	data = (t_data *)param;
+	if (data->enemies->total_enemies == 0)
+		return ;
+	current_enemy = data->enemies->enemies;
+	while (current_enemy)
+	{
+		if (current_enemy->is_died)
+		{
+			current_enemy = current_enemy->next;
+			continue ;
+		}
+		result_x = fabs(data->player->pos_x - current_enemy->pos_x);
+		result_y = fabs(data->player->pos_y - current_enemy->pos_y);
+		if (result_x <= COLLISION_DIE && result_y < COLLISION_DIE)
+		{
+			//flag u sistema de termnate 
+			mlx_close_window(data->mlx->window);
+		}
+		current_enemy = current_enemy->next;
+	}
+}
 
 void	ft_game_loop(t_data *data)
 {
@@ -662,12 +764,13 @@ void	ft_game_loop(t_data *data)
 	mlx_loop_hook(data->mlx->window, ft_date, data);
 	mlx_loop_hook(data->mlx->window, ft_timer, data);
 	mlx_loop_hook(data->mlx->window, ft_render, data);
-	//mlx_loop_hook(data->mlx->window, ft_draw_enemies, data);
+	mlx_loop_hook(data->mlx->window, ft_draw_enemies, data);
 	mlx_key_hook(data->mlx->window, ft_move, data);
 	mlx_loop_hook(data->mlx->window, ft_point, data);
 	mlx_loop_hook(data->mlx->window, ft_minimap, data);
 	mlx_cursor_hook(data->mlx->window, ft_mouse, data);
 	mlx_mouse_hook(data->mlx->window, ft_shoot, data);
 	mlx_loop_hook(data->mlx->window, ft_change_frame, data);
+	mlx_loop_hook(data->mlx->window, ft_check_position, data);
 	mlx_loop(data->mlx->window);
 }
