@@ -6,7 +6,7 @@
 #    By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/29 19:14:28 by mvillavi          #+#    #+#              #
-#    Updated: 2026/02/24 21:18:06 by mvillavi         ###   ########.fr        #
+#    Updated: 2026/02/24 21:31:14 by mvillavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRC_VALIDATOR = validator.c \
 			$(DIR_VALIDATOR_CONFIG)/config.c $(DIR_VALIDATOR_CONFIG)/config_helpers.c $(DIR_VALIDATOR_CONFIG)/config_validator.c $(DIR_VALIDATOR_CONFIG)/config_validator_helpers.c $(DIR_VALIDATOR_CONFIG)/config_content.c \
 			$(DIR_VALIDATOR_MAP)/map.c $(DIR_VALIDATOR_MAP)/map_content.c $(DIR_VALIDATOR_MAP)/map_validator.c $(DIR_VALIDATOR_MAP)/map_validator_helpers.c
 SRC_PARSER = parser.c data.c mlx.c player.c enemies.c map.c textures.c colors.c $(DIR_PARSER_BONUS)/minimap.c
-SRC_GAME = game.c mouse_view.c $(DIR_GAME_BONUS)/draw_enemies.c $(DIR_GAME_BONUS)/minimap.c $(DIR_GAME_BONUS)/crosshair.c $(DIR_GAME_BONUS)/timer.c
+SRC_GAME = game.c mouse_view.c $(DIR_GAME_BONUS)/draw_enemies.c $(DIR_GAME_BONUS)/minimap.c $(DIR_GAME_BONUS)/crosshair.c $(DIR_GAME_BONUS)/timer.c $(DIR_GAME_BONUS)/weapon.c
 SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
 SRC_UTILS = $(DIR_UTILS_FILE)/file.c $(DIR_UTILS_FILE)/file_utils.c
 SRC_FREE = file_content.c content_assigned.c split.c \
