@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 19:31:50 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/24 20:16:46 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -499,11 +499,11 @@ void ft_shoot(mouse_key_t button, action_t action, modifier_key_t mods, void* pa
 			if ((int)bullet_x < 0 || (int)bullet_x >= data->map->width
 				|| (int)bullet_y < 0 || (int)bullet_y >= data->map->height)
 				break;
-			if (data->map->map[(int)bullet_y][(int)bullet_x] != 'e' && data->map->map[(int)bullet_y][(int)bullet_x] != '0')
+			if (data->map->map[(int)bullet_y][(int)bullet_x] != 'e' && data->map->map[(int)bullet_y][(int)bullet_x] != '0' && data->map->map[(int)bullet_y][(int)bullet_x] != 'O')
 				break;
 			if (ft_check_impact_enemy(bullet_y, bullet_x, data))
 				return ;
-			distance += 0.1;
+			distance += 0.009;
 		}
 	}
 }
