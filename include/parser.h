@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 19:26:48 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/24 21:21:39 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_enemies
 	int			total_enemies;
 	mlx_image_t	*enemy_frame1;
 	mlx_image_t	*enemy_frame2;
-	t_enemy	*enemies;
+	t_enemy		*enemies;
 }	t_enemies;
 
 //Player
@@ -95,6 +95,34 @@ typedef struct s_mlx
 	mlx_image_t		*framebuffer;
 	double			z_buffer[WINDOW_WIDTH];
 }	t_mlx;
+
+typedef struct s_wall
+{
+	bool	hit; // used to knw if the ray hit a wall
+	int		side; // to know if the ray passed a vertical or horizontal line first (0 vertical x 1 horizontal y)
+	double	perpend_dist; // straight distance to the wall (avoid fisheye)
+	int		wall_height; // how tall the wall looks on the screen
+	int		draw_start; // point where you start to draw the wall
+	int		draw_end; // point where you stop drawing the wall
+	double	wall_x; // in what x pixel of the wall the ray collides
+	int		tex_x; // x pixel (col) of the image wall_x represents
+}	t_wall;
+
+typedef struct s_render
+{
+	double	camera_x; // used to calculate in which side of the screen is current_col
+	double	ray_dir_x; // direction of the ray casted on x axis
+	double	ray_dir_y; // direction of the ray casted on y axis
+	double	delta_dist_x; // how many pixels it takes for the ray to cross 1 whole x unit (vertical lines)
+	double	delta_dist_y; // how many pixels it takes for the ray to cross 1 whole y unit (horizontal lines)
+	double	side_dist_x; // distance to first vertical line
+	double	side_dist_y; // distance to first horizontal line
+	int		map_x; // player pos_x casted to int
+	int		map_y; // player pos_y casted to int
+	int		step_x; // used to know in which direction the player is going in the x axis
+	int		step_y; // used to know in which direction the player is going in the y axis
+	t_wall	*wall;
+}	t_render;
 
 //Bonus
 //Minimap

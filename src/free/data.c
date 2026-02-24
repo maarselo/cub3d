@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 16:31:58 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/24 21:16:59 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_free_enemies_struct(t_data *data);
 void	ft_free_map_struct(t_data *data);
 void	ft_free_mlx_struct(t_data *data);
 void	ft_free_error_struct(t_data *data);
+void	ft_free_render(t_data *data);
 
 void	ft_free_data(t_data *data)
 {
@@ -39,6 +40,8 @@ void	ft_free_data(t_data *data)
 		free(data->player);
 	if (data->minimap)
 		free(data->minimap);
+	if (data->render)
+		ft_free_render(data);
 	if (data->mlx)
 		ft_free_mlx_struct(data);
 	if (data->error)

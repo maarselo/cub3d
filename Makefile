@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+         #
+#    By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/29 19:14:28 by mvillavi          #+#    #+#              #
-#    Updated: 2026/02/24 16:25:42 by mvillavi         ###   ########.fr        #
+#    Updated: 2026/02/24 21:20:13 by fbanzo-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,12 +39,13 @@ SRC_VALIDATOR = validator.c \
 			$(DIR_VALIDATOR_CONFIG)/config.c $(DIR_VALIDATOR_CONFIG)/config_helpers.c $(DIR_VALIDATOR_CONFIG)/config_validator.c $(DIR_VALIDATOR_CONFIG)/config_validator_helpers.c $(DIR_VALIDATOR_CONFIG)/config_content.c \
 			$(DIR_VALIDATOR_MAP)/map.c $(DIR_VALIDATOR_MAP)/map_content.c $(DIR_VALIDATOR_MAP)/map_validator.c $(DIR_VALIDATOR_MAP)/map_validator_helpers.c
 SRC_PARSER = parser.c data.c mlx.c player.c enemies.c map.c textures.c colors.c $(DIR_PARSER_BONUS)/minimap.c
-SRC_GAME = game.c $(DIR_GAME_BONUS)/minimap.c
+SRC_GAME = game.c $(DIR_GAME_BONUS)/minimap.c render.c game_helpers.c
 SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
 SRC_UTILS = $(DIR_UTILS_FILE)/file.c $(DIR_UTILS_FILE)/file_utils.c
 SRC_FREE = file_content.c content_assigned.c split.c \
 			data.c \
-			textures_struct.c map_struct.c enemies_struct.c mlx_struct.c error_struct.c
+			textures_struct.c map_struct.c enemies_struct.c mlx_struct.c error_struct.c \
+			render_struct.c
 
 
 #diferent folder with files

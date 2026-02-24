@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.h                                             :+:      :+:    :+:   */
+/*   render_struct.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/29 19:14:28 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 21:19:25 by fbanzo-s         ###   ########.fr       */
+/*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
+/*   Updated: 2026/02/24 21:18:49 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FREE_H
-# define FREE_H
+#include "cub3d.h" //t_data
+#include "parser.h"//t_map
+#include <stdlib.h> //free()
 
-# include "cub3d.h"
-
-// free_file_content
-void	ft_free_file_content(char **content);
-
-// free_content_assigned.c
-void	ft_free_content_assigned(int i, char **file_content);
-
-// free_split.c
-void	ft_free_split(char **split);
-
-// free_data.c
-void	ft_free_data(t_data *data);
-
-// free render
-void	ft_free_render(t_data *data);
-
-#endif
+void	ft_free_render(t_data *data)
+{
+	if (data->render->wall)
+		free(data->render->wall);
+	free(data->render);
+}
