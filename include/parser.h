@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 15:47:40 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 17:48:40 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_weapon
 	mlx_image_t	*smoke;
 	bool		is_shooting;
 }	t_weapon;
+
 typedef struct textures
 {
 	mlx_image_t	*north;
@@ -66,10 +67,11 @@ typedef struct s_enemy
 {
 	double			pos_x;
 	double			pos_y;
-	bool			is_died;
+	bool			is_dead;
 	unsigned short	frame;
 	struct s_enemy	*next;
 }	t_enemy;
+
 typedef struct s_enemies
 {
 	int			total_enemies;
@@ -97,6 +99,54 @@ typedef struct s_mlx
 	mlx_image_t		*framebuffer;
 	double			z_buffer[WINDOW_WIDTH];
 }	t_mlx;
+
+typedef struct s_wall
+{
+	bool	hit;
+	int		side;
+	double	perpend_dist;
+	int		wall_height;
+	int		draw_start;
+	int		draw_end;
+	double	wall_x;
+	int		tex_x;
+	double	step;
+	double	tex_pos;
+}	t_wall;
+
+typedef struct s_render
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	t_wall	*wall;
+}	t_render;
+
+typedef struct s_enemy_render
+{
+	double	sprite_x;
+	double	sprite_y;
+	double	trans_x;
+	double	trans_y;
+	double	inverse_det;
+	int		draw_start_x;
+	int		draw_end_x;
+	int		draw_start_y;
+	int		draw_end_y;
+	int		tex_x;
+	int		tex_y;
+	double	screen_x;
+	double	size;
+	int		d;
+}	t_enemy_render;
 
 //Bonus
 //Minimap

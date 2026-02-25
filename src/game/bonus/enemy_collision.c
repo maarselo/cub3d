@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 15:06:22 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 17:34:26 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_monitor_player_death(t_data *data)
 	current_enemy = data->enemies->enemies;
 	while (current_enemy)
 	{
-		if (current_enemy->is_died)
+		if (current_enemy->is_dead)
 		{
 			current_enemy = current_enemy->next;
 			continue ;

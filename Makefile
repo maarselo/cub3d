@@ -6,7 +6,7 @@
 #    By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/29 19:14:28 by mvillavi          #+#    #+#              #
-#    Updated: 2026/02/25 16:30:28 by mvillavi         ###   ########.fr        #
+#    Updated: 2026/02/25 17:44:55 by mvillavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,12 +40,13 @@ SRC_VALIDATOR = validator.c \
 			$(DIR_VALIDATOR_CONFIG)/config.c $(DIR_VALIDATOR_CONFIG)/config_helpers.c $(DIR_VALIDATOR_CONFIG)/config_validator.c $(DIR_VALIDATOR_CONFIG)/config_validator_helpers.c $(DIR_VALIDATOR_CONFIG)/config_content.c \
 			$(DIR_VALIDATOR_MAP)/map.c $(DIR_VALIDATOR_MAP)/map_content.c $(DIR_VALIDATOR_MAP)/map_validator.c $(DIR_VALIDATOR_MAP)/map_validator_helpers.c
 SRC_PARSER = parser.c data.c mlx.c player.c enemies.c map.c textures.c colors.c $(DIR_PARSER_BONUS)/minimap.c
-SRC_GAME = game.c game_helpers.c setup.c end_game.c render.c keyboard.c mouse.c $(DIR_GAME_BONUS)/weapon.c $(DIR_GAME_BONUS)/draw_enemies.c $(DIR_GAME_BONUS)/enemy_collision.c $(DIR_GAME_BONUS)/minimap.c $(DIR_GAME_BONUS)/timer.c $(DIR_GAME_BONUS)/crosshair.c 
-SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c   
+SRC_GAME = game.c game_helpers.c setup.c end_game.c render.c render_utils.c keyboard.c keyboard_utils.c mouse.c $(DIR_GAME_BONUS)/weapon.c $(DIR_GAME_BONUS)/draw_enemies.c $(DIR_GAME_BONUS)/draw_enemies_helpers.c\
+			$(DIR_GAME_BONUS)/enemy_collision.c $(DIR_GAME_BONUS)/minimap.c $(DIR_GAME_BONUS)/timer.c $(DIR_GAME_BONUS)/crosshair.c 
+SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c
 SRC_UTILS = $(DIR_UTILS_FILE)/file.c $(DIR_UTILS_FILE)/file_utils.c
 SRC_FREE = file_content.c content_assigned.c split.c \
 			data.c \
-			$(DIR_FREE_STRUCTS)/textures_struct.c $(DIR_FREE_STRUCTS)/map_struct.c $(DIR_FREE_STRUCTS)/enemies_struct.c $(DIR_FREE_STRUCTS)/mlx_struct.c $(DIR_FREE_STRUCTS)/error_struct.c
+			$(DIR_FREE_STRUCTS)/textures_struct.c $(DIR_FREE_STRUCTS)/map_struct.c $(DIR_FREE_STRUCTS)/enemies_struct.c $(DIR_FREE_STRUCTS)/mlx_struct.c $(DIR_FREE_STRUCTS)/error_struct.c $(DIR_FREE_STRUCTS)/render_struct.c
 
 
 #diferent folder with files
