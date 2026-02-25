@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 14:46:28 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 14:56:44 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "cub3d.h"
 #include "MLX42.h"
 #include "errorctx.h"
+#include "game_internal.h"
 
 void	ft_put_weapon_images(t_data *data);
 
@@ -35,10 +36,12 @@ static void	ft_register_game_hooks(void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
+	ft_monitor_player_death(data);
+	if (ft_end_game(data))
+		return (ft_);
 	ft_render(data);
 	ft_update_animation(data);
 	ft_draw_enemies(data);
-	ft_monitor_player_death(data);
 	ft_minimap(data);
 	ft_timer(data);
 	ft_point(data);

@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 14:43:14 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 14:56:55 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_monitor_player_death(t_data *data)
 		result_x = fabs(data->player->pos_x - current_enemy->pos_x);
 		result_y = fabs(data->player->pos_y - current_enemy->pos_y);
 		if (result_x <= COLLISION_DIE && result_y < COLLISION_DIE)
-			mlx_close_window(data->mlx->window);
+			data->game_over = true;
 		current_enemy = current_enemy->next;
 	}
 }
