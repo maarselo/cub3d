@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 14:56:44 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 16:20:40 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_mouse(double x, double y, void *param);
 void	ft_shoot(mouse_key_t button, action_t action,
 			modifier_key_t mods, void *param);
 
+void	ft_handle_endgame(t_data *data);
+
 static void	ft_register_game_hooks(void *param)
 {
 	t_data	*data;
@@ -38,7 +40,7 @@ static void	ft_register_game_hooks(void *param)
 	data = (t_data *)param;
 	ft_monitor_player_death(data);
 	if (ft_end_game(data))
-		return (ft_);
+		return (ft_handle_endgame(data));
 	ft_render(data);
 	ft_update_animation(data);
 	ft_draw_enemies(data);

@@ -6,12 +6,13 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 14:16:37 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 15:02:55 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MLX42.h"
 #include "cub3d.h"
+#include "game.h"
 
 uint32_t	ft_get_pixel(int row, int col, mlx_image_t *texture)
 {
@@ -34,5 +35,5 @@ uint32_t	ft_get_pixel(int row, int col, mlx_image_t *texture)
 
 bool	ft_end_game(t_data *data)
 {
-	return (data->game_over);
+	return (data->game_over == KILL_ALL_ENEMIES || data->game_over == DIE);
 }

@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 14:15:28 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 15:02:22 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_data
 	t_enemies	*enemies;
 	t_minimap	*minimap;
 	t_error		*error;
-	bool		game_over;
+	short		game_over;
 }	t_data;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/27 20:55:55 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/02/25 15:47:53 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 #define EAST "EA"
 
 #define PATH_DOOR "./textures/door/door.png"
+
+#define PATH_GAME_OVER "./textures/game/game_over.png"
+#define PATH_VICTORY "./textures/game/victory.png"
 
 #define PATH_WEAPON_IDLE "./textures/weapon/shotgun1.png"
 #define PATH_WEAPON_SHOOT "./textures/weapon/shotgun2.png"
@@ -57,11 +60,13 @@ static void	ft_init_orientation_texture(char **cfg_line, t_data *data)
 	ft_free_split(cfg_line);
 }
 
-static void	ft_init_doors_textures(t_data *data)
+static void	ft_init_utils_textures(t_data *data)
 {
 	if (ft_has_error(data->error))
 		return ;
 	data->textures->door = ft_texture_to_img(PATH_DOOR, data);
+	data->textures->game_over = ft_texture_to_img(PATH_GAME_OVER, data);
+	data->textures->victory = ft_texture_to_img(PATH_VICTORY, data);
 }
 
 static void	ft_init_weapons_textures(t_data *data)
@@ -96,7 +101,7 @@ void	ft_init_textures(char *file, t_data *data)
 			ft_init_orientation_texture(cfg_line, data);
 		}
 	}
-	ft_init_doors_textures(data);
+	ft_init_utils_textures(data);
 	ft_init_weapons_textures(data);
 	return (ft_free_file_content(content));
 }
