@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 12:40:43 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 14:42:26 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,13 @@ void	ft_draw_pixel_by_type(int pixel_col, int pixel_row, t_data *data)
 		mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, WHITE);
 }
 
-void	ft_minimap(void *param)
+void	ft_minimap(t_data *data)
 {
 	int		pixel_row;
 	int		pixel_col;
 	double	rel_x;
 	double	rel_y;
-	t_data	*data;
 
-	data = (t_data *)param;
 	pixel_row = data->minimap->start_y;
 	while (pixel_row++ < data->minimap->final_y)
 	{

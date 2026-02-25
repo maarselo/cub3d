@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 13:19:22 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 14:42:15 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 #include "parser.h"
 #include "../game_internal.h"
 
-void	ft_draw_enemies(void *param)
+void	ft_draw_enemies(t_data *data)
 {
-	t_data	*data;
 	t_enemy	*curr;
 	double	sprite_x;// posicion del enemigo respecto a ti en x
 	double	sprite_y;// posicion del enemigo respecto a ti en y
@@ -40,7 +39,6 @@ void	ft_draw_enemies(void *param)
 	static int	counter; ///////////////////////
 	bool		should_change_frame;/////////////////
 
-	data = (t_data *)param;
 	should_change_frame = false;///////////////
 	counter++; ////////////////
 	if (counter >= 15) ////////////

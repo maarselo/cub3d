@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 13:12:06 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 14:43:14 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@
 
 #define COLLISION_DIE 0.3
 
-void	ft_check_position(void *param)
+void	ft_monitor_player_death(t_data *data)
 {
 	double	result_y;
 	double	result_x;
-	t_data	*data;
 	t_enemy	*current_enemy;
 
-	data = (t_data *)param;
 	if (data->enemies->total_enemies == 0)
 		return ;
 	current_enemy = data->enemies->enemies;

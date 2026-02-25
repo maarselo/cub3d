@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 13:30:21 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 14:42:04 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <math.h>
 #include "game_internal.h"
 
-void	ft_render(void *param)
+void	ft_render(t_data *data)
 {
 	int		current_col; // current pixel column of the screen
 	double	camera_x; // used to calculate in which side of the screen is current_col
@@ -40,9 +40,7 @@ void	ft_render(void *param)
 	int		tex_x; // x pixel (col) of the image wall_x represents
 	double	step; // how many pixels to skip, to resize the image
 	double	tex_pos; // initial position of the texture to draw
-	t_data	*data;
 
-	data = (t_data *)param;
 	current_col = -1;
 	while (++current_col < WINDOW_WIDTH)
 	{

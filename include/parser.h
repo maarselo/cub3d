@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 14:18:17 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 14:48:33 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_enemies
 	mlx_image_t	*enemy_frame1;
 	mlx_image_t	*enemy_frame2;
 	bool		has_enemies;
-	t_enemy	*enemies;
+	t_enemy		*enemies;
 }	t_enemies;
 
 //Player

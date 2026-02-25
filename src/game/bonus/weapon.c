@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 13:25:18 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 14:41:38 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,11 @@ static void	ft_change_frame(int frame_update, int *frame_counter, t_data *data)
 	}
 }
 
-void	ft_update_animation(void *param)
+void	ft_update_animation(t_data *data)
 {
-	t_data		*data;
 	static int	counter;
 	static int	frame;
 
-	data = (t_data *)param;
 	if (!data->textures->weapon->is_shooting)
 	{
 		frame = SHOOT;
