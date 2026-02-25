@@ -6,37 +6,37 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 19:47:58 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 12:40:43 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h" //t_data
-#include "parser.h" //t_data
-#include "game.h" //Macros WINDOWHEIGT and more
-#include <math.h> ///flood
+#include "cub3d.h"
+#include "parser.h"
+#include "game.h"
+#include <math.h>
 
-# define RED 0xFF0000FF
-# define WHITE 0xFFFFFFFF
-# define GREY 0x333333FF
-# define BLACK 0x000000FF
+#define RED 0xFF0000FF
+#define WHITE 0xFFFFFFFF
+#define GREY 0x333333FF
+#define BLACK 0x000000FF
 
-#define PLAYER_SIDE 8  //draw_player 
+#define PLAYER_SIDE 8
 
-#define RAY_LENGTH 40 //the length of  the
-#define FOV_RAYS_SEPARATION 0.04 //separation of the rays in the fov
+#define RAY_LENGTH 40
+#define FOV_RAYS_SEPARATION 0.04
 
 static void	ft_draw_player(t_data *data)
 {
-	int init_col;
-	int final_col;
-	int init_row;
-	int final_row;
-	int current_col;
+	int	init_col;
+	int	final_col;
+	int	init_row;
+	int	final_row;
+	int	current_col;
 
-	init_col = data->minimap->center_x - (PLAYER_SIDE / 2); //Se sma porque ahor alo quermeos mas a la derecha
-	final_col = data->minimap->center_x + (PLAYER_SIDE / 2); //Se sma porque ahor alo quermeos mas a la derecha
-	init_row = data->minimap->center_y - (PLAYER_SIDE / 2); //Se resta minimap borde proque siempre lo quremoe mas arriba
-	final_row = data->minimap->center_y + (PLAYER_SIDE / 2); //Se resta minimap borde proque siempre lo quremoe mas arriba
+	init_col = data->minimap->center_x - (PLAYER_SIDE / 2);
+	final_col = data->minimap->center_x + (PLAYER_SIDE / 2);
+	init_row = data->minimap->center_y - (PLAYER_SIDE / 2);
+	final_row = data->minimap->center_y + (PLAYER_SIDE / 2);
 	while (init_row++ <= final_row)
 	{
 		current_col = init_col;
@@ -44,7 +44,8 @@ static void	ft_draw_player(t_data *data)
 			mlx_put_pixel(data->mlx->framebuffer, current_col, init_row, RED);
 	}
 }
-static void ft_draw_fov(t_data *data)
+
+static void	ft_draw_fov(t_data *data)
 {
 	int		i;
 	double	column;
@@ -85,12 +86,12 @@ void	ft_draw_pixel_by_type(int pixel_col, int pixel_row, t_data *data)
 		mlx_put_pixel(data->mlx->framebuffer, pixel_col, pixel_row, WHITE);
 }
 
-void ft_minimap(void *param)
+void	ft_minimap(void *param)
 {
-	int 	pixel_row;
-	int 	pixel_col;
-	double 	rel_x;
-	double 	rel_y;
+	int		pixel_row;
+	int		pixel_col;
+	double	rel_x;
+	double	rel_y;
 	t_data	*data;
 
 	data = (t_data *)param;
@@ -100,8 +101,10 @@ void ft_minimap(void *param)
 		pixel_col = data->minimap->start_x;
 		while (pixel_col++ < data->minimap->final_x)
 		{
-			rel_x = (double)(pixel_col - data->minimap->center_x) / data->minimap->tile_size;
-			rel_y = (double)(pixel_row - data->minimap->center_y) / data->minimap->tile_size;
+			rel_x = (double)(pixel_col - data->minimap->center_x)
+				/ data->minimap->tile_size;
+			rel_y = (double)(pixel_row - data->minimap->center_y)
+				/ data->minimap->tile_size;
 			data->minimap->relation_x = (int)floor(data->player->pos_x + rel_x);
 			data->minimap->relation_y = (int)floor(data->player->pos_y + rel_y);
 			ft_draw_pixel_by_type(pixel_col, pixel_row, data);

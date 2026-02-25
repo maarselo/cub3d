@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 12:13:47 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 13:19:22 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_draw_enemies(void *param)
 				{
 					d = (y - (int)(175.0 / trans_y)) * 256 - WINDOW_HEIGHT * 128 + size * 128;
 					tex_y = ((d * frame->height) / size) / 256;
-					color = ft_get_pixel(frame, tex_x, tex_y);
+					color = ft_get_pixel(tex_y, tex_x, frame);
 					if ((color & 0x000000FF) != 0)
 						mlx_put_pixel(data->mlx->framebuffer, x, y, color);
 				}

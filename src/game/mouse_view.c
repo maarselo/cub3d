@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 21:04:51 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 13:25:07 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 void	ft_mouse(double x, double y, void *param)
 {
-	double			delta;
 	double			rotation;
 	double			tmp_x;
 	t_data			*data;
@@ -31,13 +30,16 @@ void	ft_mouse(double x, double y, void *param)
 		old_x = x;
 		return ;
 	}
-	delta = x - old_x;
-	rotation = delta * SENSIBILITY;
+	rotation = (x - old_x) * SENSIBILITY;
 	tmp_x = data->player->dir_x;
-	data->player->dir_x = tmp_x * cos(rotation) - data->player->dir_y * sin(rotation);
-	data->player->dir_y = tmp_x * sin(rotation) + data->player->dir_y * cos(rotation);
+	data->player->dir_x = tmp_x * cos(rotation) - data->player->dir_y
+		* sin(rotation);
+	data->player->dir_y = tmp_x * sin(rotation) + data->player->dir_y
+		* cos(rotation);
 	tmp_x = data->player->plane_x;
-	data->player->plane_x = tmp_x * cos(rotation) - data->player->plane_y * sin(rotation);
-	data->player->plane_y = tmp_x * sin(rotation) + data->player->plane_y * cos(rotation);
+	data->player->plane_x = tmp_x * cos(rotation) - data->player->plane_y
+		* sin(rotation);
+	data->player->plane_y = tmp_x * sin(rotation) + data->player->plane_y
+		* cos(rotation);
 	old_x = x;
 }

@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:28 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 20:38:35 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 13:11:21 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	ft_timer(void *param)
 	tmp = ft_itoa((int)mlx_get_time());
 	timer_str = ft_strjoin("Time played: ", tmp);
 	free(tmp);
-	data->textures->timer = mlx_put_string(data->mlx->window, timer_str, 0,0);
+	data->textures->timer = mlx_put_string(data->mlx->window, timer_str, 0, 0);
 	free(timer_str);
 }

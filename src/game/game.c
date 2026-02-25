@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 12:25:37 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 13:19:11 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_put_weapon_images(t_data *data);
 void	ft_move(mlx_key_data_t key, void *param);
 void	ft_mouse(double x, double y, void *param);
 
-void	ft_change_frame(void *param);
+void	ft_update_animation(void *param);
 void	ft_shoot(mouse_key_t button, action_t action, modifier_key_t mods, void* param);
 void	ft_draw_enemies(void *param);
 void 	ft_minimap(void *param);
@@ -165,7 +165,7 @@ void	ft_render(void *param)
 		}
 		while (i < draw_end) //pintar pared
 		{
-			int	pixel = ft_get_pixel(wall_texture, tex_x, (int)tex_pos); //Coger el pixel exacto y pasarlo a uint32_t
+			int	pixel = ft_get_pixel((int)tex_pos, tex_x, wall_texture); //Coger el pixel exacto y pasarlo a uint32_t
 			mlx_put_pixel(data->mlx->framebuffer, current_col, i, pixel);
 			tex_pos += step;
 			i++;
@@ -193,7 +193,7 @@ void	ft_game_loop(t_data *data)
 	mlx_loop_hook(data->mlx->window, ft_minimap, data);
 	mlx_cursor_hook(data->mlx->window, ft_mouse, data);
 	mlx_mouse_hook(data->mlx->window, ft_shoot, data);
-	mlx_loop_hook(data->mlx->window, ft_change_frame, data);
+	mlx_loop_hook(data->mlx->window, ft_update_animation, data);
 	mlx_loop_hook(data->mlx->window, ft_check_position, data);
 	mlx_loop(data->mlx->window);
 }
