@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 15:45:36 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 16:23:53 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # define WINDOW_WIDTH  1920
 # define WINDOW_HEIGHT 1080
 
-typedef enum s_finish
+typedef enum e_finish
 {
 	KILL_ALL_ENEMIES = 1,
 	DIE = 2,
-}	e_finish;
+}	t_finish;
 
 void	ft_game_loop(t_data *data);
 

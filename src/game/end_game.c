@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 16:20:34 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 16:25:22 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_put_finish_image(int finish_type, t_data *data)
 
 static void	ft_final_time_played(t_data *data)
 {
-	char 	*tmp;
+	char	*tmp;
 	char	*time_str;
 
 	if (data->textures->timer)
@@ -56,7 +56,7 @@ static void	ft_final_time_played(t_data *data)
 	tmp = ft_itoa((int)mlx_get_time());
 	time_str = ft_strjoin("Time played: ", tmp);
 	data->textures->timer = mlx_put_string(data->mlx->window, time_str,
-		WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 + 200);
+			WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 + 200);
 	mlx_resize_image(data->textures->timer, 300, 50);
 	free(tmp);
 	free(time_str);
@@ -64,7 +64,8 @@ static void	ft_final_time_played(t_data *data)
 
 void	ft_handle_endgame(t_data *data)
 {
-	static	bool	not_first;
+	static bool	not_first;
+
 	if (not_first == false)
 	{
 		ft_black_screen(data);
