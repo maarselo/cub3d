@@ -15,20 +15,6 @@
 #include "errorctx.h" //ft+_set_error_mlx
 #include "game.h" //WINDOW_HEIGHT  and other macros
 
-#define PATH_ICON "./textures/icon/icon.png" 
-
-static void	ft_set_icon(t_data *data)
-{
-	mlx_texture_t	*icon;
-
-	if (ft_has_error(data->error))
-		return ;
-	icon = mlx_load_png(PATH_ICON);
-	if (!icon)
-		return (ft_set_error_mlx(data->error));
-	mlx_set_icon(data->mlx->window, icon);
-}
-
 void	ft_init_mlx(t_data *data)
 {
 	if (ft_has_error(data->error))
@@ -37,7 +23,6 @@ void	ft_init_mlx(t_data *data)
 			WINDOW_NAME, false);
 	if (!data->mlx->window)
 		return (ft_set_error_mlx(data->error));
-	ft_set_icon(data);
 	data->mlx->framebuffer = mlx_new_image(data->mlx->window, WINDOW_WIDTH,
 			WINDOW_HEIGHT);
 	if (!data->mlx->framebuffer)
