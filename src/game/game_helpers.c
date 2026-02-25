@@ -6,11 +6,12 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 13:20:37 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 14:16:37 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MLX42.h"
+#include "cub3d.h"
 
 uint32_t	ft_get_pixel(int row, int col, mlx_image_t *texture)
 {
@@ -29,4 +30,9 @@ uint32_t	ft_get_pixel(int row, int col, mlx_image_t *texture)
 	b = texture->pixels[position + 2];
 	a = texture->pixels[position + 3];
 	return (r << 24 | g << 16 | b << 8 | a);
+}
+
+bool	ft_end_game(t_data *data)
+{
+	return (data->game_over);
 }
