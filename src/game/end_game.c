@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 16:25:22 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 16:35:08 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ static void	ft_final_time_played(t_data *data)
 	if (data->textures->timer)
 		mlx_delete_image(data->mlx->window, data->textures->timer);
 	tmp = ft_itoa((int)mlx_get_time());
-	time_str = ft_strjoin("Time played: ", tmp);
+	time_str = ft_multijoin(3, "Time played: ", tmp, " seconds");
 	data->textures->timer = mlx_put_string(data->mlx->window, time_str,
-			WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 + 200);
-	mlx_resize_image(data->textures->timer, 300, 50);
+			WINDOW_WIDTH / 2 - 230, WINDOW_HEIGHT / 2 + 200);
+	mlx_resize_image(data->textures->timer, 400, 40);
 	free(tmp);
 	free(time_str);
 }
