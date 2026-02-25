@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 21:27:52 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 12:14:53 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "errorctx.h"
 #include "game.h"
 #include <math.h>
+#include "game_internal.h"
 
 void	ft_put_weapon_images(t_data *data);
 
@@ -27,17 +28,6 @@ void 	ft_minimap(void *param);
 void	ft_point(void *param);
 void	ft_timer(void *param);
 
-uint32_t	ft_get_pixel(mlx_image_t *texture, int col, int row)
-{
-	if ((uint32_t)col >= texture->width || (uint32_t)row >= texture->height || col < 0 || row < 0)
-		return (0);
-	uint32_t	pos = (row * texture->width + col) * 4;
-	uint8_t r = texture->pixels[pos];
-	uint8_t g = texture->pixels[pos + 1];
-	uint8_t b = texture->pixels[pos + 2];
-	uint8_t a = texture->pixels[pos + 3];
-	return (r << 24 | g << 16 | b << 8 | a);
-}
 
 void	ft_render(void *param)
 {

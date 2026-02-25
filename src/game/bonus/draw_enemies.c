@@ -6,25 +6,14 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 21:19:06 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 12:13:47 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
 #include "parser.h"
-
-static uint32_t	ft_get_pixel(mlx_image_t *texture, int col, int row)
-{
-	if ((uint32_t)col >= texture->width || (uint32_t)row >= texture->height || col < 0 || row < 0)
-		return (0);
-	uint32_t	pos = (row * texture->width + col) * 4;
-	uint8_t r = texture->pixels[pos];
-	uint8_t g = texture->pixels[pos + 1];
-	uint8_t b = texture->pixels[pos + 2];
-	uint8_t a = texture->pixels[pos + 3];
-	return (r << 24 | g << 16 | b << 8 | a);
-}
+#include "../game_internal.h"
 
 void	ft_draw_enemies(void *param)
 {
