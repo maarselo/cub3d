@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvillavi <mvillavi@student.42barcelon      +#+  +:+       +#+        */
+/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:43:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2025/01/05 17:34:07 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/25 18:03:49 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_itoa(int n)
 	if (n == INT_MIN)
 		return (ft_strdup("-2147483648"));
 	digits = ft_count(n);
-	ptr = (char *)malloc((digits + 1) * sizeof(char));
+	ptr = (char *)ft_calloc(1, (digits + 1) * sizeof(char));
 	if (ptr == NULL)
 		return (NULL);
 	ptr[digits] = '\0';
