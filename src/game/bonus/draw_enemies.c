@@ -6,7 +6,7 @@
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/26 13:00:19 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/02/26 17:27:55 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,16 @@ t_enemy	*ft_skip_enemy(t_enemy *enemy)
 	return (enemy);
 }
 
+bool	ft_check_is_dead(t_enemy **enemy)
+{
+	if ((*enemy)->is_dead)
+	{
+		*enemy = (*enemy)->next;
+		return (true);
+	}
+	return (false);
+}
+
 void	ft_draw_enemies(t_data *data)
 {
 	t_enemy		*curr;
@@ -82,11 +92,8 @@ void	ft_draw_enemies(t_data *data)
 	curr = data->enemies->enemies;
 	while (curr)
 	{
-		if (curr->is_dead)
-		{
-			curr = curr->next;
+		if (ft_check_is_dead(&curr) == true)
 			continue ;
-		}
 		frame = ft_update_enemy_frame(data, curr, should_change_frame);
 		curr = ft_skip_enemy(curr);
 		ft_set_enemy_data(data, curr);
