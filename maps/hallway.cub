@@ -1,0 +1,13 @@
+NO ./textures/wall1.png
+SO ./textures/wall2.png
+WE ./textures/wall3.png
+EA ./textures/wall4.png
+F 37, 55,  56
+C 0,0,0
+111
+1N1
+1_1
+101
+101
+101
+111
