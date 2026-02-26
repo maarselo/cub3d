@@ -6,7 +6,7 @@
 /*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/24 23:35:57 by fbanzo-s         ###   ########.fr       */
+/*   Updated: 2026/02/26 17:23:33 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 
 void	ft_set_draw_pos(t_data *data)
 {
-	data->render->wall->draw_start = (WINDOW_HEIGHT
-			- data->render->wall->wall_height) / 2;
-	data->render->wall->draw_end = data->render->wall->draw_start
-		+ data->render->wall->wall_height;
-	if (data->render->wall->draw_start < 0)
-		data->render->wall->draw_start = 0;
-	if (data->render->wall->draw_end >= WINDOW_HEIGHT)
-		data->render->wall->draw_end = WINDOW_HEIGHT - 1;
+	data->render->wall.draw_start = (WINDOW_HEIGHT
+			- data->render->wall.wall_height) / 2;
+	data->render->wall.draw_end = data->render->wall.draw_start
+		+ data->render->wall.wall_height;
+	if (data->render->wall.draw_start < 0)
+		data->render->wall.draw_start = 0;
+	if (data->render->wall.draw_end >= WINDOW_HEIGHT)
+		data->render->wall.draw_end = WINDOW_HEIGHT - 1;
 }
 
 void	ft_set_render_data(t_data *data, int curr_col)
@@ -39,13 +39,13 @@ void	ft_set_render_data(t_data *data, int curr_col)
 
 void	ft_set_tex_params(t_data *data, mlx_image_t *wall_texture)
 {
-	data->render->wall->tex_x = (int)((double)wall_texture->width
-			* data->render->wall->wall_x);
-	data->render->wall->step = (double)wall_texture->height
-		/ data->render->wall->wall_height;
-	data->render->wall->tex_pos = (data->render->wall->draw_start
-			- WINDOW_HEIGHT / 2 + data->render->wall->wall_height / 2)
-		* data->render->wall->step;
+	data->render->wall.tex_x = (int)((double)wall_texture->width
+			* data->render->wall.wall_x);
+	data->render->wall.step = (double)wall_texture->height
+		/ data->render->wall.wall_height;
+	data->render->wall.tex_pos = (data->render->wall.draw_start
+			- WINDOW_HEIGHT / 2 + data->render->wall.wall_height / 2)
+		* data->render->wall.step;
 }
 
 void	ft_set_delta_dist(t_data *data)
@@ -65,7 +65,7 @@ mlx_image_t	*ft_set_wall_texture(t_data *data,
 {
 	if (!wall_texture)
 	{
-		if (data->render->wall->side == 0)
+		if (data->render->wall.side == 0)
 		{
 			if (data->render->step_x == -1)
 				wall_texture = data->textures->east;

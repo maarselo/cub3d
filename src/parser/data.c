@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:14:57 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 17:07:56 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/26 17:24:16 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ static void	ft_init_structs_utils(t_data *data, t_error *error)
 		return (ft_set_error_system(error));
 	data->render = (t_render *)ft_calloc(1, sizeof(t_render));
 	if (!data->render)
-		return (ft_set_error_system(error));
-	data->render->wall = (t_wall *)ft_calloc(1, sizeof(t_wall));
-	if (!data->render->wall)
 		return (ft_set_error_system(error));
 }
 

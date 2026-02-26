@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+         #
+#    By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/29 19:14:28 by mvillavi          #+#    #+#              #
-#    Updated: 2026/02/25 17:44:55 by mvillavi         ###   ########.fr        #
+#    Updated: 2026/02/26 17:35:34 by fbanzo-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SRC_ERROR = init_error.c set_error.c strerror.c handler_error.c
 SRC_UTILS = $(DIR_UTILS_FILE)/file.c $(DIR_UTILS_FILE)/file_utils.c
 SRC_FREE = file_content.c content_assigned.c split.c \
 			data.c \
-			$(DIR_FREE_STRUCTS)/textures_struct.c $(DIR_FREE_STRUCTS)/map_struct.c $(DIR_FREE_STRUCTS)/enemies_struct.c $(DIR_FREE_STRUCTS)/mlx_struct.c $(DIR_FREE_STRUCTS)/error_struct.c $(DIR_FREE_STRUCTS)/render_struct.c
+			$(DIR_FREE_STRUCTS)/textures_struct.c $(DIR_FREE_STRUCTS)/map_struct.c $(DIR_FREE_STRUCTS)/enemies_struct.c $(DIR_FREE_STRUCTS)/mlx_struct.c $(DIR_FREE_STRUCTS)/error_struct.c
 
 
 #diferent folder with files
