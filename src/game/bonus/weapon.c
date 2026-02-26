@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapon.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: fbanzo-s <fbanzo-s@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/02/25 17:42:17 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/02/26 12:59:50 by fbanzo-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ static bool	ft_check_impact_enemy(double row, double col, t_data *data)
 	current_enemy = data->enemies->enemies;
 	while (current_enemy)
 	{
+		if (current_enemy->is_dead)
+		{
+			current_enemy = current_enemy->next;
+			continue ;
+		}
 		result_x = fabs(col - current_enemy->pos_x);
 		result_y = fabs(row - current_enemy->pos_y);
 		if (result_x <= WEAPONG_RANGE && result_y <= WEAPONG_RANGE)
