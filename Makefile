@@ -6,7 +6,7 @@
 #    By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/29 19:14:28 by mvillavi          #+#    #+#              #
-#    Updated: 2026/02/25 16:30:28 by mvillavi         ###   ########.fr        #
+#    Updated: 2026/03/03 00:07:10 by mvillavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,9 +93,10 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(MLX) $(OBJS) Makefile
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(CFLAGS_MLX) -o $(NAME)
 
-$(LIBFT):
+FORCE: 
+$(LIBFT): FORCE
 	make -C $(DIR_LIBFT)
-$(MLX):
+$(MLX): FORCE
 	cd libs/mlx && cmake -B build && cmake --build build -j4 && cd -
 	
 $(DIR_OBJS)/%.o: $(DIR_SRC)/%.c
