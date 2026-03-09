@@ -6,7 +6,7 @@
 /*   By: mvillavi <mvillavi@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 19:15:12 by mvillavi          #+#    #+#             */
-/*   Updated: 2026/01/10 23:33:37 by mvillavi         ###   ########.fr       */
+/*   Updated: 2026/03/09 20:43:14 by mvillavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ int	ft_has_path(char *cfg_line, t_error *error)
 	while (split_line[i])
 		i++;
 	if (i < 2)
-		return (ft_set_error_static(CFG_TEX_WITHOUT_PATH, error, VALIDATOR), 0);
+		return (ft_free_split(split_line), ft_set_error_static(CFG_TEX_WITHOUT_PATH, error, VALIDATOR), 0);
 	else if (i > 2)
-		return (ft_set_error_static(CFG_TEX_MULTI_PATHS, error, VALIDATOR), 0);
+		return (ft_free_split(split_line), ft_set_error_static(CFG_TEX_MULTI_PATHS, error, VALIDATOR), 0);
 	return (ft_free_split(split_line), 1);
 }
 
